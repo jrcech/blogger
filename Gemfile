@@ -37,7 +37,6 @@ gem "redis", "~> 4.0"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -64,3 +63,16 @@ group :development do
   # gem "spring"
 end
 
+group :development do
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'fasterer'
+  gem 'flay'
+  gem 'rails_best_practices'
+  gem 'reek'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubycritic', require: false
+  gem 'slim_lint'
+end
