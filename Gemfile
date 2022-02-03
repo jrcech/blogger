@@ -114,3 +114,9 @@ gem 'omniauth-rails_csrf_protection'
 gem 'rolify'
 
 gem 'slim-rails'
+
+group :development do
+  gem 'annotate'
+  gem 'rails-erd'
+  gem 'seedbank'
+end
