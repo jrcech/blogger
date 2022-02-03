@@ -104,3 +104,13 @@ group :test do
   gem 'webdrivers', require: false
   gem 'webmock'
 end
+
+gem 'devise'
+gem 'email_validator'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'rolify'
+
+gem 'slim'
