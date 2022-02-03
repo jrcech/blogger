@@ -113,4 +113,4 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'rolify'
 
-gem 'slim'
+gem 'slim-rails'
