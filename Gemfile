@@ -120,3 +120,5 @@ group :development do
   gem 'rails-erd'
   gem 'seedbank'
 end
+
+gem 'bootstrap', '~> 5.1', '>= 5.1.3'
