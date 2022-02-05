@@ -1,0 +1,5 @@
+/ frozen_string_literal: true
+
+h1 = t('headers.new', item: t("models.#{model_plural_symbol}.one"))
+
+= render Views::Admin::Articles::Form::Component.new item: item

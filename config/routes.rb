@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  concern :searchable do
+    get(
+      'search(/page/:page(/items/:items))',
+      action: :search,
+      on: :collection,
+      as: :search
+    )
+  end
+
   devise_for(
     :users,
     only: :omniauth_callbacks,
@@ -11,6 +20,8 @@ Rails.application.routes.draw do
     devise_for :users, skip: :omniauth_callbacks
 
     namespace :admin do
+      resources :articles, concerns: %i[searchable]
+
       get :system_test, to: 'system_test#index'
 
       root to: 'dashboard#index'
