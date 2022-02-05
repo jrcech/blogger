@@ -122,3 +122,5 @@ group :development do
 end
 
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+
+gem 'view_component'
