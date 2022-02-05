@@ -126,3 +126,5 @@ gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 gem 'view_component'
 
 gem 'simple_form'
+
+gem 'pagy'
