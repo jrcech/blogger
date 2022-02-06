@@ -3,3 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "popper"
 import "bootstrap"
+
+import Pagy from "pagy-module";
+
+window.addEventListener("turbo:load", Pagy.init);

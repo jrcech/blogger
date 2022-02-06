@@ -128,3 +128,4 @@ gem 'view_component'
 gem 'simple_form'
 
 gem 'pagy'
+gem 'oj'
