@@ -22,6 +22,13 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :articles, concerns: %i[searchable]
 
+      resources :users, concerns: %i[searchable] do
+        member do
+          get :make_admin, to: 'users#make_admin'
+          get :make_member, to: 'users#make_member'
+        end
+      end
+
       get :system_test, to: 'system_test#index'
 
       root to: 'dashboard#index'
