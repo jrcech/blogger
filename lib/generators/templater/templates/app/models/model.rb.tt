@@ -1,14 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: articles
-#
-#  id         :integer          not null, primary key
-#  title      :string
-#  content    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 
 class <%= file_name.singularize.capitalize %> < ApplicationRecord
   validates :title, presence: true
@@ -16,7 +6,8 @@ class <%= file_name.singularize.capitalize %> < ApplicationRecord
 
   scope :search_by, (lambda { |query|
     where(
-      '<%= file_name %>.title ILIKE ?',
+      '<%= file_name %>.title ILIKE ? OR '<%= file_name %>.content ILIKE ?',
+      "%#{query}%",
       "%#{query}%"
     )
   })

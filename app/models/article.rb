@@ -16,7 +16,8 @@ class Article < ApplicationRecord
 
   scope :search_by, (lambda { |query|
     where(
-      'articles.title ILIKE ?',
+      'articles.title ILIKE ? OR articles.content ILIKE ?',
+      "%#{query}%",
       "%#{query}%"
     )
   })
