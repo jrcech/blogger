@@ -18,7 +18,10 @@ html lang="en"
     = javascript_importmap_tags
   
   body data-controller="bs"
-    p class="notice" = notice
-    p class="alert" = alert
+    = render Elements::Navbar::Component.new current_user: current_user
 
-    = yield
+    div class="container"
+      p class="notice" = notice
+      p class="alert" = alert
+
+      = yield
