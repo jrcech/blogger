@@ -1,9 +1,4 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+// Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
-import "controllers"
-import "popper"
-import "bootstrap"
-
-import Pagy from "pagy-module";
-
-window.addEventListener("turbo:load", Pagy.init);
+import "./controllers"
+// import * as bootstrap from "bootstrap"

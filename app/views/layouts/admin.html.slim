@@ -15,7 +15,7 @@ html lang="en"
     = csp_meta_tag
     
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
-    = javascript_importmap_tags
+    = javascript_include_tag 'application', "data-turbo-track": "reload", defer: true
   
   body data-controller="bs"
     = render Elements::Navbar::Component.new current_user: current_user
