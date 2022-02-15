@@ -6,5 +6,5 @@ footer class="row"
       preset: per_page_button,
       dropdown_items: per_page_dropdown_items)
     
-  div class="col-md" data-controller="pagy-initializer"
-    == pagy_bootstrap_nav_js(pagy)
+  div class="col-md" data-controller="pagy"
+    == pagy_bootstrap_nav_js pagy

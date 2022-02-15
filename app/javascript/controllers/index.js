@@ -10,8 +10,8 @@ application.register("bs", BsController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
-import PagyInitializerController from "./pagy_initializer_controller.js"
-application.register("pagy-initializer", PagyInitializerController)
+import PagyController from "./pagy_controller.js"
+application.register("pagy", PagyController)
 
 import SystemTestController from "./system_test_controller.js"
 application.register("system-test", SystemTestController)

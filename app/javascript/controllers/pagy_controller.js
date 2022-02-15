@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import Pagy from "pagy-module";
+import Pagy from "pagy-module"
 
 export default class extends Controller {
   connect() {
