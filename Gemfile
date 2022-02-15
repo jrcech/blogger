@@ -133,3 +133,7 @@ gem 'simple_form'
 
 gem 'pagy'
 gem 'oj'
+
+group :development do
+  gem 'overcommit'
+end
