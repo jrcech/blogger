@@ -37,5 +37,7 @@ PreCommit:
   YamlSyntax:
     enabled: true
 PrePush:
+  ALL:
+    on_fail: warn
   Brakeman:
     enabled: true
