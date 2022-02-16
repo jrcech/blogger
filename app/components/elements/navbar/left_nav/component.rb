@@ -32,7 +32,13 @@ module Elements
 
           {
             path: admin_users_path,
-            title: fa_icon(model_icon(:users), text: t('models.users.more')),
+            title: render(
+              Elements::FontAwesome::Component.new(
+                icon: model_icon(:users),
+                title: t('models.users.more'),
+                text: t('models.users.more')
+              )
+            ),
             controller: controller,
             class: "nav-link#{active_class(controller)}"
           }
@@ -43,7 +49,13 @@ module Elements
 
           {
             path: admin_articles_path,
-            title: fa_icon(model_icon(:articles), text: t('models.articles.more')),
+            title: render(
+              Elements::FontAwesome::Component.new(
+                icon: model_icon(:articles),
+                title: t('models.articles.more'),
+                text: t('models.articles.more')
+              )
+            ),
             controller: controller,
             class: "nav-link#{active_class(controller)}"
           }

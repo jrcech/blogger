@@ -31,10 +31,10 @@ module Views
 
           def details
             %i[
-            id
-            title
-            content
-          ]
+              id
+              title
+              content
+            ]
           end
         end
       end

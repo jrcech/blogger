@@ -75,10 +75,12 @@ module Elements
         def title_with_icon
           return button[:title] if button[:icon].blank?
 
-          fa_icon(
-            button[:icon],
-            text: button[:title],
-            fixed_width: button[:icon_fixed_width]
+          render(
+            Elements::FontAwesome::Component.new(
+              icon: button[:icon],
+              title: button[:title],
+              text: button[:title]
+            )
           )
         end
 

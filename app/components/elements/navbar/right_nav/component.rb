@@ -41,7 +41,14 @@ module Elements
             title: current_user.present? ? UserPresenter.new(item: current_user).full_name : nil,
             dropdown_items: [
               {
-                title: fa_icon('power-off', text: 'Sign out', size: 'sm'),
+                title: render(
+                  Elements::FontAwesome::Component.new(
+                    icon: 'power-off',
+                    title: 'Sign out',
+                    text: 'Sign out',
+                    size: 'sm'
+                  )
+                ),
                 path: destroy_user_session_path,
                 method: :delete
               }
@@ -51,7 +58,14 @@ module Elements
 
         def login_button
           {
-            title: fa_icon('sign-in-alt', text: 'Log in', size: 'sm'),
+            title: render(
+              Elements::FontAwesome::Component.new(
+                icon: 'sign-in-alt',
+                title: 'Log in',
+                text: 'Log in',
+                size: 'sm'
+              )
+            ),
             path: new_user_session_path,
             class: 'nav-item'
           }
