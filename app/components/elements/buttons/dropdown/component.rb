@@ -46,7 +46,7 @@ module Elements
         def dropdown_menu_position
           menu_position = dropdown[:menu_position]
 
-          return " dropdown-menu-#{menu_position.to_s}" if menu_position.present?
+          return " dropdown-menu-#{menu_position}" if menu_position.present?
 
           nil
         end
@@ -78,20 +78,8 @@ module Elements
 
         def dropdown_button_id
           button_id = +''
-          button_id << "#{create_id}-" if title? || id?
+          button_id << "#{dropdown[:id]}-" if id?
           button_id << 'dropdown-button'
-        end
-
-        def create_id
-          string = +''
-          string << dropdown[:title] if title?
-          string << dropdown[:id] if id?
-
-          I18n.transliterate(string).parameterize
-        end
-
-        def title?
-          dropdown[:title].present?
         end
 
         def id?

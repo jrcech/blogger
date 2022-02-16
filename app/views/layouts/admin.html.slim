@@ -21,7 +21,8 @@ html lang="en"
     = render Elements::Navbar::Component.new current_user: current_user
 
     div class="container"
-      p class="notice" = notice
-      p class="alert" = alert
+      nav aria-label="breadcrumb" class="mt-3"
+        = breadcrumbs style: :bootstrap4
 
+      = flash_messages
       = yield

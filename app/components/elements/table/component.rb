@@ -68,7 +68,7 @@ module Elements
       def index_buttons(item, item_presenter)
         render Buttons::Dropdown::Component.new(
           item: item,
-          id: item_presenter.title,
+          id: item_presenter.id,
           dropdown_items: buttons.first[:ellipsis_button]
         )
       end

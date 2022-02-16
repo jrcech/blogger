@@ -192,6 +192,9 @@ GEM
       sexp_processor (~> 4.8)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    gretel (4.4.0)
+      actionview (>= 5.1, < 7.1)
+      railties (>= 5.1, < 7.1)
     hashdiff (1.0.1)
     hashie (5.0.0)
     i18n (1.10.0)
@@ -526,6 +529,7 @@ DEPENDENCIES
   faker
   fasterer
   flay
+  gretel
   jbuilder
   jsbundling-rails
   letter_opener

@@ -1,3 +1,23 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'pagy';
 @import 'system_test';
+
+mark {
+  padding: 0;
+  background-color: #ffed94;
+}
+
+.dropdown > a:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.index-table {
+  tbody tr:hover {
+    cursor: pointer;
+  }
+
+  td > span:hover {
+    cursor: auto;
+  }
+}

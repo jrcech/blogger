@@ -26,7 +26,10 @@ module Views
           end
 
           def action_buttons
-            [:edit_button]
+            %i[
+              edit_button
+              destroy_button
+            ]
           end
 
           def details

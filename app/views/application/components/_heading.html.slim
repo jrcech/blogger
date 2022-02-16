@@ -1,0 +1,19 @@
+/ frozen_string_literal: true
+
+= fa_icon(header[:icon], text: header[:title], title: header[:title])
+
+br
+
+- if header.key?(:related)
+
+  small
+    = fa_icon(header[:related][:icon],
+      text: header[:related][:title],
+      title: header[:related][:title],
+      class: 'fa-1x')
+
+- if header_buttons
+
+  == render 'application/components/buttons',
+    buttons: header_buttons,
+    title: 'Secondary actions'

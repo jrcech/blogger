@@ -1,0 +1,27 @@
+/ frozen_string_literal: true
+
+div class="btn-group" role="group" aria-label="#{title} buttons"
+
+  - buttons.each do |button|
+    - @button = button
+
+    - if button.key? :dropdown_items
+      a [
+        class=button_class
+        id=dropdown_button_id(title)
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      ] = dropdown_button
+
+      div [
+        class=dropdown_menu_class
+        aria-labelledby=dropdown_button_id(title)
+      ]
+        - button[:dropdown_items].each do |dropdown_item|
+          - @button = dropdown_item
+
+          == render 'application/components/dropdown_items',
+            dropdown_item: dropdown_item
+
+    - else
+      = button_link

@@ -1,0 +1,27 @@
+/ frozen_string_literal: true
+
+footer class="row"
+  div class="col-md"
+    div class="dropdown"
+
+      button [
+        class="btn btn-light dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      ]
+        = "#{pagy.vars[:items]} items per page"
+
+      div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+        - pagy.vars[:per_page].each do |per_page|
+          - @per_page = per_page
+
+          = link_to per_page,
+            per_page_path,
+            class: 'dropdown-item'
+
+  div class="col-md"
+
+  div class="col-md"
+    == pagy_bootstrap_nav_js(pagy)

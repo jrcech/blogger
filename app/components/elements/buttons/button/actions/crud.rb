@@ -7,6 +7,15 @@ module Elements
         module Crud
           private
 
+          def show_button
+            {
+              action: :show,
+              path: path_for(:show, item),
+              title: t('actions.show'),
+              icon: action_icon(:show)
+            }
+          end
+
           def new_button
             {
               action: :new,
@@ -32,7 +41,6 @@ module Elements
             {
               action: :destroy,
               path: path_for(:destroy, item),
-              method: :delete,
               title: t('actions.destroy'),
               icon: action_icon(:destroy),
               data: destroy_button_data
@@ -42,8 +50,9 @@ module Elements
           def destroy_button_data
             model_translation = t("models.#{model_plural_symbol}.one")
             {
+              turbo_method: :delete,
+              turbo_confirm: t('confirmations.destroy.confirm', item: item_presenter.title),
               title: t('confirmations.destroy.title', model: model_translation),
-              confirm: t('confirmations.destroy.confirm', item: item_presenter.title),
               commit: t('confirmations.destroy.commit', model: model_translation),
               cancel: t('confirmations.destroy.cancel')
             }

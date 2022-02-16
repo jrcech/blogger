@@ -1,0 +1,6 @@
+/ frozen_string_literal: true
+
+- breadcrumb :edit, @item, @item_presenter
+
+= render Views::Admin::Users::Edit::Component.new item: @item,
+  item_presenter: @item_presenter

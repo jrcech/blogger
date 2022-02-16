@@ -13,6 +13,9 @@ application.register("font-awesome", FontAwesomeController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import IndexTableController from "./index_table_controller.js"
+application.register("index-table", IndexTableController)
+
 import PagyController from "./pagy_controller.js"
 application.register("pagy", PagyController)
 

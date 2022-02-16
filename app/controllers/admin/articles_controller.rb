@@ -65,7 +65,7 @@ module Admin
         flash[:error] = t('errors.destroy')
       end
 
-      redirect_back fallback_location: admin_articles_path, format: :html
+      redirect_to admin_articles_url, status: :see_other
     end
 
     private

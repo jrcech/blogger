@@ -1,0 +1,25 @@
+/ frozen_string_literal: true
+
+= simple_form_for [:admin, item] do |f|
+  = f.error_notification
+
+  = f.input :email
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :username
+
+  - if item.new_record?
+    = f.input :password, required: true, hint: false
+    = f.input :password_confirmation, required: true
+  - else
+    = f.input :password, hint: :translate
+    = f.input :password_confirmation
+
+  - if params[:return_to].present?
+    = f.input :return_to,
+      as: :hidden,
+      input_html: { value: params[:return_to] }
+
+  div class="mt-4"
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', :back, class: 'btn btn-outline-secondary'

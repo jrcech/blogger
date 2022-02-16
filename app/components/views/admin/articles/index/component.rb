@@ -48,6 +48,7 @@ module Views
             [
               {
                 ellipsis_button: %i[
+                  show_button
                   edit_button
                   divider
                   destroy_button
