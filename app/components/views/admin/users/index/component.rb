@@ -39,21 +39,21 @@ module Views
 
           def tbody
             %i[
-            id
-            highlight_full_name
-            highlight_email
-            user_role
-          ]
+              id
+              highlight_full_name
+              highlight_email
+              user_role
+            ]
           end
 
           def action_buttons
             [
               {
                 ellipsis_button: %i[
-                edit_button
-                divider
-                destroy_button
-              ]
+                  edit_button
+                  divider
+                  destroy_button
+                ]
               }
             ]
           end

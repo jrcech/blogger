@@ -38,9 +38,11 @@ module Elements
         end
 
         def dropdown_class
-          return 'nav-item dropdown' if nav_item?
+          string = +'dropdown'
+          string << ' nav-item' if nav_item?
+          string << " float-#{dropdown[:float]}" if dropdown[:float].present?
 
-          'dropdown'
+          string
         end
 
         def dropdown_menu_position
