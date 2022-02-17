@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles', type: :system do
+RSpec.describe 'Admin Articles destroy', type: :system do
   let!(:factory) { create :article }
 
   before do
@@ -11,21 +11,25 @@ RSpec.describe 'Admin Articles', type: :system do
     visit admin_articles_path
   end
 
-  it 'user destroyed an article from index', js: true do
-    find_by_id("#{factory.id}-dropdown-button").click
+  context 'when on index' do
+    it 'user destroyed an article', js: true do
+      find_by_id("#{factory.id}-dropdown-button").click
 
-    accept_confirm { click_link 'Destroy' }
+      accept_confirm { click_link 'Destroy' }
 
-    expect_deleted_item
+      expect_deleted_item
+    end
   end
 
-  it 'user destroyed an article from show', js: true do
-    find_by_id("#{factory.id}-dropdown-button").click
-    click_link 'Show'
+  context 'when on show' do
+    it 'user destroyed an article', js: true do
+      find_by_id("#{factory.id}-dropdown-button").click
+      click_link 'Show'
 
-    accept_confirm { click_link 'Destroy' }
+      accept_confirm { click_link 'Destroy' }
 
-    expect_deleted_item
+      expect_deleted_item
+    end
   end
 
   private

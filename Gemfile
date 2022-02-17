@@ -103,10 +103,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'vcr'
   gem 'w3c_validators'
   gem 'webdrivers', require: false
-  gem 'webmock'
 end
 
 gem 'devise'

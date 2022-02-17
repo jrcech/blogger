@@ -73,8 +73,6 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.2.0)
-      execjs (~> 2)
     awesome_print (1.9.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -90,10 +88,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
-    bootstrap (5.1.3)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.9.3, < 3)
-      sassc-rails (>= 2.0.0)
     brakeman (5.2.1)
     builder (3.2.4)
     bullet (7.0.1)
@@ -121,8 +115,6 @@ GEM
       descendants_tracker (~> 0.0.1)
     colorize (0.8.1)
     concurrent-ruby (1.1.9)
-    crack (0.4.5)
-      rexml
     crass (1.0.6)
     cssbundling-rails (1.0.0)
       railties (>= 6.0.0)
@@ -146,7 +138,6 @@ GEM
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
-    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -180,7 +171,6 @@ GEM
     fasterer (0.9.0)
       colorize (~> 0.7)
       ruby_parser (>= 3.14.1)
-    ffi (1.15.5)
     flay (2.12.1)
       erubis (~> 2.7.0)
       path_expander (~> 1.0)
@@ -195,7 +185,6 @@ GEM
     gretel (4.4.0)
       actionview (>= 5.1, < 7.1)
       railties (>= 5.1, < 7.1)
-    hashdiff (1.0.1)
     hashie (5.0.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
@@ -285,7 +274,6 @@ GEM
       ast (~> 2.4.1)
     path_expander (1.1.0)
     pg (1.3.2)
-    popper_js (2.9.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -413,14 +401,6 @@ GEM
       tty-which (~> 0.4.0)
       virtus (~> 1.0)
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     seedbank (0.5.0)
       rake (>= 10.0)
     selenium-webdriver (4.1.0)
@@ -472,7 +452,6 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
     uniform_notifier (1.14.2)
-    vcr (6.0.0)
     view_component (2.49.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
@@ -496,10 +475,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
-    webmock (3.14.0)
-      addressable (>= 2.8.0)
-      crack (>= 0.3.2)
-      hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -516,7 +491,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap
-  bootstrap (~> 5.1, >= 5.1.3)
   brakeman
   bullet
   bundler-audit
@@ -567,12 +541,10 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  vcr
   view_component
   w3c_validators
   web-console
   webdrivers
-  webmock
 
 RUBY VERSION
    ruby 3.1.0p0

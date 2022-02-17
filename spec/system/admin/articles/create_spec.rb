@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles', type: :system do
+RSpec.describe 'Admin Articles create', type: :system do
   before do
     resource_for :articles, :admin
     sign_in_user
@@ -11,22 +11,24 @@ RSpec.describe 'Admin Articles', type: :system do
     click_link 'New Article'
   end
 
-  it 'user creates an article', js: true do
-    fill_in 'Title', with: 'Test Article'
-    fill_in 'Content', with: 'Test content'
+  context 'when on index' do
+    it 'user creates an article', js: true do
+      fill_in 'Title', with: 'Test Article'
+      fill_in 'Content', with: 'Test content'
 
-    click_button 'Create Article'
+      click_button 'Create Article'
 
-    expect_created_item
-  end
+      expect_created_item
+    end
 
-  it 'user failed to create an article', js: true do
-    fill_in 'Title', with: ''
-    fill_in 'Content', with: ''
+    it 'user failed to create an article', js: true do
+      fill_in 'Title', with: ''
+      fill_in 'Content', with: ''
 
-    click_button 'Create Article'
+      click_button 'Create Article'
 
-    expect_not_created_item
+      expect_not_created_item
+    end
   end
 
   private
