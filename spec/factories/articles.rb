@@ -11,7 +11,7 @@
 FactoryBot.define do
   factory :article do
     title { 'MyString' }
-    content { 'MyString' }
+    content { 'MyText' }
     created_at { '2019-03-08 15:33:28' }
     updated_at { '2019-03-08 15:33:28' }
 

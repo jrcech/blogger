@@ -8,6 +8,7 @@ RSpec.describe 'Admin Articles destroy', type: :system do
   before do
     resource_for :articles, :admin
     sign_in_user
+
     visit admin_articles_path
   end
 

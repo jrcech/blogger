@@ -27,13 +27,13 @@ RSpec.describe 'Admin Articles update', type: :system do
       expect_updated_item
     end
 
-    it 'user failed to update an article from show', js: true do
+    it 'user failed to update an article', js: true do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
 
       click_button 'Update Article'
 
-      expect_not_created_item
+      expect_not_updated_item
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe 'Admin Articles update', type: :system do
 
       click_button 'Update Article'
 
-      expect_not_created_item
+      expect_not_updated_item
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe 'Admin Articles update', type: :system do
     end
   end
 
-  def expect_not_created_item
+  def expect_not_updated_item
     aggregate_failures do
       expect(page).to have_content "Article wasn't updated!"
       expect(resource_updated?).to eq false
