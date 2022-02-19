@@ -74,11 +74,11 @@ en:
       roles: "Roles"
       content: "Content"
   details:
-    email: "E-Mail: "
-    role: "Role: "
-    id: "ID: "
-    title: "Title: "
-    content: "Content: "
+    id: "ID"
+    email: "E-Mail"
+    role: "Role"
+    title: "Title"
+    content: "Content"
   tooltips:
     search: "This column is used in search"
     remove: "Remove"

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Articles read', type: :system do
-  let!(:factory) { create :article }
+  let!(:article) { create :article }
 
   before do
     sign_in_user
@@ -19,7 +19,7 @@ RSpec.describe 'Admin Articles read', type: :system do
 
   context 'when on show' do
     before do
-      find_by_id("#{factory.id}-dropdown-button").click
+      find_by_id("#{article.id}-dropdown-button").click
 
       click_link 'Show'
     end
@@ -33,7 +33,7 @@ RSpec.describe 'Admin Articles read', type: :system do
 
   def expect_index_item
     aggregate_failures do
-      expect(page).to have_content factory.id
+      expect(page).to have_content article.id
       expect(page).to have_content 'MyString'
       expect(page).to have_content 'MyText'
     end
@@ -41,7 +41,7 @@ RSpec.describe 'Admin Articles read', type: :system do
 
   def expect_show_item
     aggregate_failures do
-      expect(page).to have_content "ID: #{factory.id}"
+      expect(page).to have_content "ID: #{article.id}"
       expect(page).to have_content 'Title: MyString'
       expect(page).to have_content 'Content: MyText'
     end

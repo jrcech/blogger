@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Articles update', type: :system do
-  let!(:factory) { create :article }
+  let!(:article) { create :article }
 
   before do
     sign_in_user
@@ -13,7 +13,7 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   context 'when on index' do
     before do
-      find_by_id("#{factory.id}-dropdown-button").click
+      find_by_id("#{article.id}-dropdown-button").click
 
       click_link 'Edit'
     end
@@ -39,7 +39,7 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   context 'when on show' do
     before do
-      find_by_id("#{factory.id}-dropdown-button").click
+      find_by_id("#{article.id}-dropdown-button").click
       click_link 'Show'
 
       click_link 'Edit'
@@ -82,6 +82,6 @@ RSpec.describe 'Admin Articles update', type: :system do
   end
 
   def resource_updated?
-    factory.updated_at < factory.reload.updated_at
+    article.updated_at < article.reload.updated_at
   end
 end
