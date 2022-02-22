@@ -50,7 +50,13 @@ module Elements
                   )
                 ),
                 path: destroy_user_session_path,
-                method: :delete
+                data: {
+                  turbo_method: :delete
+                }
+              },
+              {
+                title: 'Edit password',
+                path: edit_user_registration_path
               }
             ]
           }

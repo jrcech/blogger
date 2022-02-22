@@ -67,7 +67,10 @@ group :development do
   # gem "spring"
 end
 
+# Code Quality
 group :development do
+  gem 'overcommit'
+
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'fasterer'
@@ -81,32 +84,38 @@ group :development do
   gem 'slim_lint'
 end
 
+# Debug
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
-  gem 'pry-awesome_print'
-  gem 'pry-rails'
+
+  group :test do
+    gem 'amazing_print'
+    gem 'bullet'
+    gem 'pry-rails'
+  end
 end
 
-group :development, :test do
-  gem 'amazing_print'
-  gem 'bullet'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'pry-byebug'
-  gem 'rspec-rails'
-end
-
+# Test
 group :test do
   gem 'capybara'
+  gem 'capybara-email'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'w3c_validators'
   gem 'webdrivers', require: false
+
+  group :development do
+    gem 'rspec-rails'
+
+    gem 'factory_bot_rails'
+    gem 'faker'
+  end
 end
 
+# Authentication
 gem 'devise'
 gem 'email_validator'
 gem 'omniauth'
@@ -115,23 +124,20 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'rolify'
 
-gem 'slim-rails'
-
+# Database
 group :development do
   gem 'annotate'
   gem 'rails-erd'
   gem 'seedbank'
 end
 
+# View
+gem 'slim-rails'
 gem 'view_component'
 
 gem 'simple_form'
 
+gem 'gretel'
+
 gem 'oj'
 gem 'pagy'
-
-group :development do
-  gem 'overcommit'
-end
-
-gem 'gretel'

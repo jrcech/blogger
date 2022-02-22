@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Capybara.server_port = 1111
+
 Capybara.register_driver :selenium_chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--window-size=1920,1080')

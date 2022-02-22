@@ -34,6 +34,8 @@ module Admin
 
         redirect_to admin_users_path
       else
+        flash[:error] = t('errors.create', model: helpers.model_singular)
+
         render :new
       end
     end
@@ -47,9 +49,9 @@ module Admin
 
         redirect_to admin_users_path
       else
-        @return_to = params[:return_to]
+        flash[:error] = t('errors.update', model: helpers.model_singular)
 
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -72,7 +74,7 @@ module Admin
         @item = find_item
 
         if @item.send("make_#{role}")
-          flash[:success] = t('success.change_role', role: role)
+          flash[:success] = t('success.change_role', role:)
         else
           flash[:error] = t('errors.change_role')
         end

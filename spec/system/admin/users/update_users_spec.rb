@@ -2,36 +2,35 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles update', type: :system do
-  let!(:article) { create :article }
+RSpec.describe 'Admin Users update', type: :system do
+  let!(:user) { create :user }
 
   before do
     sign_in_user
 
-    visit admin_articles_path
+    visit admin_users_path
   end
 
   context 'when on index' do
     before do
-      find_by_id("#{article.id}-dropdown-button").click
+      find_by_id("#{user.id}-dropdown-button").click
 
       click_link 'Edit'
     end
 
-    it 'user updates an article', js: true do
-      fill_in 'Title', with: 'Test title updated'
-      fill_in 'Content', with: 'Test content updated'
+    it 'user updates an user', js: true do
+      fill_in 'First name', with: 'First name updated'
+      fill_in 'Last name', with: 'Last name updated'
 
-      click_button 'Update Article'
+      click_button 'Update User'
 
       expect_updated_item
     end
 
-    it 'user failed to update an article', js: true do
-      fill_in 'Title', with: ''
-      fill_in 'Content', with: ''
+    it 'user failed to update an user', js: true do
+      fill_in 'Email', with: ''
 
-      click_button 'Update Article'
+      click_button 'Update User'
 
       expect_not_updated_item
     end
@@ -39,26 +38,25 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   context 'when on show' do
     before do
-      find_by_id("#{article.id}-dropdown-button").click
+      find_by_id("#{user.id}-dropdown-button").click
       click_link 'Show'
 
       click_link 'Edit'
     end
 
-    it 'user updates an article', js: true do
-      fill_in 'Title', with: 'Test title updated'
-      fill_in 'Content', with: 'Test content updated'
+    it 'user updates an user', js: true do
+      fill_in 'First name', with: 'First name updated'
+      fill_in 'Last name', with: 'Last name updated'
 
-      click_button 'Update Article'
+      click_button 'Update User'
 
       expect_updated_item
     end
 
-    it 'user failed to update an article', js: true do
-      fill_in 'Title', with: ''
-      fill_in 'Content', with: ''
+    it 'user failed to update an user', js: true do
+      fill_in 'Email', with: ''
 
-      click_button 'Update Article'
+      click_button 'Update User'
 
       expect_not_updated_item
     end
@@ -68,20 +66,21 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   def expect_updated_item
     aggregate_failures do
-      expect(page).to have_content 'Article was successfully updated.'
-      expect(page).to have_content 'Test title updated'
+      expect(page).to have_content 'User was successfully updated.'
+      expect(page).to have_content 'First name updated'
+      expect(page).to have_content 'Last name updated'
       expect(resource_updated?).to eq true
     end
   end
 
   def expect_not_updated_item
     aggregate_failures do
-      expect(page).to have_content "Article wasn't updated!"
+      expect(page).to have_content "User wasn't updated!"
       expect(resource_updated?).to eq false
     end
   end
 
   def resource_updated?
-    article.updated_at < article.reload.updated_at
+    user.updated_at < user.reload.updated_at
   end
 end
