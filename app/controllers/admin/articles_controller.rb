@@ -27,14 +27,14 @@ module Admin
     end
 
     def create
-      @item = Article.new article_params
+      @item = Article.new(article_params)
 
       if @item.save
-        flash[:success] = t('success.create', model: helpers.model_singular)
+        flash[:success] = t('success.create', model: 'article')
 
-        redirect_to admin_articles_path, format: :html
+        redirect_to admin_articles_path
       else
-        flash[:error] = t('errors.create', model: helpers.model_singular)
+        flash[:error] = t('errors.create', model: 'article')
 
         render :new, status: :unprocessable_entity
       end
@@ -44,12 +44,11 @@ module Admin
       @item = find_item
       @item_presenter = ArticlePresenter.new(item: @item)
 
-      if @item.update article_params
+      if @item.update(article_params)
         flash[:success] = t('success.update', model: helpers.model_singular)
 
         redirect_to admin_articles_path
       else
-        @return_to = params[:return_to]
         flash[:error] = t('errors.update', model: helpers.model_singular)
 
         render :edit, status: :unprocessable_entity
@@ -71,11 +70,11 @@ module Admin
     private
 
     def find_items
-      Article.order updated_at: :desc
+      Article.order(updated_at: :desc)
     end
 
     def find_item
-      Article.find params[:id]
+      Article.find(params[:id])
     end
 
     def article_params
