@@ -9,7 +9,8 @@ Capybara.register_driver :selenium_chrome_headless do |app|
 
   Capybara::Selenium::Driver.new(
     app,
-    browser: :chrome,
+    browser: :remote,
+    url: "http://selenium_chrome:4444/wd/hub",
     capabilities: options
   )
 end
@@ -21,5 +22,8 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
+    Capybara.server_host = "0.0.0.0"
+    Capybara.server_port = 4000
+    Capybara.app_host = 'http://web:4000'
   end
 end

@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "3000:3000"
+      - "4000:4000"
     volumes:
       - .:/app
     env_file:
@@ -37,5 +38,11 @@ services:
       - /app/node_modules
     command: "yarn build:css --watch"
 
+  selenium_chrome:
+    image: selenium/standalone-chrome
+    logging:
+      driver: none
+    ports:
+        - "5900:5900"
 volumes:
   db_data:

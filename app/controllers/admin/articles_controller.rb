@@ -30,11 +30,11 @@ module Admin
       @item = Article.new(article_params)
 
       if @item.save
-        flash[:success] = t('success.create', model: 'article')
+        flash[:success] = t('success.create', model: 'Article')
 
         redirect_to admin_articles_path
       else
-        flash[:error] = t('errors.create', model: 'article')
+        flash[:error] = t('errors.create', model: 'Article')
 
         render :new, status: :unprocessable_entity
       end
