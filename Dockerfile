@@ -3,14 +3,30 @@ FROM ruby:3.1.0
 LABEL maintainer="jiricech94@gmail.com"
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
-    nodejs
+    apt-transport-https
 
-COPY Gemfile* /usr/src/app/
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
-WORKDIR /usr/src/app
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
+    tee /etc/apt/sources.list.d/yarn.list
+
+RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
+    nodejs \
+    yarn
+
+COPY Gemfile* /app/
+COPY package.json yarn.lock /app/
+
+WORKDIR /app
+
 RUN bundle install
+RUN yarn install
 
-COPY . /usr/src/app/
+COPY . /app/
+
+RUN yarn build
+RUN yarn build:css
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 

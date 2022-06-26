@@ -40,3 +40,5 @@
 .env
 .env.*
 /coverage
+
+yarn-error.log

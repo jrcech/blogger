@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - .:/app
     env_file:
       - .env/development/database
       - .env/development/web
@@ -20,6 +20,22 @@ services:
 
   redis:
     image: redis
+
+  js:
+    build: .
+    tty: true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: "yarn build --watch"
+
+  css:
+    build: .
+    tty: true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: "yarn build:css --watch"
 
 volumes:
   db_data:

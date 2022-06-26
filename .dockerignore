@@ -11,3 +11,5 @@ tmp/*
 # Editor temp files
 *.swp
 *.swo
+
+/node_modules
