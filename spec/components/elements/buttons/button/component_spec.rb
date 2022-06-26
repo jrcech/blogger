@@ -11,7 +11,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button
 
     expect(
-      rendered_component
+      page
     ).to have_css "a.btn.btn-primary[role='button'][href='test_path']"
   end
 
@@ -19,7 +19,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button, :full
 
     aggregate_failures do
-      expect(rendered_component).to have_text 'Test title'
+      expect(page).to have_text 'Test title'
 
       expect_to_have_css_attributes
     end
@@ -29,7 +29,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button, :divider
 
     expect(
-      rendered_component
+      page
     ).to have_css 'hr.dropdown-divider'
   end
 
@@ -37,15 +37,15 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button, :dropdown_item
 
     expect(
-      rendered_component
+      page
     ).to have_css 'li>a.dropdown-item[role="button"]'
   end
 
   it 'renders a dropdown item with an icon' do
     render_inline build :button, :dropdown_item_with_icon
-    puts rendered_component
+
     expect(
-      rendered_component
+      page
     ).to have_css 'li>a.dropdown-item>i.fa-check.fa-fw'
   end
 
@@ -53,7 +53,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button, :nav_item
 
     expect(
-      rendered_component
+      page
     ).to have_css 'li.nav-item>a.nav-link'
   end
 
@@ -61,7 +61,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     render_inline build :button, :bootstrap
 
     expect(
-      rendered_component
+      page
     ).to have_css 'a.btn.btn-success'
   end
 
@@ -70,7 +70,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
   def expect_to_have_css_attributes
     expected_attributes.each do |attribute|
       expect(
-        rendered_component
+        page
       ).to have_css attribute
     end
   end

@@ -18,9 +18,8 @@ RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
   it 'renders a dropdown with a title' do
     render_inline build :dropdown, :with_title
 
-    puts rendered_component
     expect(
-      rendered_component
+      page
     ).to have_css 'ul[aria-labelledby="dropdown-button"]'
   end
 
@@ -28,7 +27,7 @@ RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
     render_inline build :dropdown, :nav_item
 
     expect(
-      rendered_component
+      page
     ).to have_css 'li.nav-item.dropdown>a.nav-link.dropdown-toggle'
   end
 
@@ -37,7 +36,7 @@ RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
   def expect_to_have_css_attributes
     expected_attributes.each do |attribute|
       expect(
-        rendered_component
+        page
       ).to have_css attribute
     end
   end

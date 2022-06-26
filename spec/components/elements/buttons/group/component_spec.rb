@@ -19,7 +19,7 @@ RSpec.describe Elements::Buttons::Group::Component, type: :component do
     render_inline build :group, :with_title
 
     expect(
-      rendered_component
+      page
     ).to have_css 'div.btn-group[aria-label="Test title buttons"]'
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Elements::Buttons::Group::Component, type: :component do
   def expect_to_have_css_attributes
     expected_attributes.each do |attribute|
       expect(
-        rendered_component
+        page
       ).to have_css attribute
     end
   end

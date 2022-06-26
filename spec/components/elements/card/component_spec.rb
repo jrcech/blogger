@@ -26,14 +26,14 @@ RSpec.describe Elements::Card::Component, type: :component do
   end
 
   it 'renders component' do
-    expect(rendered_component).to have_text 'john.doe@example.com'
+    expect(page).to have_text 'john.doe@example.com'
   end
 
   it 'loops through card body' do
-    expect(rendered_component).to have_css 'p:nth-child(2)', text: 'John'
+    expect(page).to have_css 'p:nth-child(2)', text: 'John'
   end
 
   it 'stops looping through card body' do
-    expect(rendered_component).not_to have_css 'p:nth-child(3)'
+    expect(page).not_to have_css 'p:nth-child(3)'
   end
 end
