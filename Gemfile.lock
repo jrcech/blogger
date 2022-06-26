@@ -491,13 +491,13 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   overcommit
   pagy
-  pg (~> 1.1)
+  pg
   pry-rails
-  puma (~> 5.0)
-  rails (~> 7.0.2, >= 7.0.2.2)
+  puma
+  rails
   rails-erd
   rails_best_practices
-  redis (~> 4.0)
+  redis
   reek
   rolify
   rspec-rails
@@ -522,7 +522,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.1.0p0
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.6
