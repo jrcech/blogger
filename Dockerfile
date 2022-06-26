@@ -20,6 +20,8 @@ COPY package.json yarn.lock /app/
 
 WORKDIR /app
 
+ENV BUNDLE_PATH /gems
+
 RUN bundle install
 RUN yarn install
 

@@ -8,6 +8,7 @@ services:
       - "4000:4000"
     volumes:
       - .:/app
+      - gem_cache:/gems
     env_file:
       - .env/development/database
       - .env/development/web
@@ -28,6 +29,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - gem_cache:/gems
     command: "yarn build --watch"
 
   css:
@@ -36,6 +38,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - gem_cache:/gems
     command: "yarn build:css --watch"
 
   selenium_chrome:
@@ -43,6 +46,7 @@ services:
     logging:
       driver: none
     ports:
-        - "5900:5900"
+      - "5900:5900"
 volumes:
   db_data:
+  gem_cache:
