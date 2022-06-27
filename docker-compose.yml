@@ -50,6 +50,7 @@ services:
       driver: none
     ports:
       - "5900:5900"
+
 volumes:
   db_data:
   gem_cache:
