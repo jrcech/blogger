@@ -10,15 +10,23 @@ RUN bash -c "curl -sL https://deb.nodesource.com/setup_18.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo 'deb https://dl.yarnpkg.com/debian/ stable main' | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs yarn \
-    && apt-get clean"
+    && apt-get clean \
+    && useradd --create-home ruby \
+    && mkdir /gems && chown ruby:ruby -R /gems \
+    && mkdir /node_modules && chown ruby:ruby -R /node_modules \
+    && chown ruby:ruby -R /app"
 
-COPY Gemfile Gemfile.lock ./
+USER ruby
+
+COPY --chown=ruby:ruby Gemfile Gemfile.lock ./
 RUN bundle install
 
-COPY package.json yarn.lock ./
+COPY --chown=ruby:ruby package.json yarn.lock ./
 RUN yarn install
 
-COPY . .
+ENV USER='ruby'
+
+COPY --chown=ruby:ruby . .
 
 RUN yarn build
 RUN yarn build:css
