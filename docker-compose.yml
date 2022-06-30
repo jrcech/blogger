@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-      - node_cache:/node_modules
+      - node_cache:/app/node_modules
     env_file:
       - .env/development/database
       - .env/development/web
@@ -32,7 +32,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-      - node_cache:/node_modules
+      - node_cache:/app/node_modules
     command: "yarn build --watch"
 
   css:
@@ -42,7 +42,7 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-      - node_cache:/node_modules
+      - node_cache:/app/node_modules
     command: "yarn build:css --watch"
 
   selenium_chrome:
