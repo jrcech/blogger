@@ -3,6 +3,7 @@ version: '3'
 services:
   web:
     build: .
+    user: ruby:ruby
     ports:
       - "3000:3000"
       - "4000:4000"
@@ -26,20 +27,20 @@ services:
 
   js:
     build: .
+    user: ruby:ruby
     tty: true
     volumes:
       - .:/app
-      - /app/node_modules
       - gem_cache:/gems
       - node_cache:/node_modules
     command: "yarn build --watch"
 
   css:
     build: .
+    user: ruby:ruby
     tty: true
     volumes:
       - .:/app
-      - /app/node_modules
       - gem_cache:/gems
       - node_cache:/node_modules
     command: "yarn build:css --watch"

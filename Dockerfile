@@ -2,8 +2,6 @@ FROM ruby:3.1.2
 
 LABEL maintainer="jiricech94@gmail.com"
 
-ENV BUNDLE_PATH /gems
-
 WORKDIR /app
 
 RUN bash -c "curl -sL https://deb.nodesource.com/setup_18.x | bash - \
@@ -16,15 +14,19 @@ RUN bash -c "curl -sL https://deb.nodesource.com/setup_18.x | bash - \
     && mkdir /node_modules && chown ruby:ruby -R /node_modules \
     && chown ruby:ruby -R /app"
 
+ENV BUNDLE_PATH /gems
+ENV NODE_PATH /node_modules
+ENV USER='ruby'
+
 USER ruby
 
 COPY --chown=ruby:ruby Gemfile Gemfile.lock ./
 RUN bundle install
 
-COPY --chown=ruby:ruby package.json yarn.lock ./
+COPY --chown=ruby:ruby package.json yarn.lock .yarnrc ./
 RUN yarn install
 
-ENV USER='ruby'
+ENV PATH="${PATH}:/node_modules/.bin"
 
 COPY --chown=ruby:ruby . .
 
