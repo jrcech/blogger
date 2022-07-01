@@ -3,6 +3,9 @@ version: '3'
 services:
   web:
     build: .
+    depends_on:
+      - "database"
+      - "redis"
     user: ruby:ruby
     ports:
       - "3000:3000"

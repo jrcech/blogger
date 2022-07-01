@@ -1,17 +1,19 @@
-FROM ruby:3.1.2
+FROM ruby:3.1.2-slim
 
 LABEL maintainer="jiricech94@gmail.com"
 
 WORKDIR /app
 
-RUN bash -c "curl -sL https://deb.nodesource.com/setup_18.x | bash - \
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo 'deb https://dl.yarnpkg.com/debian/ stable main' | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs yarn \
-    && apt-get clean \
-    && useradd --create-home ruby \
-    && mkdir /gems && chown ruby:ruby -R /gems \
-    && chown ruby:ruby -R /app"
+RUN bash -c "apt update && \
+    apt install -y --no-install-recommends build-essential curl git libpq-dev && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo 'deb https://dl.yarnpkg.com/debian/ stable main' | tee /etc/apt/sources.list.d/yarn.list && \
+    apt update && apt install -y --no-install-recommends nodejs yarn && \
+    apt clean && \
+    useradd --create-home ruby && \
+    mkdir /gems && chown ruby:ruby -R /gems && \
+    chown ruby:ruby -R /app"
 
 ENV BUNDLE_PATH /gems
 ENV USER='ruby'
