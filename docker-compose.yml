@@ -17,6 +17,7 @@ services:
     env_file:
       - .env/development/database
       - .env/development/web
+    tty: true
 
   database:
     image: postgres
