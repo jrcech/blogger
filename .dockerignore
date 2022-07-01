@@ -1,43 +1,43 @@
 # Ignore bundler config.
-/.bundle
+.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+tmp/pids/*
+!tmp/pids/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
-/tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
+storage/*
+!storage/.keep
+tmp/storage/*
+!tmp/storage/.keep
 
-/public/assets
+public/assets
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+config/master.key
 
-/app/assets/builds/*
-!/app/assets/builds/.keep
+app/assets/builds/*
+!app/assets/builds/.keep
 
-# Git
+node_modules
+
+.env
+.env.*
+
 .git
 .gitignore
 
-/node_modules
-
 .dockerignore
+
+coverage
+.byebug_history
 yarn-error.log
 
 .DS_Store
 .idea
-.env
-.env.*
-/coverage
