@@ -1,8 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      target: "app"
     depends_on:
       - "database"
       - "redis"
@@ -30,7 +32,9 @@ services:
     image: redis
 
   js:
-    build: .
+    build:
+      context: .
+      target: "assets"
     user: ruby:ruby
     tty: true
     volumes:
@@ -40,7 +44,9 @@ services:
     command: "yarn build --watch"
 
   css:
-    build: .
+    build:
+      context: .
+      target: "assets"
     user: ruby:ruby
     tty: true
     volumes:
