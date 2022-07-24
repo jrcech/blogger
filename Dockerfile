@@ -47,9 +47,6 @@ RUN apt update && \
 
 USER ruby
 
-COPY --chown=ruby:ruby bin/ ./bin
-RUN chmod 0755 bin/*
-
 ENV BUNDLE_PATH /gems
 ENV USER='ruby'
 
