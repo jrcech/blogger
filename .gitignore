@@ -39,6 +39,9 @@
 .idea
 .env
 .env.*
+!.env.*.example
 /coverage
 
 yarn-error.log
+
+/config/credentials/development.key

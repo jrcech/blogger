@@ -39,7 +39,7 @@ LABEL maintainer="jiricech94@gmail.com"
 WORKDIR /app
 
 RUN apt update && \
-  apt install -y --no-install-recommends build-essential curl git libpq-dev && \
+  apt install -y --no-install-recommends build-essential curl git libpq-dev nano && \
   rm -rf /var/lib/apt/lists/* && \
   apt clean && \
   useradd --create-home ruby && \
