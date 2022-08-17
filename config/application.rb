@@ -31,6 +31,8 @@ module Blogger
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
+
     # Don't generate system test files.
     config.generators do |generator|
       generator.test_framework :rspec

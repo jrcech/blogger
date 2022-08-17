@@ -36,7 +36,6 @@ RSpec.describe Elements::FontAwesome::Component, type: :component do
   def full_fontawesome_css
     [
       'i.fa-test-icon',
-      "i[title='Test title']",
       'i.test-style',
       'i.fa-test-size',
       'i.fa-fw',
@@ -44,8 +43,9 @@ RSpec.describe Elements::FontAwesome::Component, type: :component do
       'i.fa-test-rotation',
       'i.fa-border',
       'i.fa-pull-test-pull',
-      "i[data-test-key='test-value']",
-      "i[data-controller='font-awesome test-controller']"
+      'i[title="Test title"]',
+      'i[data-test-key="test-value"]',
+      'i[data-controller="font-awesome test-controller"]'
     ]
   end
 end

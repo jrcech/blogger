@@ -142,5 +142,5 @@ gem 'gretel'
 gem 'oj'
 gem 'pagy'
 
-gem "sentry-ruby"
-gem "sentry-rails"
+gem 'sentry-ruby'
+gem 'sentry-rails'
