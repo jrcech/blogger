@@ -12,7 +12,7 @@ RSpec.describe Elements::FontAwesome::Component, type: :component do
 
     expect(
       page
-    ).to have_css "i.fa-solid.fa-test-icon[title='Test title'][data-controller='font-awesome']"
+    ).to have_css base_fontawesome_css
   end
 
   it 'renders a full font awesome' do
@@ -21,21 +21,19 @@ RSpec.describe Elements::FontAwesome::Component, type: :component do
     aggregate_failures do
       expect(page).to have_text 'Test text'
 
-      expect_to_have_css_attributes
+      expect_to_have_css_attributes full_fontawesome_css
     end
   end
 
   private
 
-  def expect_to_have_css_attributes
-    expected_attributes.each do |attribute|
-      expect(
-        page
-      ).to have_css attribute
-    end
+  def base_fontawesome_css
+    'i.fa-solid.fa-test-icon' \
+      '[title="Test title"]' \
+      '[data-controller="font-awesome"]'
   end
 
-  def expected_attributes
+  def full_fontawesome_css
     [
       'i.fa-test-icon',
       "i[title='Test title']",

@@ -37,6 +37,7 @@ module Elements
 
       def style
         style = options&.dig :style
+
         return style if style.present?
 
         'fa-solid'
@@ -88,11 +89,6 @@ module Elements
         return " fa-pull-#{position}" if position.present?
 
         nil
-      end
-
-      def construct_title
-        title = options&.dig :title
-        "title='#{title}'" if title.present?
       end
     end
   end

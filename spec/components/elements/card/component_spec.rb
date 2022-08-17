@@ -3,23 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe Elements::Card::Component, type: :component do
-  let(:user) {
-    FactoryBot.build(
+  let(:user) do
+    build(
       :user,
       email: 'john.doe@example.com',
       first_name: 'John'
     )
-  }
+  end
 
   let(:user_presenter) { UserPresenter.new item: user }
 
-  let(:component) {
+  let(:component) do
     described_class.new(
       item: user,
       item_presenter: user_presenter,
       details: %i[email first_name]
     )
-  }
+  end
 
   before do
     render_inline(component)

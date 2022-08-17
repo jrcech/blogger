@@ -12,7 +12,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
 
     expect(
       page
-    ).to have_css "a.btn.btn-primary[role='button'][href='test_path']"
+    ).to have_css base_button_css
   end
 
   it 'renders a full button from a hash' do
@@ -21,7 +21,7 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
     aggregate_failures do
       expect(page).to have_text 'Test title'
 
-      expect_to_have_css_attributes
+      expect_to_have_css_attributes full_button_css
     end
   end
 
@@ -62,20 +62,24 @@ RSpec.describe Elements::Buttons::Button::Component, type: :component do
 
     expect(
       page
-    ).to have_css 'a.btn.btn-success'
+    ).to have_css bootstrap_button_css
   end
 
   private
 
-  def expect_to_have_css_attributes
-    expected_attributes.each do |attribute|
-      expect(
-        page
-      ).to have_css attribute
-    end
+  def base_button_css
+    'a.btn.btn-primary' \
+      '[role="button"]' \
+      '[href="test_path"]'
   end
 
-  def expected_attributes
+  def bootstrap_button_css
+    'a.btn.btn-success' \
+      '[role="button"]' \
+      '[href="test_path"]'
+  end
+
+  def full_button_css
     [
       'i.fa-check',
       'a[aria-expanded="true"]',

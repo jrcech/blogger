@@ -11,7 +11,7 @@ module Elements
 
       private
 
-      attr_reader :title, :icon, :options
+      attr_reader :icon, :title, :options
 
       def construct_options
         options.deep_merge(construct_data)

@@ -3,15 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Elements::Header::Component, type: :component do
-  let(:user) {
-    FactoryBot.build(
+  let(:user) do
+    build(
       :user,
       email: 'john.doe@example.com',
       first_name: 'John'
     )
-  }
+  end
 
-  let(:component) {
+  let(:component) do
     described_class.new(
       header: {
         title: user.email,
@@ -20,7 +20,7 @@ RSpec.describe Elements::Header::Component, type: :component do
       main_header: true,
       item: user
     )
-  }
+  end
 
   before do
     render_inline component

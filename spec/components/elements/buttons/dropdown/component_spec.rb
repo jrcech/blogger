@@ -11,7 +11,7 @@ RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
     render_inline build :dropdown
 
     aggregate_failures do
-      expect_to_have_css_attributes
+      expect_to_have_css_attributes base_dropdown_css
     end
   end
 
@@ -33,15 +33,7 @@ RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
 
   private
 
-  def expect_to_have_css_attributes
-    expected_attributes.each do |attribute|
-      expect(
-        page
-      ).to have_css attribute
-    end
-  end
-
-  def expected_attributes
+  def base_dropdown_css
     %w[
       div.dropdown>a.btn.btn-light
       div.dropdown>a[aria-expanded="false"]
