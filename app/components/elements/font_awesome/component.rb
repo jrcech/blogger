@@ -48,6 +48,7 @@ module Elements
 
       def size
         size = options&.dig :size
+
         return " fa-#{size}" if size.present?
 
         nil
@@ -55,6 +56,7 @@ module Elements
 
       def animation
         animation = options&.dig :animation
+
         return " fa-#{animation}" if animation.present?
 
         nil
@@ -68,6 +70,7 @@ module Elements
 
       def rotation
         rotation = options&.dig :rotation
+
         return " fa-#{rotation}" if rotation.present?
 
         nil
@@ -81,39 +84,15 @@ module Elements
 
       def pull
         position = options&.dig :pull
+
         return " fa-pull-#{position}" if position.present?
 
         nil
       end
 
-      def construct_data_hash
-        data = {}
-
-        options[:data].each do |key, value|
-          data << "#{key.to_s.dasherize}='#{value}'"
-        end
-
-        data
-      end
-
       def construct_title
         title = options&.dig :title
         "title='#{title}'" if title.present?
-      end
-
-      def model_icon(model)
-        icons = YAML.load_file('config/icons.yml')
-        icons['models'][model.to_s]
-      end
-
-      def action_icon(model)
-        icons = YAML.load_file('config/icons.yml')
-        icons['actions'][model.to_s]
-      end
-
-      def search_icon(title)
-        tooltip = tooltip t('tooltips.search'), 'search', { class: 'minor' }
-        "#{title} #{tooltip}".html_safe
       end
     end
   end
