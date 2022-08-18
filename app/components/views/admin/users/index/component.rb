@@ -58,6 +58,20 @@ module Views
               }
             ]
           end
+
+          def per_page_dropdown_items(pagination)
+            per_page_items = []
+
+            pagination.vars[:per_page].each do |per_page|
+              path = request.params.merge({ items: per_page, page: 1 })
+
+              per_page_item = { title: per_page, path: path }
+
+              per_page_items << per_page_item
+            end
+
+            per_page_items
+          end
         end
       end
     end
