@@ -16,7 +16,7 @@ RSpec.describe Elements::Footer::Component, type: :component do
   end
 
   it 'renders a footer with left dropdown' do
-    puts render_inline build :footer, :with_left_dropdown
+    render_inline build :footer, :with_left_dropdown
 
     aggregate_failures do
       expect_to_have_css_attributes dropdown_footer_css
@@ -47,7 +47,6 @@ RSpec.describe Elements::Footer::Component, type: :component do
   def pagination_footer_css
     [
       'footer.row > div.col-md + div.col-md > nav.pagy-bootstrap-nav-js',
-      # 'footer.row > div.col-md > a.btn',
       'div[data-controller="pagy"]',
     ]
   end
