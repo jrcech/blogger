@@ -11,14 +11,14 @@ module Elements
       include Pagy::Frontend
       include Buttons::Dropdown::Presets
 
-      def initialize(pagination: nil, pagy_dropdown_items: nil)
+      def initialize(pagination: nil, left_dropdown: nil)
         @pagination = pagination
-        @pagy_dropdown_items = pagy_dropdown_items
+        @left_dropdown = left_dropdown
       end
 
       private
 
-      attr_reader :pagination, :pagy_dropdown_items
+      attr_reader :pagination, :left_dropdown
 
       def pagination?
         pagination.present?

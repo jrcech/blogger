@@ -59,6 +59,16 @@ module Views
             ]
           end
 
+          def left_dropdown(pagination)
+            {
+              id: 'Per page',
+              class: 'btn btn-light dropdown-toggle',
+              icon: nil,
+              title: "#{pagination.vars[:items]} items per page",
+              dropdown_items: per_page_dropdown_items(pagination)
+            }
+          end
+
           def per_page_dropdown_items(pagination)
             per_page_items = []
 

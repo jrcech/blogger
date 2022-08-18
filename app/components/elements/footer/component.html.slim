@@ -3,11 +3,7 @@
 footer class="row"
   div class="col-md"
     - if pagination?
-      = render Elements::Buttons::Dropdown::Component.new(id: 'Per page',
-        class: 'btn btn-light dropdown-toggle',
-        icon: nil,
-        title: "#{pagination.vars[:items]} items per page",
-        dropdown_items: pagy_dropdown_items)
+      = render Elements::Buttons::Dropdown::Component.new(**left_dropdown)
 
   - if pagination?
     div class="col-md" data-controller="pagy"
