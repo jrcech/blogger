@@ -2,7 +2,7 @@
 
 footer class="row"
   div class="col-md"
-    - if pagination?
+    - if left_dropdown?
       = render Elements::Buttons::Dropdown::Component.new(**left_dropdown)
 
   - if pagination?

@@ -23,6 +23,10 @@ module Elements
       def pagination?
         pagination.present?
       end
+
+      def left_dropdown?
+        left_dropdown.present?
+      end
     end
   end
 end

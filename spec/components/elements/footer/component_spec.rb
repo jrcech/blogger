@@ -8,18 +8,26 @@ RSpec.describe Elements::Footer::Component, type: :component do
   end
 
   it 'renders a base footer' do
-    puts render_inline build :footer
+    render_inline build :footer
 
     expect(
       page
     ).to have_css base_footer_css
   end
 
-  it 'renders a footer with pagination' do
-    puts render_inline build :footer, :with_pagination
+  it 'renders a footer with left dropdown' do
+    puts render_inline build :footer, :with_left_dropdown
 
     aggregate_failures do
-      expect_to_have_css_attributes full_footer_css
+      expect_to_have_css_attributes dropdown_footer_css
+    end
+  end
+
+  it 'renders a footer with pagination' do
+    render_inline build :footer, :with_pagination
+
+    aggregate_failures do
+      expect_to_have_css_attributes pagination_footer_css
     end
   end
 
@@ -29,7 +37,14 @@ RSpec.describe Elements::Footer::Component, type: :component do
     'footer.row > div.col-md'
   end
 
-  def full_footer_css
+  def dropdown_footer_css
+    [
+      'footer.row > div.col-md > div.dropdown > a.btn.btn-light + ul',
+      'ul.dropdown-menu > li:nth-child(2)'
+    ]
+  end
+
+  def pagination_footer_css
     [
       'footer.row > div.col-md + div.col-md > nav.pagy-bootstrap-nav-js',
       # 'footer.row > div.col-md > a.btn',

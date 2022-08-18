@@ -7,11 +7,7 @@ FactoryBot.define do
 
     initialize_with { new(**attributes) }
 
-    trait :with_pagination do
-      pagination {
-        Pagy.new(count: (1..10).to_a.count)
-      }
-
+    trait :with_left_dropdown do
       left_dropdown do
         {
           dropdown_items: [
@@ -20,6 +16,12 @@ FactoryBot.define do
           ]
         }
       end
+    end
+
+    trait :with_pagination do
+      pagination {
+        Pagy.new(count: (1..10).to_a.count)
+      }
     end
   end
 end
