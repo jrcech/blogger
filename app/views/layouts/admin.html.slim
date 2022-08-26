@@ -18,7 +18,8 @@ html lang="en"
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   
   body data-controller="bs"
-    = render Elements::Navbar::Component.new current_user: current_user
+    = render Elements::Navbar::Component.new left_nav: [homepage_button, users_button, articles_button],
+      right_nav: create_nav_items
 
     div class="container"
       nav aria-label="breadcrumb" class="mt-3"

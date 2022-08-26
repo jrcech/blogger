@@ -3,13 +3,14 @@
 module Elements
   module Navbar
     class Component < ViewComponent::Base
-      def initialize(current_user:)
-        @current_user = current_user
+      def initialize(left_nav:, right_nav:)
+        @left_nav = left_nav
+        @right_nav = right_nav
       end
 
       private
 
-      attr_reader :current_user
+      attr_reader :left_nav, :right_nav
     end
   end
 end

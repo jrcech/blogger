@@ -1,0 +1,5 @@
+/ frozen_string_literal: true
+
+= content_tag :ul, nav_attributes
+  = render Elements::Buttons::Button::Component.with_collection nav_items,
+    type: :nav_item
