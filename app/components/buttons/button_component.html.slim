@@ -1,0 +1,9 @@
+/ frozen_string_literal: true
+
+- if button.key?(:dropdown_items)
+  = render Buttons::DropdownComponent.new **button
+
+- else
+  = render Buttons::LinkComponent.new **button
+
+/ = ap button

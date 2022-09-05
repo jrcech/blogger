@@ -24,3 +24,35 @@ html lang="en"
     div class="container"
       = flash_messages
       = yield
+
+      / = render Elements::Buttons::Button::Component.new(title: 'test',
+      /   path: '#',
+      /   css_class: 'btn btn-primary',
+      /   link_method: :delete,
+      /   id: 'someId',
+      /   icon: 'check')
+
+      - arr = [{ title: 'testa',
+        path: root_path,
+        icon: 'check',
+        css_class: 'btn btn-secondary'}, { title: 'testb',
+        icon: 'check',
+        path: '#',
+        data: { test_key: 'test-value' },
+        dropdown_items: [{ title: 'dp test', path: 'dptest' },
+          { title: 'dp test2', path: 'dptest2' }]}]
+
+      = render Buttons::ButtonComponent.with_collection(arr)
+      /
+      = render Buttons::ButtonComponent.new(title: 'test2',
+        path: root_path,
+        icon: 'check',
+        css_class: 'btn btn-primary')
+
+      = render Buttons::ButtonComponent.new(title: 'test2',
+        icon: 'check',
+        css_class: 'btn btn-success',
+        id: 'test-id',
+        menu_position: 'right',
+        dropdown_items: [{ title: 'droghfhp', path: '#', icon: 'suitcase', css_class: 'test-class' },
+          { title: 'drop2', path: '#', icon: 'check' }])

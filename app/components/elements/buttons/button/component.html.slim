@@ -1,10 +1,28 @@
 / frozen_string_literal: true
 
-- if divider?
-  hr class="dropdown-divider"
-- elsif dropdown_item?
-  li = create_button
-- elsif nav_item?
-  li class="nav-item" = create_button
-- else
-  = create_button
+/ - if divider?
+/   hr class="dropdown-divider"
+/ - elsif dropdown_item?
+/   li = create_button
+/ - elsif nav_item?
+/   li class="nav-item" = create_button
+/ - else
+/   = create_button
+
+/ = link_to(title_with_icon,
+/   path,
+/   method: options[:link_method],
+/   class: button_class,
+/   role: 'button',
+/   id: options[:id],
+/   'aria-expanded': options[:aria_expanded],
+/   data: options[:data])
+
+= link_to(construct_title,
+  path,
+  class: options[:css_class],
+  method: options[:link_method],
+  role: 'button',
+  id: options[:id],
+  'aria-expanded': options[:aria_expanded],
+  data: options[:data])

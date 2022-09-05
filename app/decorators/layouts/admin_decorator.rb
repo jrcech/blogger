@@ -22,7 +22,6 @@ module Layouts
 
     def right_nav
       [
-        locales_dropdown,
         user_signed_in? ? user_dropdown : login_button
       ]
     end
@@ -88,6 +87,8 @@ module Layouts
     def user_dropdown
       {
         title: current_user.present? ? UserPresenter.new(item: current_user).full_name : nil,
+        menu_position: 'right',
+        css_class: 'nav-item',
         dropdown_items: [
           {
             icon: 'power-off',

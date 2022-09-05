@@ -6,13 +6,26 @@ module Elements
       include Utilities::FontAwesomeHelper
 
       def initialize(nav_items:, **options)
-        @nav_items = nav_items
+        @nav_items = alter_nav_items(nav_items)
         @options = options
       end
 
       private
 
       attr_reader :nav_items, :options
+
+      def alter_nav_items(nav_items)
+        nav_items.each do |button|
+          button[:css_class] = merge_css_class(**button)
+        end
+      end
+
+      def merge_css_class(**button)
+        string = +'nav-link'
+        string << " #{button[:css_class]}" if button.key?(:css_class)
+
+        string
+      end
 
       def nav_attributes
         {
