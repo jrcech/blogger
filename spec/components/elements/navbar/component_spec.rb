@@ -8,26 +8,10 @@ RSpec.describe Elements::Navbar::Component, type: :component do
   end
 
   it 'renders a base navbar' do
-    render_inline build :navbar
+    puts render_inline build(:navbar)
 
     aggregate_failures do
       expect_to_have_css_attributes base_navbar_css
-    end
-  end
-
-  it 'renders a navbar with left navigation' do
-    render_inline build :navbar, :with_left_nav
-
-    aggregate_failures do
-      expect_to_have_css_attributes left_nav_css
-    end
-  end
-
-  it 'renders a navbar with right navigation' do
-    render_inline build :navbar, :with_right_nav
-
-    aggregate_failures do
-      expect_to_have_css_attributes right_nav_css
     end
   end
 
@@ -46,17 +30,7 @@ RSpec.describe Elements::Navbar::Component, type: :component do
       'button.navbar-toggler[aria-expanded="false"]',
       'button.navbar-toggler[aria-label="Toggle navigation"]',
       'div.collapse#navbarSupportedContent',
-    ]
-  end
-
-  def left_nav_css
-    [
-      'div.collapse > ul.navbar-nav.me-auto > li.nav-item:nth-child(2) > a.nav-link'
-    ]
-  end
-
-  def right_nav_css
-    [
+      'div.collapse > ul.navbar-nav.me-auto > li.nav-item:nth-child(2) > a.nav-link',
       'div.collapse > ul.navbar-nav > li.nav-item:nth-child(2) > a.nav-link'
     ]
   end

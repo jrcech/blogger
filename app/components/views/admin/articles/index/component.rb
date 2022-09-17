@@ -24,7 +24,6 @@ module Views
 
           attr_reader :items, :search_query, :pagy
 
-          #TODO
           def new_button
             {
               action: :new,
@@ -38,7 +37,7 @@ module Views
             }
           end
 
-          def the_data
+          def articles_data
             collection = []
 
             items.each do |item|
@@ -68,7 +67,7 @@ module Views
 
           def index_buttons(item_presenter)
             render Buttons::DropdownComponent.new(
-              id: item_presenter.id,
+              id: "#{item_presenter.id}-dropdown-button",
               float: 'end',
               css_class: 'btn btn-light',
               icon: 'ellipsis-v',
@@ -149,7 +148,7 @@ module Views
           def left_dropdown(pagination)
             {
               id: 'Per page',
-              class: 'btn btn-light dropdown-toggle',
+              css_class: 'btn btn-light dropdown-toggle',
               icon: nil,
               title: "#{pagination.vars[:items]} items per page",
               dropdown_items: per_page_dropdown_items(pagination)

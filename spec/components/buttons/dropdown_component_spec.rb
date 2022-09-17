@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Buttons::Dropdown::Component, type: :component do
+RSpec.describe Buttons::DropdownComponent, type: :component do
   it 'has a working factory' do
     build :dropdown
   end

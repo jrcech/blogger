@@ -6,16 +6,7 @@
   pagy: pagy,
   action_buttons: [new_button]
 
-/ = render Elements::Table::Component.new items: items,
-/   search_query: search_query,
-/   tbody: tbody,
-/   thead: thead,
-/   buttons: action_buttons
-
-= render Tables::TableComponent.new collection: [{ cells: ['1st cell', '2nd cell', render(Buttons::ButtonComponent.new(title: 'test', path: '#'))] }, { cells: ['3rd cell', '4th cell'] }]
-
-
-= render Tables::TableComponent.new collection: the_data, thead: thead
+= render Tables::TableComponent.new collection: articles_data, thead: thead
 
 = render Elements::Footer::Component.new left_dropdown: left_dropdown(pagy),
   pagination: pagy

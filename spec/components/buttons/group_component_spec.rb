@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Buttons::Group::Component, type: :component do
+RSpec.describe Buttons::GroupComponent, type: :component do
   it 'has a working factory' do
     build :group
   end

@@ -1,9 +1,11 @@
 / frozen_string_literal: true
 
-- if button.key?(:dropdown_items)
+- if button.dig(:dropdown_items).present?
   = render Buttons::DropdownComponent.new **button
+
+- elsif button.dig(:wrapper_element).present?
+  = content_tag button.dig(:wrapper_element), button.dig(:wrapper_attributes)
+    = render Buttons::LinkComponent.new **button
 
 - else
   = render Buttons::LinkComponent.new **button
-
-/ = ap button

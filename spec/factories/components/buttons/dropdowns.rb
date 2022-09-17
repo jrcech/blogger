@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :dropdown, class: 'Elements::Buttons::Dropdown::Component' do
+  factory :dropdown, class: 'Buttons::DropdownComponent' do
     dropdown_items do
       [
         { title: 'Test title 1', path: 'test_path1' },

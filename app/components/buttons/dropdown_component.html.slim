@@ -3,8 +3,9 @@
 = content_tag dropdown_element, class: dropdown_class
   = render Buttons::ButtonComponent.new(**button)
 
-  div [
+  ul [
     class="dropdown-menu#{dropdown_menu_position}"
     aria-labelledby=dropdown_button_id
   ]
-    = render Buttons::ButtonComponent.with_collection(dropdown_items)
+    = render Buttons::ButtonComponent.with_collection(dropdown_items,
+      wrapper_element: :li)

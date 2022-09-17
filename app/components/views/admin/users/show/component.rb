@@ -9,6 +9,10 @@ module Views
           include Utilities::FontAwesomeHelper
           include Utilities::TooltipHelper
 
+          include Utilities::PathsHelper
+          include Utilities::ResourceHelper
+          include Utilities::ControllerHelper
+
           def initialize(item:, item_presenter:)
             @item = item
             @item_presenter = item_presenter
@@ -26,7 +30,7 @@ module Views
           end
 
           def action_buttons
-            [:edit_button]
+            [edit_button]
           end
 
           def details
@@ -53,6 +57,16 @@ module Views
               created_at
               updated_at
             ]
+          end
+
+          def edit_button
+            {
+              action: :edit,
+              path: path_for(:edit, item_presenter.id),
+              title: t('actions.edit'),
+              css_class: 'btn btn-primary',
+              icon: action_icon(:edit)
+            }
           end
         end
       end
