@@ -3,7 +3,7 @@
 footer class="row"
   div class="col-md"
     - if left_dropdown?
-      = render Elements::Buttons::Dropdown::Component.new(**left_dropdown)
+      = render Buttons::DropdownComponent.new(**left_dropdown)
 
   - if pagination?
     div class="col-md" data-controller="pagy"

@@ -21,7 +21,7 @@ div class="row"
     = render Elements::Buttons::Group::Component.new title: "#{header[:title]} link",
       buttons: options[:link_buttons]
       
-    = render Elements::Buttons::Group::Component.new title: "#{header[:title]} action",
+    = render Buttons::GroupComponent.new title: "#{header[:title]} action",
       buttons: options[:action_buttons],
       item: item
     

@@ -1,0 +1,6 @@
+/ frozen_string_literal: true
+
+thead
+  = render Tables::RowComponent.with_collection(thead,
+    cell_element: :th,
+    cell_attributes: { scope: 'col' })
