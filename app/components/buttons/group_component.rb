@@ -2,15 +2,14 @@
 
 module Buttons
   class GroupComponent < ViewComponent::Base
-    def initialize(buttons:, title: nil, item: nil)
+    def initialize(buttons:, title: nil)
       @buttons = buttons
       @title = title
-      @item = item
     end
 
     private
 
-    attr_reader :buttons, :title, :item
+    attr_reader :buttons, :title
 
     def aria_label_title
       return "#{title} buttons" if title?

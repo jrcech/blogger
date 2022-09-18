@@ -25,7 +25,7 @@ FactoryBot.define do
       link_method { :test_method }
       action { :test_action }
       aria_expanded { true }
-      css_class { 'test' }
+      css_class { 'test-class' }
 
       data do
         {

@@ -8,7 +8,7 @@ RSpec.describe Elements::Navbar::Component, type: :component do
   end
 
   it 'renders a base navbar' do
-    puts render_inline build(:navbar)
+    render_inline build(:navbar)
 
     aggregate_failures do
       expect_to_have_css_attributes base_navbar_css

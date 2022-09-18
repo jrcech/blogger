@@ -16,7 +16,7 @@ RSpec.describe Elements::Footer::Component, type: :component do
   end
 
   it 'renders a footer with left dropdown' do
-    puts render_inline build(:footer, :with_left_dropdown)
+    render_inline build(:footer, :with_left_dropdown)
 
     aggregate_failures do
       expect_to_have_css_attributes dropdown_footer_css
@@ -24,7 +24,7 @@ RSpec.describe Elements::Footer::Component, type: :component do
   end
 
   it 'renders a footer with pagination' do
-    puts render_inline build(:footer, :with_pagination)
+    render_inline build(:footer, :with_pagination)
 
     aggregate_failures do
       expect_to_have_css_attributes pagination_footer_css

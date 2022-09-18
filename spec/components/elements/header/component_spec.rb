@@ -17,8 +17,7 @@ RSpec.describe Elements::Header::Component, type: :component do
         title: user.email,
         icon: 'check'
       },
-      main_header: true,
-      item: user
+      main_header: true
     )
   end
 

@@ -26,7 +26,7 @@ RSpec.describe Buttons::ButtonComponent, type: :component do
   end
 
   it 'renders a dropdown button' do
-    puts render_inline build(:button, :dropdown)
+    render_inline build(:button, :dropdown)
 
     aggregate_failures do
       expect(page).to have_text 'Test title'
@@ -47,7 +47,7 @@ RSpec.describe Buttons::ButtonComponent, type: :component do
     [
       'i.fa-test-icon',
       'a[aria-expanded="true"]',
-      'a[class="test"]',
+      'a[class="test-class"]',
       'a[href="test_path"]',
       'a[id="TestId"]',
       'a[data-method="test_method"]',

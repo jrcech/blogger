@@ -8,39 +8,26 @@ RSpec.describe Buttons::DropdownComponent, type: :component do
   end
 
   it 'renders a default dropdown with buttons' do
-    render_inline build :dropdown
+    render_inline build(:dropdown)
 
     aggregate_failures do
       expect_to_have_css_attributes base_dropdown_css
     end
   end
 
-  it 'renders a dropdown with a title' do
-    render_inline build :dropdown, :with_title
-
-    expect(
-      page
-    ).to have_css 'ul[aria-labelledby="dropdown-button"]'
-  end
-
-  it 'renders a dropdown nav item' do
-    render_inline build :dropdown, :nav_item
-
-    expect(
-      page
-    ).to have_css 'li.nav-item.dropdown>a.nav-link.dropdown-toggle'
-  end
-
   private
 
   def base_dropdown_css
-    %w[
-      div.dropdown>a.btn.btn-light
-      div.dropdown>a[aria-expanded="false"]
-      div.dropdown>a[data-bs-toggle="dropdown"]
-      div.dropdown>ul.dropdown-menu[aria-labelledby="dropdown-button"]
-      ul.dropdown-menu>li>a.dropdown-item[href="test_path1"][role="button"]
-      ul.dropdown-menu>li:nth-child(2)>a.dropdown-item[href="test_path2"]
+    [
+      'div.dropdown > a.dropdown-toggle + ul.dropdown-menu',
+      'a[href="#"]',
+      'a[role="button"]',
+      'a[aria-expanded="false"]',
+      'a[data-bs-toggle="dropdown"]',
+      'ul[aria-labelledby="dropdown-button"]',
+      'ul.dropdown-menu > li:nth-child(2) > a.dropdown-item',
+      'a.dropdown-item[role="button"]',
+      'a.dropdown-item[href="test_path2"]'
     ]
   end
 end
