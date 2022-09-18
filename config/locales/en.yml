@@ -46,6 +46,7 @@ en:
   actions:
     new: "New %{item}"
     edit: "Edit"
+    show: "Show"
     destroy: "Destroy"
   headers:
     new: "New %{item}"

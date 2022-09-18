@@ -2,6 +2,13 @@
 
 - breadcrumb :items
 
-= render Views::Admin::Articles::Index::Component.new items: @items,
+= render Elements::Header::Component.new header: header,
+  main_header: true,
   search_query: @search_query,
-  pagy: @pagy
+  pagy: @pagy,
+  action_buttons: [new_button]
+
+= render Tables::TableComponent.new collection: articles_data(@articles, [:id, :highlight_title, :truncate_content]), thead: thead
+
+= render Elements::Footer::Component.new left_dropdown: per_page_button(@pagy),
+  pagination: @pagy

@@ -1,6 +1,7 @@
 / frozen_string_literal: true
 
-- breadcrumb :edit, @item, @item_presenter
+- breadcrumb :edit, @article, @article_presenter
 
-= render Views::Admin::Articles::Edit::Component.new item: @item,
-  item_presenter: @item_presenter
+h1 = t('headers.edit', item: @article_presenter.title)
+
+= render Views::Admin::Articles::Form::Component.new item: @article

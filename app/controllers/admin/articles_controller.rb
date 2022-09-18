@@ -5,31 +5,31 @@ module Admin
     include Searchable
 
     def index
-      @pagy, @items = pagy(
-        find_items,
+      @pagy, @articles = pagy(
+        find_articles,
         page: params[:page],
         items: params[:items]
       )
     end
 
     def show
-      @item = find_item
-      @item_presenter = ArticlePresenter.new(item: @item)
+      @article = find_article
+      @article_presenter = ArticlePresenter.new(item: @article)
     end
 
     def new
-      @item = Article.new
+      @article = Article.new
     end
 
     def edit
-      @item = find_item
-      @item_presenter = ArticlePresenter.new(item: @item)
+      @article = find_article
+      @article_presenter = ArticlePresenter.new(item: @article)
     end
 
     def create
-      @item = Article.new(article_params)
+      @article = Article.new(article_params)
 
-      if @item.save
+      if @article.save
         flash[:success] = t('success.create', model: 'Article')
 
         redirect_to admin_articles_path
@@ -41,10 +41,10 @@ module Admin
     end
 
     def update
-      @item = find_item
-      @item_presenter = ArticlePresenter.new(item: @item)
+      @article = find_article
+      @article_presenter = ArticlePresenter.new(item: @article)
 
-      if @item.update(article_params)
+      if @article.update(article_params)
         flash[:success] = t('success.update', model: helpers.model_singular)
 
         redirect_to admin_articles_path
@@ -56,9 +56,9 @@ module Admin
     end
 
     def destroy
-      @item = find_item
+      @article = find_article
 
-      if @item.destroy
+      if @article.destroy
         flash[:success] = t('success.destroy', model: helpers.model_singular)
       else
         flash[:error] = t('errors.destroy')
@@ -69,11 +69,11 @@ module Admin
 
     private
 
-    def find_items
+    def find_articles
       Article.order(updated_at: :desc)
     end
 
-    def find_item
+    def find_article
       Article.find(params[:id])
     end
 

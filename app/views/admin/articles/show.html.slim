@@ -1,6 +1,15 @@
 / frozen_string_literal: true
 
-- breadcrumb :item, @item, @item_presenter
+- breadcrumb :item, @article, @article_presenter
 
-= render Views::Admin::Articles::Show::Component.new item: @item,
-  item_presenter: @item_presenter
+= render Elements::Header::Component.new header: header(@article_presenter),
+  main_header: true,
+  item: @article,
+  action_buttons: [edit_button(@article_presenter),
+    destroy_button(@article_presenter)]
+
+= render Elements::Card::Component.new item: @article,
+  item_presenter: @article_presenter,
+  details: [:id,
+    :title,
+    :content]

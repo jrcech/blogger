@@ -2,4 +2,6 @@
 
 - breadcrumb :new
 
-= render Views::Admin::Articles::New::Component.new item: @item
+h1 = t('headers.new', item: t("models.#{model_plural_symbol}.one"))
+
+= render Views::Admin::Articles::Form::Component.new item: @article
