@@ -45,11 +45,11 @@ module Admin
       @article_presenter = ArticlePresenter.new(item: @article)
 
       if @article.update(article_params)
-        flash[:success] = t('success.update', model: helpers.model_singular)
+        flash[:success] = t('success.update', model: 'article')
 
         redirect_to admin_articles_path
       else
-        flash[:error] = t('errors.update', model: helpers.model_singular)
+        flash[:error] = t('errors.update', model: 'article')
 
         render :edit, status: :unprocessable_entity
       end
@@ -59,7 +59,7 @@ module Admin
       @article = find_article
 
       if @article.destroy
-        flash[:success] = t('success.destroy', model: helpers.model_singular)
+        flash[:success] = t('success.destroy', model: 'article')
       else
         flash[:error] = t('errors.destroy')
       end
