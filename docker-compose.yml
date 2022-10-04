@@ -55,7 +55,7 @@ services:
     command: "yarn build:css --watch"
 
   selenium_chrome:
-    image: selenium/standalone-chrome
+    image: seleniarm/standalone-chromium
     logging:
       driver: none
     ports:
