@@ -4,4 +4,4 @@
 
 h1 = t('headers.new', item: t('models.articles.one'))
 
-= render Views::Admin::Articles::Form::Component.new item: @article
+= render Forms::ArticlesFormComponent.new article: @article

@@ -4,4 +4,4 @@
 
 h1 = t('headers.edit', item: @user_presenter.title)
 
-= render Views::Admin::Users::Form::Component.new item: @user
+= render Forms::UsersFormComponent.new user: @user

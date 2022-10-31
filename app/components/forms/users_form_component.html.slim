@@ -1,6 +1,6 @@
 / frozen_string_literal: true
 
-= simple_form_for [:admin, item] do |f|
+= simple_form_for [:admin, user] do |f|
   = f.error_notification
 
   = f.input :email
@@ -8,7 +8,7 @@
   = f.input :last_name
   = f.input :username
 
-  - if item.new_record?
+  - if user.new_record?
     = f.input :password, required: true, hint: false
     = f.input :password_confirmation, required: true
 

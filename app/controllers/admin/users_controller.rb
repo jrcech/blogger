@@ -90,7 +90,7 @@ module Admin
     end
 
     def find_user
-      User.find params[:id]
+      User.find(params[:id])
     end
 
     def user_params
