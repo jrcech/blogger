@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Footer::Component, type: :component do
+RSpec.describe Footers::FooterComponent, type: :component do
   it 'has a working factory' do
     build :footer
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :footer, class: 'Elements::Footer::Component' do
+  factory :footer, class: 'Footers::FooterComponent' do
     pagination { nil }
     left_dropdown { nil }
 
