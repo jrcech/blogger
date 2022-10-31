@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Navbar::Component, type: :component do
+RSpec.describe Navbars::NavbarComponent, type: :component do
   it 'has a working factory' do
     build :navbar
   end

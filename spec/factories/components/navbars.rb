@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :navbar, class: 'Elements::Navbar::Component' do
+  factory :navbar, class: 'Navbars::NavbarComponent' do
     left_nav do
       [
         { title: 'Test title 1', path: 'test_path1' },
