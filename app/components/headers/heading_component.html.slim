@@ -1,7 +1,7 @@
 / frozen_string_literal: true
 
 = content_tag main_header.present? ? :h1 : :h2 do
-  = render Elements::FontAwesome::Component.new icon: header[:icon],
+  = render Icons::FontAwesomeComponent.new icon: header[:icon],
     title: header[:title],
     text: header[:title]
 
@@ -9,7 +9,7 @@
 
   - if header.key? :related
     small
-      = render Elements::FontAwesome::Component.new icon: header[:related][:icon],
+      = render Icons::FontAwesomeComponent.new icon: header[:related][:icon],
         title: header[:related][:title],
         text: header[:related][:title],
         class: 'fa-1x'

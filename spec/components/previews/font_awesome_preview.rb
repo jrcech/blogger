@@ -1,6 +1,6 @@
 class FontAwesomePreview < ViewComponent::Preview
   def base_font_awesome
-    render Elements::FontAwesome::Component.new(
+    render Icons::FontAwesomeComponent.new(
       icon: 'check',
       title: 'Example component title',
       text: '90'

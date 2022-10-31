@@ -83,7 +83,7 @@ module Elements
           return title if options[:icon].blank?
 
           render(
-            Elements::FontAwesome::Component.new(
+            Icons::FontAwesomeComponent.new(
               icon: options[:icon],
               title: title,
               text: title

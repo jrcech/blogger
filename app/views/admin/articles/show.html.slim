@@ -14,7 +14,7 @@ ruby:
     %i(id title content)
   end
 
-= render Elements::Header::Component.new header: header(@article_presenter),
+= render Headers::HeaderComponent.new header: header(@article_presenter),
   main_header: true,
   item: @article,
   action_buttons:

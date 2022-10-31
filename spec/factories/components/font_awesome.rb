@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :font_awesome, class: 'Elements::FontAwesome::Component' do
+  factory :font_awesome, class: 'Icons::FontAwesomeComponent' do
     icon { 'test-icon' }
     title { 'Test title' }
     text { nil }

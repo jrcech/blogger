@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Header::Component, type: :component do
+RSpec.describe Headers::HeaderComponent, type: :component do
   let(:user) do
     build(
       :user,

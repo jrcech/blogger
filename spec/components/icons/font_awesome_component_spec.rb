@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::FontAwesome::Component, type: :component do
+RSpec.describe Icons::FontAwesomeComponent, type: :component do
   it 'has a working factory' do
     build :font_awesome
   end

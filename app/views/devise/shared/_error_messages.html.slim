@@ -1,6 +1,6 @@
 - if resource.errors.any?
   div id="error_explanation" class="alert alert-danger"
-    = render Elements::FontAwesome::Component.new icon: 'exclamation-triangle',
+    = render Icons::FontAwesomeComponent.new icon: 'exclamation-triangle',
       title: 'error',
       text: t('errors.messages.not_saved',
         count: resource.errors.count,

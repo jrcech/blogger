@@ -14,7 +14,7 @@ module Buttons
       return button[:title] if button[:icon].blank?
 
       render(
-        Elements::FontAwesome::Component.new(
+        Icons::FontAwesomeComponent.new(
           icon: button[:icon],
           title: button[:title],
           text: button[:title]

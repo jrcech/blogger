@@ -1,6 +1,6 @@
 / frozen_string_literal: true
 
-= render Elements::Header::Component.new header: header,
+= render Headers::HeaderComponent.new header: header,
   main_header: true,
   search_query: search_query,
   pagy: pagy,
