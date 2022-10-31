@@ -2,12 +2,6 @@
 
 module Headers
   class HeadingComponent < ViewComponent::Base
-    include Utilities::PathsHelper
-    include Utilities::ResourceHelper
-    include Utilities::ModelHelper
-    include Utilities::ControllerHelper
-    include Utilities::FontAwesomeHelper
-
     def initialize(header:, main_header:)
       @header = header
       @main_header = main_header
