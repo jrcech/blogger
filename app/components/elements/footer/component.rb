@@ -9,7 +9,6 @@ module Elements
       include Utilities::ControllerHelper
       include Utilities::FontAwesomeHelper
       include Pagy::Frontend
-      include Buttons::Dropdown::Presets
 
       def initialize(left_dropdown: nil, pagination: nil)
         @left_dropdown = left_dropdown

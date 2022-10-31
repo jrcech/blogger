@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Card::Component, type: :component do
+RSpec.describe Cards::CardComponent, type: :component do
   let(:user) do
     build(
       :user,

@@ -5,6 +5,6 @@
   item: item,
   action_buttons: action_buttons
 
-= render Elements::Card::Component.new item: item,
+= render Cards::CardComponent.new item: item,
   item_presenter: item_presenter,
   details: details
