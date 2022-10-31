@@ -1,14 +1,42 @@
 / frozen_string_literal: true
 
-- breadcrumb :items
+ruby:
+  breadcrumb :items
 
-= render Elements::Header::Component.new header: header,
+  def thead
+    [
+      {
+        cells: [
+          t('tables.headings.id'),
+          search_icon(t('tables.headings.title')),
+          search_icon(t('tables.headings.content'))
+        ]
+      }
+    ]
+  end
+
+  def collection
+    index_data(
+      @articles,
+      :id,
+      :highlight_title,
+      :truncate_content
+    )
+  end
+
+  def action_buttons
+    [
+      new_button
+    ]
+  end
+
+= render Elements::Header::Component.new(header:,
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons: [new_button]
+  action_buttons:)
 
-= render Tables::TableComponent.new collection: articles_data(@articles, [:id, :highlight_title, :truncate_content]), thead: thead
+= render Tables::TableComponent.new(collection:, thead:)
 
-= render Elements::Footer::Component.new left_dropdown: per_page_button(@pagy),
-  pagination: @pagy
+= render Elements::Footer::Component.new(left_dropdown: per_page_button(@pagy),
+  pagination: @pagy)

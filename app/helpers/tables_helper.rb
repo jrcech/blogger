@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TablesHelper
-  def articles_data(items, tbody)
+  def index_data(items, *columns)
     collection = []
 
     items.each do |item|
@@ -10,7 +10,7 @@ module TablesHelper
         search_query: @search_query
       )
 
-      cells = item_cells(item_presenter, tbody)
+      cells = item_cells(item_presenter, columns)
 
       cells << index_buttons(item_presenter)
 
@@ -20,10 +20,10 @@ module TablesHelper
     collection
   end
 
-  def item_cells(item_presenter, tbody)
+  def item_cells(item_presenter, columns)
     cells = []
 
-    tbody.each do |cell|
+    columns.each do |cell|
       cells << item_presenter.send(cell)
     end
 
@@ -42,17 +42,5 @@ module TablesHelper
         destroy_button(item_presenter)
       ]
     )
-  end
-
-  def thead
-    [
-      {
-        cells: [
-          t('tables.headings.id'),
-          search_icon(t('tables.headings.title')),
-          search_icon(t('tables.headings.content'))
-        ]
-      }
-    ]
   end
 end
