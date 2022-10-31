@@ -1,7 +1,44 @@
 / frozen_string_literal: true
 
-- breadcrumb :items
+ruby:
+  breadcrumb :items
 
-= render Views::Admin::Users::Index::Component.new items: @items,
+  def thead
+    [
+      {
+        cells: [
+          t('tables.headings.id'),
+          search_icon(t('tables.headings.name')),
+          search_icon(t('tables.headings.email')),
+          t('models.roles.one')
+        ]
+      }
+    ]
+  end
+
+  def collection
+    index_data(
+      @users,
+      :id,
+      :highlight_full_name,
+      :highlight_email,
+      :user_role
+    )
+  end
+
+  def action_buttons
+    [
+      new_button
+    ]
+  end
+
+= render Headers::HeaderComponent.new(header:,
+  main_header: true,
   search_query: @search_query,
-  pagy: @pagy
+  pagy: @pagy,
+  action_buttons:)
+
+= render Tables::TableComponent.new(collection:, thead:)
+
+= render Footers::FooterComponent.new(left_dropdown: per_page_button(@pagy),
+  pagination: @pagy)

@@ -1,6 +1,43 @@
 / frozen_string_literal: true
 
-- breadcrumb :item, @item, @item_presenter
+ruby:
+  breadcrumb :item, @user, @user_presenter
 
-= render Views::Admin::Users::Show::Component.new item: @item,
-  item_presenter: @item_presenter
+  def action_buttons
+    [edit_button(@user_presenter)]
+  end
+
+  def details
+    %i(
+      id
+      email
+      first_name
+      last_name
+      username
+      confirmation_sent_at
+      confirmed_at
+      current_sign_in_at
+      current_sign_in_ip
+      failed_attempts
+      last_sign_in_at
+      last_sign_in_ip
+      locked_at
+      provider
+      remember_created_at
+      reset_password_sent_at
+      sign_in_count
+      uid
+      unconfirmed_email
+      created_at
+      updated_at
+    )
+  end
+
+= render Headers::HeaderComponent.new header: header(@user_presenter),
+  main_header: true,
+  item: @user,
+  action_buttons:
+
+= render Cards::CardComponent.new item: @user,
+  item_presenter: @user_presenter,
+  details:

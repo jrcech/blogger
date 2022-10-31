@@ -5,31 +5,31 @@ module Admin
     include Searchable
 
     def index
-      @pagy, @items = pagy(
-        find_items,
+      @pagy, @users = pagy(
+        find_users,
         page: params[:page],
         items: params[:items]
       )
     end
 
     def show
-      @item = find_item
-      @item_presenter = UserPresenter.new(item: @item)
+      @user = find_user
+      @user_presenter = UserPresenter.new(item: @user)
     end
 
     def new
-      @item = User.new
+      @user = User.new
     end
 
     def edit
-      @item = find_item
-      @item_presenter = UserPresenter.new(item: @item)
+      @user = find_user
+      @user_presenter = UserPresenter.new(item: @user)
     end
 
     def create
-      @item = User.new user_params
+      @user = User.new user_params
 
-      if @item.skip_confirmation_notification! && @item.save
+      if @user.skip_confirmation_notification! && @user.save
         flash[:success] = t('success.create', model: helpers.model_singular)
 
         redirect_to admin_users_path
@@ -41,10 +41,10 @@ module Admin
     end
 
     def update
-      @item = find_item
-      @item_presenter = UserPresenter.new(item: @item)
+      @user = find_user
+      @user_presenter = UserPresenter.new(item: @user)
 
-      if @item.update user_params
+      if @user.update user_params
         flash[:success] = t('success.update', model: helpers.model_singular)
 
         redirect_to admin_users_path
@@ -56,11 +56,11 @@ module Admin
     end
 
     def destroy
-      @item = find_item
+      @user = find_user
 
-      if @item == current_user
+      if @user == current_user
         flash[:error] = t('errors.destroy_yourself')
-      elsif @item.destroy
+      elsif @user.destroy
         flash[:success] = t('success.destroy', model: helpers.model_singular)
       else
         flash[:error] = t('errors.destroy')
@@ -71,9 +71,9 @@ module Admin
 
     %w[member admin].each do |role|
       define_method("make_#{role}") do
-        @item = find_item
+        @user = find_user
 
-        if @item.send("make_#{role}")
+        if @user.send("make_#{role}")
           flash[:success] = t('success.change_role', role:)
         else
           flash[:error] = t('errors.change_role')
@@ -85,11 +85,11 @@ module Admin
 
     private
 
-    def find_items
+    def find_users
       User.preload(:roles).order(updated_at: :desc)
     end
 
-    def find_item
+    def find_user
       User.find params[:id]
     end
 
