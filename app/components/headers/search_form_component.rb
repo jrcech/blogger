@@ -2,12 +2,6 @@
 
 module Headers
   class SearchFormComponent < ViewComponent::Base
-    include Utilities::PathsHelper
-    include Utilities::ResourceHelper
-    include Utilities::ModelHelper
-    include Utilities::ControllerHelper
-    include Utilities::FontAwesomeHelper
-
     def initialize(search_query:, search_form:, path_for_search:, model:)
       @search_query = search_query
       @search_form = search_form
