@@ -2,8 +2,6 @@
 
 module Navs
   class NavComponent < ViewComponent::Base
-    include Utilities::FontAwesomeHelper
-
     def initialize(nav_items:, **options)
       @nav_items = alter_nav_items(nav_items)
       @options = options
