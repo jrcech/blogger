@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :tooltip, class: 'Elements::Tooltip::Component' do
+  factory :tooltip, class: 'Tooltips::TooltipComponent' do
     icon { 'tooltip-test-icon' }
     title { 'Tooltip test title' }
     placement { nil }

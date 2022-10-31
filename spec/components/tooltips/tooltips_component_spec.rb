@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Elements::Tooltip::Component, type: :component do
+RSpec.describe Tooltips::TooltipComponent, type: :component do
   it 'has a working factory' do
     build :tooltip
   end
