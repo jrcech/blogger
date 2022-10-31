@@ -34,7 +34,8 @@ ruby:
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons:)
+  action_buttons:,
+  path_for_search: path_for(:search))
 
 = render Tables::TableComponent.new(collection:, thead:)
 

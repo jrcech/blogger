@@ -4,7 +4,8 @@ module HeaderHelper
   def header(item_presenter = nil)
     {
       title: header_title(item_presenter),
-      icon: model_icon(model_plural_symbol)
+      icon: model_icon(model_plural_symbol),
+      model: model_plural_symbol
     }
   end
 

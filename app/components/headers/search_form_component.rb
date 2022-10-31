@@ -8,9 +8,11 @@ module Headers
     include Utilities::ControllerHelper
     include Utilities::FontAwesomeHelper
 
-    def initialize(search_query:, search_form:)
+    def initialize(search_query:, search_form:, path_for_search:, model:)
       @search_query = search_query
       @search_form = search_form
+      @path_for_search = path_for_search
+      @model = model
     end
 
     def render?
@@ -19,6 +21,6 @@ module Headers
 
     private
 
-    attr_reader :search_query, :search_form
+    attr_reader :search_query, :search_form, :path_for_search, :model
   end
 end
