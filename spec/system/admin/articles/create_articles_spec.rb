@@ -35,7 +35,7 @@ RSpec.describe 'Admin Articles create', type: :system do
 
   def expect_created_item
     aggregate_failures do
-      expect(page).to have_content 'Article was successfully created'
+      expect(page).to have_content "Article 'Test Article' was successfully created"
       expect(page).to have_content 'Test Article'
       expect(model.count).to eq 1
     end

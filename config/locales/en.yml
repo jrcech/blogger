@@ -85,13 +85,13 @@ en:
     remove: "Remove"
     users: "Users"
   success:
-    create: "%{model} was successfully created."
-    update: "%{model} was successfully updated."
-    destroy: "%{model} was successfully destroyed."
+    create: "%{model} '%{record}' was successfully created."
+    update: "%{model} '%{record}' was successfully updated."
+    destroy: "%{model} '%{record}' was successfully destroyed."
     change_role: "User role was successfully changed to %{role}."
   errors:
     create: "%{model} wasn't created!"
-    update: "%{model} wasn't updated!"
-    destroy: "%{model} wasn't destroyed!"
+    update: "%{model} '%{record}' wasn't updated!"
+    destroy: "%{model} '%{record}' wasn't destroyed!"
     change_role: "User role can't be changed!"
     destroy_yourself: "You can't destroy yourself!"

@@ -66,7 +66,7 @@ RSpec.describe 'Admin Users update', type: :system do
 
   def expect_updated_item
     aggregate_failures do
-      expect(page).to have_content 'User was successfully updated.'
+      expect(page).to have_content "User 'First name updated Last name updated' was successfully updated."
       expect(page).to have_content 'First name updated'
       expect(page).to have_content 'Last name updated'
       expect(resource_updated?).to eq true
@@ -75,7 +75,7 @@ RSpec.describe 'Admin Users update', type: :system do
 
   def expect_not_updated_item
     aggregate_failures do
-      expect(page).to have_content "User wasn't updated!"
+      expect(page).to have_content "User 'MyString MyString' wasn't updated!"
       expect(resource_updated?).to eq false
     end
   end

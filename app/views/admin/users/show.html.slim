@@ -4,7 +4,10 @@ ruby:
   breadcrumb :item, @user, @user_presenter
 
   def action_buttons
-    [edit_button(@user_presenter)]
+    [
+      edit_button(@user_presenter),
+      destroy_button(@user_presenter)
+    ]
   end
 
   def details

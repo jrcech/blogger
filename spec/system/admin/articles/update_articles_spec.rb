@@ -68,7 +68,7 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   def expect_updated_item
     aggregate_failures do
-      expect(page).to have_content 'Article was successfully updated.'
+      expect(page).to have_content "Article 'Test title updated' was successfully updated."
       expect(page).to have_content 'Test title updated'
       expect(resource_updated?).to eq true
     end
@@ -76,7 +76,7 @@ RSpec.describe 'Admin Articles update', type: :system do
 
   def expect_not_updated_item
     aggregate_failures do
-      expect(page).to have_content "Article wasn't updated!"
+      expect(page).to have_content "Article '' wasn't updated!"
       expect(resource_updated?).to eq false
     end
   end

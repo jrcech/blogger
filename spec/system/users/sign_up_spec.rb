@@ -9,8 +9,8 @@ RSpec.describe 'Users Sign Up', type: :system do
     visit new_user_registration_path
 
     fill_in 'Email', with: 'registered.user@example.com'
-    fill_in 'Password', with: '123456789'
-    fill_in 'Password confirmation', with: '123456789'
+    fill_in 'user_password', with: '123456789'
+    fill_in 'user_password_confirmation', with: '123456789'
 
     click_button 'Sign Up'
 

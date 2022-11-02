@@ -2,30 +2,32 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles create', type: :system do
+RSpec.describe 'Admin Users create', type: :system do
   before do
-    resource_for :articles, :admin
+    resource_for :users, :admin
     sign_in_user
-    visit admin_articles_path
+    visit admin_users_path
 
-    click_link 'New Article'
+    click_link 'New User'
   end
 
   context 'when on index' do
-    it 'user creates an article', js: true do
-      fill_in 'Title', with: 'Test Article'
-      fill_in 'Content', with: 'Test content'
+    it 'user creates an user', js: true do
+      fill_in 'Email', with: 'test.user@example.com'
+      fill_in 'user_password', with: 'TestPassword'
+      fill_in 'user_password_confirmation', with: 'TestPassword'
 
-      click_button 'Create Article'
+      click_button 'Create User'
 
       expect_created_item
     end
 
-    it 'user failed to create an article', js: true do
-      fill_in 'Title', with: ''
-      fill_in 'Content', with: ''
+    it 'user failed to create an user', js: true do
+      fill_in 'Email', with: ''
+      fill_in 'user_password', with: ''
+      fill_in 'user_password_confirmation', with: ''
 
-      click_button 'Create Article'
+      click_button 'Create User'
 
       expect_not_created_item
     end
@@ -35,16 +37,15 @@ RSpec.describe 'Admin Articles create', type: :system do
 
   def expect_created_item
     aggregate_failures do
-      expect(page).to have_content 'Article was successfully created'
-      expect(page).to have_content 'Test Article'
-      expect(model.count).to eq 1
+      expect(page).to have_content "User ' ' was successfully created"
+      expect(model.count).to eq 2
     end
   end
 
   def expect_not_created_item
     aggregate_failures do
-      expect(page).to have_content "Article wasn't created!"
-      expect(model.count).to eq 0
+      expect(page).to have_content "User wasn't created!"
+      expect(model.count).to eq 1
     end
   end
 end

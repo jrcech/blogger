@@ -6,14 +6,14 @@ module Admin
 
     def index
       @pagy, @articles = pagy(
-        find_articles,
+        set_articles,
         page: params[:page],
         items: params[:items]
       )
     end
 
     def show
-      @article = find_article
+      @article = set_article
       @article_presenter = ArticlePresenter.new(item: @article)
     end
 
@@ -22,7 +22,7 @@ module Admin
     end
 
     def edit
-      @article = find_article
+      @article = set_article
       @article_presenter = ArticlePresenter.new(item: @article)
     end
 
@@ -30,50 +30,67 @@ module Admin
       @article = Article.new(article_params)
 
       if @article.save
-        flash[:success] = t('success.create', model: 'Article')
+        @article_presenter = ArticlePresenter.new(item: @article)
 
-        redirect_to admin_articles_path
+        flash[:success] = t(
+          'success.create',
+          model: t('models.articles.one'),
+          record: @article_presenter.title
+        )
+
+        redirect_to admin_article_url(@article)
       else
-        flash[:error] = t('errors.create', model: 'Article')
+        flash[:error] = t('errors.create',  model: t('models.articles.one'))
 
         render :new, status: :unprocessable_entity
       end
     end
 
     def update
-      @article = find_article
+      @article = set_article
       @article_presenter = ArticlePresenter.new(item: @article)
 
       if @article.update(article_params)
-        flash[:success] = t('success.update', model: 'Article')
+        flash[:success] = t(
+          'success.update',
+          model: t('models.articles.one'),
+          record: @article_presenter.title
+        )
 
-        redirect_to admin_articles_path
+        redirect_to admin_article_url(@article)
       else
-        flash[:error] = t('errors.update', model: 'Article')
+        flash[:error] = t(
+          'errors.update',
+          model: t('models.articles.one'),
+          record: @article_presenter.title
+        )
 
         render :edit, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @article = find_article
+      @article = set_article
+      @article_presenter = ArticlePresenter.new(item: @article)
 
-      if @article.destroy
-        flash[:success] = t('success.destroy', model: 'Article')
-      else
-        flash[:error] = t('errors.destroy')
-      end
+      @article.destroy
+
+      flash[:success] = t(
+        'success.destroy',
+        model: t('models.articles.one'),
+        record: @article_presenter.title
+      )
 
       redirect_to admin_articles_url, status: :see_other
     end
 
     private
 
-    def find_articles
+    def set_articles
       Article.order(updated_at: :desc)
     end
 
-    def find_article
+    def set_article
       Article.find(params[:id])
     end
 

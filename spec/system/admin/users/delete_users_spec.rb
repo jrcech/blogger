@@ -2,19 +2,19 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles destroy', type: :system do
-  let!(:factory) { create :article }
+RSpec.describe 'Admin Users destroy', type: :system do
+  let!(:user) { create :user }
 
   before do
-    resource_for :articles, :admin
+    resource_for :users, :admin
     sign_in_user
 
-    visit admin_articles_path
+    visit admin_users_path
   end
 
   context 'when on index' do
-    it 'user destroyed an article', js: true do
-      find_by_id("#{factory.id}-dropdown-button").click
+    it 'user destroyed an user', js: true do
+      find_by_id("#{user.id}-dropdown-button").click
 
       accept_confirm { click_link 'Destroy' }
 
@@ -23,8 +23,8 @@ RSpec.describe 'Admin Articles destroy', type: :system do
   end
 
   context 'when on show' do
-    it 'user destroyed an article', js: true do
-      find_by_id("#{factory.id}-dropdown-button").click
+    it 'user destroyed an user', js: true do
+      find_by_id("#{user.id}-dropdown-button").click
       click_link 'Show'
 
       accept_confirm { click_link 'Destroy' }
@@ -37,8 +37,8 @@ RSpec.describe 'Admin Articles destroy', type: :system do
 
   def expect_deleted_item
     aggregate_failures do
-      expect(page).to have_content 'Article was successfully destroyed.'
-      expect(model.count).to eq 0
+      expect(page).to have_content "User 'MyString MyString' was successfully destroyed."
+      expect(model.count).to eq 1
     end
   end
 end

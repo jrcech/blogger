@@ -22,7 +22,6 @@ html lang="en"
       right_nav: @admin_decorator.right_nav
 
     div class="container"
-      = flash_messages
       = yield
 
       / = render Elements::Buttons::Button::Component.new(title: 'test',
@@ -31,6 +30,8 @@ html lang="en"
       /   link_method: :delete,
       /   id: 'someId',
       /   icon: 'check')
+
+      = render Toasts::ToastComponent.new
 
       - arr = [{ title: 'testa',
         path: root_path,
