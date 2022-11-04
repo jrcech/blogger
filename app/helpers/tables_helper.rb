@@ -34,7 +34,7 @@ module TablesHelper
     render Buttons::DropdownComponent.new(
       id: "#{item_presenter.id}-dropdown-button",
       menu_class: 'dropdown-menu dropdown-menu-end',
-      toggle_class: 'btn btn-light',
+      toggle_class: 'btn btn-light float-end',
       icon: 'ellipsis-v',
       dropdown_items: [
         show_button(item_presenter),
