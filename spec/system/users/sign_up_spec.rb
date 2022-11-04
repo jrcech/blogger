@@ -71,6 +71,6 @@ RSpec.describe 'Users Sign Up', type: :system do
   end
 
   def wait_for_email
-    find 'span', text: 'A message with a confirmation link has been sent'
+    find '.toast-body', text: 'A message with a confirmation link has been sent'
   end
 end

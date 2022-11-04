@@ -45,25 +45,25 @@ module Buttons
     end
 
     def toggle_class(**button)
-      return button[:toggle_class] if button.key?(:toggle_class)
+      return button[:toggle_class] if button.dig(:toggle_class).present?
 
       'dropdown-toggle'
     end
 
     def dropdown_element(**button)
-      return button[:element] if button.key?(:element)
+      return button[:element] if button.dig(:element).present?
 
       :div
     end
 
     def dropdown_class(**button)
-      return button[:dropdown_class] if button.key?(:dropdown_class)
+      return button[:dropdown_class] if button.dig(:dropdown_class).present?
 
       'dropdown'
     end
 
     def menu_class(**button)
-      return button[:menu_class] if button.key?(:menu_class)
+      return button[:menu_class] if button.dig(:menu_class).present?
 
       'dropdown-menu'
     end

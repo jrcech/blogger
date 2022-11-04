@@ -17,7 +17,6 @@ div class="toast-container position-fixed bottom-0 end-0 p-3"
           bg-#{bg_class_for(type)}\
           bg-opacity-25"
       ]
-
         = render Icons::FontAwesomeComponent.new(icon: icon_for(type), title: title_for(type), fixed_width: true)
 
         strong class="me-auto" = type.humanize

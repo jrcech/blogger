@@ -24,7 +24,6 @@ RSpec.describe Buttons::DropdownComponent, type: :component do
       'a[role="button"]',
       'a[aria-expanded="false"]',
       'a[data-bs-toggle="dropdown"]',
-      'ul[aria-labelledby="dropdown-button"]',
       'ul.dropdown-menu > li:nth-child(2) > a.dropdown-item',
       'a.dropdown-item[role="button"]',
       'a.dropdown-item[href="test_path2"]'

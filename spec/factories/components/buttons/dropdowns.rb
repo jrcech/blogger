@@ -25,7 +25,6 @@ FactoryBot.define do
     trait :full do
       icon { 'test-icon' }
       id { 'TestId' }
-      float { 'end' }
       dropdown_class { 'test-class' }
       data { { test_key: 'test-value' } }
     end
