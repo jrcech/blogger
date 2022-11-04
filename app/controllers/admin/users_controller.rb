@@ -2,8 +2,6 @@
 
 module Admin
   class UsersController < AdminController
-    include Searchable
-
     def index
       @pagy, @users = pagy(
         set_users,
@@ -86,6 +84,18 @@ module Admin
       end
 
       redirect_to admin_users_url, status: :see_other
+    end
+
+    def search
+      @search_query = params[:search_query]
+
+      @pagy, @users = pagy(
+        set_users.search_by(@search_query),
+        page: params[:page],
+        items: params[:items]
+      )
+
+      render :index
     end
 
     %w[member admin].each do |role|

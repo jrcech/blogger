@@ -2,8 +2,6 @@
 
 module Admin
   class ArticlesController < AdminController
-    include Searchable
-
     def index
       @pagy, @articles = pagy(
         set_articles,
@@ -82,6 +80,18 @@ module Admin
       )
 
       redirect_to admin_articles_url, status: :see_other
+    end
+
+    def search
+      @search_query = params[:search_query]
+
+      @pagy, @articles = pagy(
+        set_articles.search_by(@search_query),
+        page: params[:page],
+        items: params[:items]
+      )
+
+      render :index
     end
 
     private

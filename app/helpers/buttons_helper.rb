@@ -4,7 +4,7 @@ module ButtonsHelper
   def per_page_button(pagination)
     {
       id: 'Per page',
-      button_class: 'btn btn-light dropdown-toggle',
+      toggle_class: 'btn btn-light dropdown-toggle',
       icon: nil,
       title: "#{pagination.vars[:items]} items per page",
       dropdown_items: per_page_dropdown_items(pagination)

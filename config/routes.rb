@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   concern :searchable do
     get(
-      'search(/page/:page(/items/:items))',
+      'search',
       action: :search,
       on: :collection,
       as: :search
