@@ -33,13 +33,13 @@ module TablesHelper
   def index_buttons(item_presenter)
     render Buttons::DropdownComponent.new(
       id: "#{item_presenter.id}-dropdown-button",
-      float: 'end',
-      css_class: 'btn btn-light',
+      menu_class: 'dropdown-menu dropdown-menu-end',
+      toggle_class: 'btn btn-light',
       icon: 'ellipsis-v',
       dropdown_items: [
         show_button(item_presenter),
-        edit_button(item_presenter),
-        destroy_button(item_presenter)
+        edit_button(item_presenter, 'dropdown-item text-primary'),
+        destroy_button(item_presenter, 'dropdown-item text-danger')
       ]
     )
   end

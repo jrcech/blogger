@@ -47,22 +47,22 @@ module ButtonsHelper
     }
   end
 
-  def edit_button(item_presenter)
+  def edit_button(item_presenter, css_class = nil)
     {
       action: :edit,
       path: path_for(:edit, item_presenter.id),
       title: t('actions.edit'),
-      css_class: 'btn btn-primary',
+      css_class: css_class.present? ? css_class : 'btn btn-primary',
       icon: action_icon(:edit)
     }
   end
 
-  def destroy_button(item_presenter)
+  def destroy_button(item_presenter, css_class = nil)
     {
       action: :destroy,
       path: path_for(:destroy, item_presenter.id),
       title: t('actions.destroy'),
-      css_class: 'btn btn-danger',
+      css_class: css_class.present? ? css_class : 'btn btn-danger',
       icon: action_icon(:destroy),
       data: destroy_button_data(item_presenter)
     }

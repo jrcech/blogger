@@ -115,7 +115,7 @@ module Layouts
         title: 'Log in',
         size: 'sm',
         path: new_user_session_path,
-        css_class: 'nav-item'
+        css_class: 'nav-link'
       }
     end
   end
