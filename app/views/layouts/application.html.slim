@@ -50,10 +50,13 @@ html lang="en"
         icon: 'check',
         css_class: 'btn btn-primary')
 
-      = render Buttons::ButtonComponent.new(title: 'test2',
+      = render Buttons::ButtonComponent.new(title: 'test2a',
         icon: 'check',
-        css_class: 'btn btn-success',
+        toggle_class: 'btn btn-success dropdown-toggle',
         id: 'test-id',
-        menu_position: 'right',
-        dropdown_items: [{ title: 'droghfhp', path: '#', icon: 'suitcase', css_class: 'test-class' },
-          { title: 'drop2', path: '#', icon: 'check' }])
+        menu_class: 'dropdown-menu dropdown-menu-end',
+        dropdown_class: 'dropdown nav-item',
+        element: :li,
+        dropdown_items: [{ title: 'droghfhp', path: '#', icon: 'suitcase', css_class: 'dropdown-item' },
+          { title: 'drop2', path: '#', icon: 'check', css_class: 'dropdown-item text-danger' }])
+      = ap @admin_decorator.right_nav

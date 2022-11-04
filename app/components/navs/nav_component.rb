@@ -18,10 +18,9 @@ module Navs
     end
 
     def merge_css_class(**button)
-      string = +'nav-link'
-      string << " #{button[:css_class]}" if button.key?(:css_class)
+      return button[:css_class] if button.key?(:css_class)
 
-      string
+      'nav-link'
     end
 
     def nav_attributes

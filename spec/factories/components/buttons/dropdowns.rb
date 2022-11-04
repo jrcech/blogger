@@ -12,10 +12,13 @@ FactoryBot.define do
     end
 
     id { nil }
-    float { nil }
-    css_class { nil }
     icon { nil }
     data { nil }
+
+    element { nil }
+    dropdown_class { nil }
+    toggle_class { nil }
+    menu_class { nil }
 
     initialize_with { new(**attributes) }
 
@@ -23,8 +26,13 @@ FactoryBot.define do
       icon { 'test-icon' }
       id { 'TestId' }
       float { 'end' }
-      css_class { 'test-class' }
+      dropdown_class { 'test-class' }
       data { { test_key: 'test-value' } }
+    end
+
+    trait :custom_wrapper do
+      element { :li }
+      dropdown_class { 'custom-wrapper-class' }
     end
   end
 end

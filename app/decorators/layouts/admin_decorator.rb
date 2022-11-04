@@ -87,8 +87,10 @@ module Layouts
     def user_dropdown
       {
         title: current_user.present? ? UserPresenter.new(item: current_user).full_name : nil,
-        menu_position: 'right',
-        css_class: 'nav-item',
+        menu_class: 'dropdown-menu dropdown-menu-end',
+        dropdown_class: 'dropdown nav-item',
+        toggle_class: 'nav-link dropdown-toggle',
+        element: :li,
         dropdown_items: [
           {
             icon: 'power-off',

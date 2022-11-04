@@ -13,24 +13,23 @@ module Buttons
 
     def alter_dropdown_items(dropdown_items)
       dropdown_items.each do |button|
-        button[:css_class] = merge_dropdown_class(**button)
+        button[:css_class] = dropdown_item_class(**button)
       end
     end
 
-    def merge_dropdown_class(**button)
-      string = +'dropdown-item'
-      string << " #{button[:css_class]}" if button.key?(:css_class)
+    def dropdown_item_class(**button)
+      return button[:css_class] if button.key?(:css_class)
 
-      string
+      'dropdown-item'
     end
 
     def alter_button(**button)
-      altered_button = button.except(:dropdown_items)
+      altered_button = button.except(:dropdown_items, :wrapper_element)
 
       altered_button.merge(
         {
           path: '#',
-          css_class: merge_css_class(**button),
+          css_class: toggle_class(**button),
           aria_expanded: false,
           data: merge_data(**button)
         }
@@ -45,45 +44,28 @@ module Buttons
       hash
     end
 
-    def merge_css_class(**button)
-      string = +'dropdown-toggle'
-      string << " #{button[:css_class]}" if button[:css_class].present?
+    def toggle_class(**button)
+      return button[:toggle_class] if button.key?(:toggle_class)
 
-      string
+      'dropdown-toggle'
     end
 
-    def dropdown_element
-      return :li if nav_item?
+    def dropdown_element(**button)
+      return button[:element] if button.key?(:element)
 
       :div
     end
 
-    def dropdown_class
-      string = +'dropdown'
-      string << ' nav-item' if nav_item?
-      string << " float-#{button[:float]}" if button[:float].present?
+    def dropdown_class(**button)
+      return button[:dropdown_class] if button.key?(:dropdown_class)
 
-      string
+      'dropdown'
     end
 
-    def dropdown_menu_position
-      return " dropdown-menu-#{button[:menu_position]}" if button.key?(:menu_position)
+    def menu_class(**button)
+      return button[:menu_class] if button.key?(:menu_class)
 
-      nil
-    end
-
-    def nav_item?
-      button[:type] == :nav_item
-    end
-
-    def dropdown_button_id
-      button_id = +''
-      button_id << "#{button[:id]}-" if id?
-      button_id << 'dropdown-button'
-    end
-
-    def id?
-      button[:id].present?
+      'dropdown-menu'
     end
   end
 end
