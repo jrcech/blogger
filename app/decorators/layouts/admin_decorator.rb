@@ -35,7 +35,7 @@ module Layouts
         path: admin_root_path,
         title: 'Dashboard',
         controller: 'dashboard',
-        css_class: "nav-link#{active_class('dashboard')}"
+        button_class: "nav-link#{active_class('dashboard')}"
       }
     end
 
@@ -45,7 +45,7 @@ module Layouts
         icon: model_icon(:users),
         title: t('models.users.more'),
         controller: 'users',
-        css_class: "nav-link#{active_class('users')}"
+        button_class: "nav-link#{active_class('users')}"
       }
     end
 
@@ -55,7 +55,7 @@ module Layouts
         icon: model_icon(:articles),
         title: t('models.articles.more'),
         controller: 'articles',
-        css_class: "nav-link#{active_class('articles')}"
+        button_class: "nav-link#{active_class('articles')}"
       }
     end
 
@@ -115,7 +115,7 @@ module Layouts
         title: 'Log in',
         size: 'sm',
         path: new_user_session_path,
-        css_class: 'nav-link'
+        button_class: 'nav-link'
       }
     end
   end

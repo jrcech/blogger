@@ -9,7 +9,7 @@ FactoryBot.define do
     item { nil }
     action { nil }
     aria_expanded { nil }
-    css_class { nil }
+    button_class { nil }
     data { nil }
     icon { nil }
     id { nil }
@@ -25,7 +25,7 @@ FactoryBot.define do
       link_method { :test_method }
       action { :test_action }
       aria_expanded { true }
-      css_class { 'test-class' }
+      button_class { 'test-class' }
 
       data do
         {

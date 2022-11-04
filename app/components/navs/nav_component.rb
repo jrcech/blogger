@@ -13,12 +13,12 @@ module Navs
 
     def alter_nav_items(nav_items)
       nav_items.each do |button|
-        button[:css_class] = merge_css_class(**button)
+        button[:button_class] = merge_button_class(**button)
       end
     end
 
-    def merge_css_class(**button)
-      return button[:css_class] if button.key?(:css_class)
+    def merge_button_class(**button)
+      return button[:button_class] if button.key?(:button_class)
 
       'nav-link'
     end

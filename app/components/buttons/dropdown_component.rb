@@ -13,12 +13,12 @@ module Buttons
 
     def alter_dropdown_items(dropdown_items)
       dropdown_items.each do |button|
-        button[:css_class] = dropdown_item_class(**button)
+        button[:button_class] = dropdown_item_class(**button)
       end
     end
 
     def dropdown_item_class(**button)
-      return button[:css_class] if button.key?(:css_class)
+      return button[:button_class] if button.key?(:button_class)
 
       'dropdown-item'
     end
@@ -29,7 +29,7 @@ module Buttons
       altered_button.merge(
         {
           path: '#',
-          css_class: toggle_class(**button),
+          button_class: toggle_class(**button),
           aria_expanded: false,
           data: merge_data(**button)
         }

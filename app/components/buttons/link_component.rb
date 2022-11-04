@@ -23,7 +23,7 @@ module Buttons
     end
 
     def construct_class
-      return button[:css_class] if button.key?(:css_class)
+      return button[:button_class] if button.key?(:button_class)
 
       'btn btn-primary'
     end

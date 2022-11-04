@@ -26,7 +26,7 @@ html lang="en"
 
       / = render Elements::Buttons::Button::Component.new(title: 'test',
       /   path: '#',
-      /   css_class: 'btn btn-primary',
+      /   button_class: 'btn btn-primary',
       /   link_method: :delete,
       /   id: 'someId',
       /   icon: 'check')
@@ -36,7 +36,7 @@ html lang="en"
       - arr = [{ title: 'testa',
         path: root_path,
         icon: 'check',
-        css_class: 'btn btn-secondary'}, { title: 'testb',
+        button_class: 'btn btn-secondary'}, { title: 'testb',
         icon: 'check',
         path: '#',
         data: { test_key: 'test-value' },
@@ -48,7 +48,7 @@ html lang="en"
       = render Buttons::ButtonComponent.new(title: 'test2',
         path: root_path,
         icon: 'check',
-        css_class: 'btn btn-primary')
+        button_class: 'btn btn-primary')
 
       = render Buttons::ButtonComponent.new(title: 'test2a',
         icon: 'check',
@@ -57,5 +57,5 @@ html lang="en"
         menu_class: 'dropdown-menu dropdown-menu-end',
         dropdown_class: 'dropdown nav-item',
         element: :li,
-        dropdown_items: [{ title: 'droghfhp', path: '#', icon: 'suitcase', css_class: 'dropdown-item' },
-          { title: 'drop2', path: '#', icon: 'check', css_class: 'dropdown-item text-danger' }])
+        dropdown_items: [{ title: 'droghfhp', path: '#', icon: 'suitcase', button_class: 'dropdown-item' },
+          { title: 'drop2', path: '#', icon: 'check', button_class: 'dropdown-item text-danger' }])

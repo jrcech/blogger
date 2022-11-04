@@ -4,7 +4,7 @@ module ButtonsHelper
   def per_page_button(pagination)
     {
       id: 'Per page',
-      css_class: 'btn btn-light dropdown-toggle',
+      button_class: 'btn btn-light dropdown-toggle',
       icon: nil,
       title: "#{pagination.vars[:items]} items per page",
       dropdown_items: per_page_dropdown_items(pagination)
@@ -38,7 +38,7 @@ module ButtonsHelper
     {
       action: :new,
       path: path_for(:new),
-      css_class: 'btn btn-success',
+      button_class: 'btn btn-success',
       title: t(
         'actions.new',
         item: t("models.#{model_plural_symbol}.one")
@@ -47,22 +47,22 @@ module ButtonsHelper
     }
   end
 
-  def edit_button(item_presenter, css_class = nil)
+  def edit_button(item_presenter, button_class = nil)
     {
       action: :edit,
       path: path_for(:edit, item_presenter.id),
       title: t('actions.edit'),
-      css_class: css_class.present? ? css_class : 'btn btn-primary',
+      button_class: button_class.present? ? button_class : 'btn btn-primary',
       icon: action_icon(:edit)
     }
   end
 
-  def destroy_button(item_presenter, css_class = nil)
+  def destroy_button(item_presenter, button_class = nil)
     {
       action: :destroy,
       path: path_for(:destroy, item_presenter.id),
       title: t('actions.destroy'),
-      css_class: css_class.present? ? css_class : 'btn btn-danger',
+      button_class: button_class.present? ? button_class : 'btn btn-danger',
       icon: action_icon(:destroy),
       data: destroy_button_data(item_presenter)
     }
