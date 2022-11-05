@@ -1,30 +1,6 @@
 # frozen_string_literal: true
 
 module ButtonsHelper
-  def per_page_button(pagination)
-    {
-      id: 'Per page',
-      toggle_class: 'btn btn-light dropdown-toggle',
-      icon: nil,
-      title: "#{pagination.vars[:items]} items per page",
-      dropdown_items: per_page_dropdown_items(pagination)
-    }
-  end
-
-  def per_page_dropdown_items(pagination)
-    per_page_items = []
-
-    pagination.vars[:per_page].each do |per_page|
-      path = request.params.merge({ items: per_page, page: 1 })
-
-      per_page_item = { title: per_page, path: path }
-
-      per_page_items << per_page_item
-    end
-
-    per_page_items
-  end
-
   def show_button(item_presenter)
     {
       action: :show,
@@ -88,4 +64,29 @@ module ButtonsHelper
       cancel: t('confirmations.destroy.cancel')
     }
   end
+
+  def per_page_button(pagination)
+    {
+      id: 'Per page',
+      toggle_class: 'btn btn-light dropdown-toggle',
+      icon: nil,
+      title: "#{pagination.vars[:items]} items per page",
+      dropdown_items: per_page_dropdown_items(pagination)
+    }
+  end
+
+  def per_page_dropdown_items(pagination)
+    per_page_items = []
+
+    pagination.vars[:per_page].each do |per_page|
+      path = request.params.merge({ items: per_page, page: 1 })
+
+      per_page_item = { title: per_page, path: path }
+
+      per_page_items << per_page_item
+    end
+
+    per_page_items
+  end
+
 end
