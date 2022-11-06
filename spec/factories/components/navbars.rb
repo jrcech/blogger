@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :navbar, class: 'Navbars::NavbarComponent' do
+    brand { 'Test Brand' }
+
     left_nav do
       [
         { title: 'Test title 1', path: 'test_path1' },

@@ -2,11 +2,10 @@
 
 nav class="navbar navbar-expand-lg navbar-dark bg-dark"
   div class="container"
-    a [
-      class="navbar-brand"
-      href="#{root_path}"
-    ] Navbar
-    
+    = render Buttons::ButtonComponent.new(title: brand,
+      path: root_path,
+      button_class: 'navbar-brand')
+
     button [
       class="navbar-toggler"
       type="button"

@@ -3,7 +3,7 @@
 doctype html
 html lang="en"
   head
-    title Blogger
+    title = application_name
 
     meta charset="utf-8"
     meta [
@@ -18,15 +18,14 @@ html lang="en"
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   
   body data-controller="bs"
-    = render Navbars::NavbarComponent.new left_nav: left_nav,
-      right_nav: right_nav
+    = render Navbars::NavbarComponent.new(brand: application_name,
+      left_nav: left_nav,
+      right_nav: right_nav)
 
     div class="container"
       nav aria-label="breadcrumb" class="mt-3"
         = breadcrumbs style: :bootstrap5
 
-      = ap @resources
-      = controller_name
       = yield
 
       = render Toasts::ToastComponent.new
