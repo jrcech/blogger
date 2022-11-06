@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ControllerHelper
+module ControllersHelper
   def controller_singular
     controller_name.singularize
   end

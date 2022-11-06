@@ -33,9 +33,9 @@ Rails.application.routes.draw do
 
       root to: 'dashboard#index'
     end
-
-    get '/:locale', to: 'homepage#index'
-
-    root to: 'homepage#index'
   end
+
+  get '/:locale', to: 'homepage#index'
+
+  root to: 'homepage#index'
 end

@@ -11,6 +11,7 @@ module NavbarsHelper
 
   def right_nav
     [
+      locales_dropdown,
       user_signed_in? ? user_dropdown : login_button
     ]
   end
@@ -65,6 +66,9 @@ module NavbarsHelper
   def locales_dropdown
     {
       title: I18n.locale.upcase,
+      dropdown_class: 'dropdown nav-item',
+      toggle_class: 'nav-link dropdown-toggle',
+      element: :li,
       dropdown_items: available_locales
     }
   end
