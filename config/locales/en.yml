@@ -41,6 +41,9 @@ en:
     articles:
       one: "Article"
       more: "Articles"
+    reviews:
+      one: "Review"
+      more: "Reviews"
   controller:
     dashboard: "Dashboard"
   actions:

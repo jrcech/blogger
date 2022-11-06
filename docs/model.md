@@ -17,6 +17,12 @@ rails generate request Review
 - `app/components/forms/reviews_form_component.html.slim`
 - `app/components/forms/reviews_form_component.html.rb`
 
+rails generate system Review
+- Add `reviews_button` to `app/hepers/navbars_helper.rb`
+- `db/seeds/development/reviews.seeds.rb`
+- Add review translations to `config/locales/en.yml`
+- Add review icon to `config/icon.yml`
+
 ```plantuml
 @startuml
 
