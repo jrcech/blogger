@@ -14,11 +14,11 @@ ruby:
     %i(id title content)
   end
 
-= render Headers::HeaderComponent.new header: header(@article_presenter),
+= render Headers::HeaderComponent.new(header: header(@article_presenter),
   main_header: true,
   item: @article,
-  action_buttons:
+  action_buttons:)
 
-= render Cards::CardComponent.new item: @article,
+= render Cards::CardComponent.new(item: @article,
   item_presenter: @article_presenter,
-  details:
+  details:)

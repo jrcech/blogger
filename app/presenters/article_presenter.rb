@@ -6,6 +6,6 @@ class ArticlePresenter < ModelPresenter
   end
 
   def truncate_content
-    content.truncate 100
+    content.truncate(100)
   end
 end

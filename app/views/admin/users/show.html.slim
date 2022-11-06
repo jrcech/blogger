@@ -36,11 +36,11 @@ ruby:
     )
   end
 
-= render Headers::HeaderComponent.new header: header(@user_presenter),
+= render Headers::HeaderComponent.new(header: header(@user_presenter),
   main_header: true,
   item: @user,
-  action_buttons:
+  action_buttons:)
 
-= render Cards::CardComponent.new item: @user,
+= render Cards::CardComponent.new(item: @user,
   item_presenter: @user_presenter,
-  details:
+  details:)
