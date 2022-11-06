@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module HeaderHelper
+module HeadersHelper
   def header(item_presenter = nil)
     {
       title: header_title(item_presenter),
