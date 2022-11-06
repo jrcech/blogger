@@ -1,3 +1,13 @@
+# Generate new scaffold steps
+
+generate spec/system/admin
+
+rails generate model Review title content:text
+- db/migrate/xxxxxxxxx_create_reviews.rb
+- app/models/review.rb (attributes, required, search)
+- spec/models/review_spec.rb (attributes, required)
+- spec/factories/reviews_spec.rb
+
 ```plantuml
 @startuml
 
@@ -5,31 +15,31 @@ skinparam monochrome true
 skinparam shadowing false
 
 class User {
-  email:string :unique :search
-  username:string :search
+  email:string :required :unique :search
+  username:string :unique :search
   first_name:string :search
   last_name:string :search
 }
 
 class Article {
-  title:string :search
-  content:text
+  title:string :required :search
+  content:text :required
 }
 
 class Language {
-  title:string :search
+  title:string :required :search
   shortcut:string :search
   homepage:string
 }
 
 class Comment {
-  title:string :search
-  content:text
+  title:string :required :search
+  content:text :required
 }
 
 class Review {
-  title:string :search
-  content:text
+  title:string :required :search
+  content:text :required
 }
 
 User "1" <-- "*" Article
