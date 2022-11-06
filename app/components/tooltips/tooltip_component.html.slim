@@ -1,5 +1,11 @@
 / frozen_string_literal: true
 
-= render Icons::FontAwesomeComponent.new icon:,
+= options[:text_before]
+
+'
+
+= render Icons::FontAwesomeComponent.new(icon:,
   title:,
-  **construct_options
+  **construct_options)
+
+= options[:text_after]

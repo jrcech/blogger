@@ -17,7 +17,12 @@ module Tooltips
     end
 
     def construct_data
-      hash = { data: { bs_target: :tooltip } }
+      hash = {
+        data: {
+          bs_target: :tooltip
+        }
+      }
+
       hash[:data][:bs_placement] = placement if placement?
 
       hash
