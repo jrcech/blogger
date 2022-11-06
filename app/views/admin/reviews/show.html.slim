@@ -1,0 +1,24 @@
+/ frozen_string_literal: true
+
+ruby:
+  breadcrumb :item, @review, @review_presenter
+
+  def action_buttons
+    [
+      edit_button(@review_presenter),
+      destroy_button(@review_presenter)
+    ]
+  end
+
+  def details
+    %i(id title content)
+  end
+
+= render Headers::HeaderComponent.new(header: header(@review_presenter),
+  main_header: true,
+  item: @review,
+  action_buttons:)
+
+= render Cards::CardComponent.new(item: @review,
+  item_presenter: @review_presenter,
+  details:)

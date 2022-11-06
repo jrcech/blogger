@@ -1,0 +1,7 @@
+/ frozen_string_literal: true
+
+- breadcrumb :new
+
+h1 = t('headers.new', item: t('models.reviews.one'))
+
+= render Forms::ReviewsFormComponent.new(review: @review)

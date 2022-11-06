@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :articles, concerns: %i[searchable]
+      resources :reviews, concerns: %i[searchable]
 
       resources :users, concerns: %i[searchable] do
         member do

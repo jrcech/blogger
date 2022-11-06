@@ -1,0 +1,43 @@
+/ frozen_string_literal: true
+
+ruby:
+  breadcrumb :items
+
+  def thead
+    [
+      {
+        cells: [
+          t('tables.headings.id'),
+          search_icon(t('tables.headings.title')),
+          search_icon(t('tables.headings.content'))
+        ]
+      }
+    ]
+  end
+
+  def collection
+    index_data(
+      @reviews,
+      :id,
+      :highlight_title,
+      :truncate_content
+    )
+  end
+
+  def action_buttons
+    [
+      new_button
+    ]
+  end
+
+= render Headers::HeaderComponent.new(header:,
+  main_header: true,
+  search_query: @search_query,
+  pagy: @pagy,
+  action_buttons:,
+  path_for_search: path_for(:search))
+
+= render Tables::TableComponent.new(collection:, thead:)
+
+= render Footers::FooterComponent.new(left_dropdown: per_page_button(@pagy),
+  pagination: @pagy)
