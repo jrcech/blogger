@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-after :admins do
+after 'development:articles' do
   puts 'Seeding Reviews'
 
-  250.times do |i|
+  1000.times do |i|
+    article = Article.all.sample
+
     content = +''
 
     Random.rand(1..6).times do
@@ -11,7 +13,8 @@ after :admins do
     end
 
     attrs = {
-      content: content
+      content: content,
+      article: article
     }
 
     seed Review, { title: "Review #{i + 1}" }, attrs

@@ -11,6 +11,8 @@
 #
 
 class Article < ApplicationRecord
+  has_many :reviews
+
   validates :title, presence: true
   validates :content, presence: true
 

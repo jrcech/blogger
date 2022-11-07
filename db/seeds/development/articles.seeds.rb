@@ -3,7 +3,7 @@
 after :admins do
   puts 'Seeding Articles'
 
-  250.times do |i|
+  100.times do |i|
     content = +''
 
     Random.rand(1..6).times do
