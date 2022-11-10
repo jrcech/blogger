@@ -19,6 +19,17 @@ ruby:
   item: @article,
   action_buttons:)
 
+nav class="nav nav-pills nav-justified"
+  = render Buttons::ButtonComponent.new(title: 'Overview',
+    icon: 'magnifying-glass',
+    button_class: 'nav-link active')
+  = render Buttons::ButtonComponent.new(title: t('models.reviews.more'),
+    icon: 'eye',
+    path: admin_article_reviews_path(@article),
+    button_class: 'nav-link')
+  a class="nav-link" href="#" Link
+  a class="nav-link disabled" Disabled
+
 = render Cards::CardComponent.new(item: @article,
   item_presenter: @article_presenter,
   details:)

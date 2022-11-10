@@ -27,7 +27,7 @@ ruby:
 
   def action_buttons
     [
-      new_button
+      #new_button
     ]
   end
 
@@ -37,8 +37,8 @@ ruby:
   pagy: @pagy,
   action_buttons:,
   path_for_search: path_for(:search))
-
-= render Tables::TableComponent.new(collection:, thead:)
+/
+/ = render Tables::TableComponent.new(collection:, thead:)
 
 = render Footers::FooterComponent.new(left_dropdown: per_page_button(@pagy),
   pagination: @pagy)
