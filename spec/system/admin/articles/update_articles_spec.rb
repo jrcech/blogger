@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Articles update', type: :system do
-  let!(:article) { create :article }
+  let(:article) { create :article }
 
   before do
     sign_in_user
+
+    article
 
     visit admin_articles_path
   end
@@ -42,6 +44,7 @@ RSpec.describe 'Admin Articles update', type: :system do
       find_by_id("#{article.id}-dropdown-button").click
       click_link 'Show'
 
+      find_by_id("show-#{article.id}-dropdown-button").click
       click_link 'Edit'
     end
 

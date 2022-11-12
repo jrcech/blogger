@@ -21,15 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_204651) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.bigint "review_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_comments_on_review_id"
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -88,6 +79,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_204651) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "comments", "reviews"
   add_foreign_key "reviews", "articles"
 end

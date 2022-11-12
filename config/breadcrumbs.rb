@@ -33,3 +33,51 @@ crumb :edit do |item, item_presenter|
 
   parent :item, item, item_presenter
 end
+
+crumb :articles do
+  link(
+    render(
+      Tooltips::TooltipComponent.new(
+        icon: model_icon('articles'),
+        title: t("models.articles.more")
+      )
+    ),
+    admin_articles_path
+  )
+end
+
+crumb :article do |article, article_presenter|
+  link article_presenter.title, admin_article_path(article)
+
+  parent :articles
+end
+
+crumb :reviews do |article, article_presenter|
+  if article.present?
+    link(
+      render(
+        Tooltips::TooltipComponent.new(
+          icon: model_icon('reviews'),
+          title: t("models.reviews.more")
+        )
+      ),
+      admin_article_reviews_path(article)
+    )
+
+
+    parent :article, article, article_presenter
+  else
+    link(
+      render(
+        Tooltips::TooltipComponent.new(
+          icon: model_icon('reviews'),
+          title: t("models.reviews.more")
+        )
+      ),
+      admin_reviews_path
+    )
+
+
+    parent :root
+  end
+end

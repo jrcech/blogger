@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   subject(:review) { described_class.new }
+  let(:article) { FactoryBot.create(:article) }
 
   it 'has a valid factory' do
     expect(FactoryBot.build(:review)).to be_valid
@@ -12,6 +13,8 @@ RSpec.describe Review, type: :model do
   it 'is valid with valid attributes' do
     review.title = 'Test title'
     review.content = 'Test content'
+    review.article = article
+
     expect(review).to be_valid
   end
 

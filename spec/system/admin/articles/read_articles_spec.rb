@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Articles read', type: :system do
-  let!(:article) { create :article }
+  let(:article) { create :article }
 
   before do
     sign_in_user
+
+    article
 
     visit admin_articles_path
   end

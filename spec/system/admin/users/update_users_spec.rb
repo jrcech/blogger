@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Users update', type: :system do
-  let!(:user) { create :user }
+  let(:user) { create :user }
 
   before do
     sign_in_user
+
+    user
 
     visit admin_users_path
   end
@@ -41,6 +43,7 @@ RSpec.describe 'Admin Users update', type: :system do
       find_by_id("#{user.id}-dropdown-button").click
       click_link 'Show'
 
+      find_by_id("show-#{user.id}-dropdown-button").click
       click_link 'Edit'
     end
 
@@ -75,7 +78,7 @@ RSpec.describe 'Admin Users update', type: :system do
 
   def expect_not_updated_item
     aggregate_failures do
-      expect(page).to have_content "User 'MyString MyString' wasn't updated!"
+      expect(page).to have_content "User 'TestFirstName TestLastName' wasn't updated!"
       expect(resource_updated?).to eq false
     end
   end

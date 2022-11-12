@@ -13,4 +13,8 @@ class ModelPresenter
   private
 
   attr_reader :item, :search_query
+
+  # def model_name
+  #   item.class.name.underscore
+  # end
 end

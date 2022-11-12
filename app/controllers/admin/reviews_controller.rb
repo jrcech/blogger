@@ -3,11 +3,24 @@
 module Admin
   class ReviewsController < AdminController
     def index
-      @pagy, @reviews = pagy(
-        set_reviews,
-        page: params[:page],
-        items: params[:items]
-      )
+      # @article = Article.find(params[:article_id])
+      # @article_presenter = ArticlePresenter.new(item: @article)
+      if controller_nested?
+        @parent = parent_record
+        @parent_presenter = parent_presenter.new(item: @parent)
+
+        @pagy, @reviews = pagy(
+          Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc),
+          page: params[:page],
+          items: params[:items]
+        )
+      else
+        @pagy, @reviews = pagy(
+          Review.includes(:article).order(updated_at: :desc),
+          page: params[:page],
+          items: params[:items]
+        )
+      end
     end
 
     def show
@@ -38,7 +51,7 @@ module Admin
 
         redirect_to admin_review_url(@review)
       else
-        flash[:error] = t('errors.create',  model: t('models.reviews.one'))
+        flash[:error] = t('errors.create', model: t('models.reviews.one'))
 
         render :new, status: :unprocessable_entity
       end
@@ -107,7 +120,8 @@ module Admin
     def review_params
       params.require(:review).permit(
         :title,
-        :content
+        :content,
+        :article_id
       )
     end
   end

@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews read', type: :system do
-  let!(:review) { create :review }
+  let(:review) { create :review }
 
   before do
     sign_in_user
+
+    review
 
     visit admin_reviews_path
   end

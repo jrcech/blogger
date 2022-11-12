@@ -26,17 +26,11 @@ ruby:
     )
   end
 
-  def action_buttons
-    [
-      new_button
-    ]
-  end
-
-= render Headers::HeaderComponent.new(header:,
+= render Headers::HeaderComponent.new(header: index_header(:users),
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons:)
+  action_buttons: [new_button])
 
 = render Tables::TableComponent.new(collection:, thead:)
 

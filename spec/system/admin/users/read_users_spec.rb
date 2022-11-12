@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Users read', type: :system do
-  let!(:user) { create :user }
+  let(:user) { create :user }
 
   before do
     sign_in_user
+
+    user
 
     visit admin_users_path
   end
@@ -34,7 +36,7 @@ RSpec.describe 'Admin Users read', type: :system do
   def index_expectations
     [
       user.id,
-      'MyString MyString',
+      'TestFirstName TestLastName',
       user.email,
       'Member'
     ]
@@ -44,8 +46,8 @@ RSpec.describe 'Admin Users read', type: :system do
     [
       "ID: #{user.id}",
       "E-Mail: #{user.email}",
-      'First Name: MyString',
-      'Last Name: MyString',
+      'First Name: TestFirstName',
+      'Last Name: TestLastName',
       "Username: #{user.username}"
     ]
   end

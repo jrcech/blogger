@@ -8,4 +8,8 @@ class ReviewPresenter < ModelPresenter
   def truncate_content
     content.truncate(100)
   end
+
+  def article_title
+    article.title
+  end
 end

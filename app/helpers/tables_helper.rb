@@ -14,7 +14,7 @@ module TablesHelper
 
       cells << index_buttons(item_presenter)
 
-      collection << { cells:, show_path: path_for(:show, item) }
+      collection << { cells:, show_path: send("admin_#{item_presenter.model_name.singular}_path", item) }
     end
 
     collection

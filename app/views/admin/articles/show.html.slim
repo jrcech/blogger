@@ -3,13 +3,6 @@
 ruby:
   breadcrumb :item, @article, @article_presenter
 
-  def action_buttons
-    [
-      edit_button(@article_presenter),
-      destroy_button(@article_presenter)
-    ]
-  end
-
   def details
     %i(id title content)
   end
@@ -17,9 +10,9 @@ ruby:
 = render Headers::HeaderComponent.new(header: header(@article_presenter),
   main_header: true,
   item: @article,
-  action_buttons:)
+  header_buttons: action_buttons(@article))
 
-nav class="nav nav-pills nav-justified"
+nav class="nav nav-tabs nav-fill"
   = render Buttons::ButtonComponent.new(title: 'Overview',
     icon: 'magnifying-glass',
     button_class: 'nav-link active')
@@ -27,8 +20,10 @@ nav class="nav nav-pills nav-justified"
     icon: 'eye',
     path: admin_article_reviews_path(@article),
     button_class: 'nav-link')
-  a class="nav-link" href="#" Link
-  a class="nav-link disabled" Disabled
+
+= render Headers::HeaderComponent.new(header: overview_header,
+  main_header: false,
+  item: @article)
 
 = render Cards::CardComponent.new(item: @article,
   item_presenter: @article_presenter,

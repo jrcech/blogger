@@ -3,11 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews destroy', type: :system do
-  let!(:review) { create :review }
+  let(:review) { create :review }
 
   before do
     resource_for :reviews, :admin
     sign_in_user
+
+    review
 
     visit admin_reviews_path
   end
@@ -27,6 +29,7 @@ RSpec.describe 'Admin Reviews destroy', type: :system do
       find_by_id("#{review.id}-dropdown-button").click
       click_link 'Show'
 
+      find_by_id("show-#{review.id}-dropdown-button").click
       accept_confirm { click_link 'Destroy' }
 
       expect_deleted_item

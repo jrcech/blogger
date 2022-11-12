@@ -3,13 +3,6 @@
 ruby:
   breadcrumb :item, @user, @user_presenter
 
-  def action_buttons
-    [
-      edit_button(@user_presenter),
-      destroy_button(@user_presenter)
-    ]
-  end
-
   def details
     %i(
       id
@@ -39,7 +32,7 @@ ruby:
 = render Headers::HeaderComponent.new(header: header(@user_presenter),
   main_header: true,
   item: @user,
-  action_buttons:)
+  header_buttons: action_buttons(@user_presenter))
 
 = render Cards::CardComponent.new(item: @user,
   item_presenter: @user_presenter,

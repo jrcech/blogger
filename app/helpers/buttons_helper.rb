@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module ButtonsHelper
-  def show_button(item_presenter)
+  def show_button(item)
     {
       action: :show,
-      path: path_for(:show, item_presenter.id),
+      path: send("admin_#{item.model_name.singular}_path", item.id),
       title: t('actions.show'),
       icon: action_icon(:show)
     }
@@ -13,7 +13,7 @@ module ButtonsHelper
   def new_button
     {
       action: :new,
-      path: path_for(:new),
+      path: send("new_admin_#{model_singular_symbol}_path"),
       button_class: 'btn btn-success',
       title: t(
         'actions.new',
@@ -23,35 +23,35 @@ module ButtonsHelper
     }
   end
 
-  def edit_button(item_presenter, button_class = nil)
+  def edit_button(item, button_class = nil)
     {
       action: :edit,
-      path: path_for(:edit, item_presenter.id),
+      path: send("edit_admin_#{item.model_name.singular}_path", item.id),
       title: t('actions.edit'),
       button_class: button_class.present? ? button_class : 'btn btn-primary',
       icon: action_icon(:edit)
     }
   end
 
-  def destroy_button(item_presenter, button_class = nil)
+  def destroy_button(item, button_class = nil)
     {
       action: :destroy,
-      path: path_for(:destroy, item_presenter.id),
+      path: send("admin_#{item.model_name.singular}_path", item.id),
       title: t('actions.destroy'),
       button_class: button_class.present? ? button_class : 'btn btn-danger',
       icon: action_icon(:destroy),
-      data: destroy_button_data(item_presenter)
+      data: destroy_button_data(item)
     }
   end
 
-  def destroy_button_data(item_presenter)
-    model_translation = t("models.#{model_plural_symbol}.one")
+  def destroy_button_data(item)
+    model_translation = t("models.#{item.model_name.plural}.one")
 
     {
       turbo_method: :delete,
       turbo_confirm: t(
         'confirmations.destroy.confirm',
-        item: item_presenter.title
+        item: item.title
       ),
       title: t(
         'confirmations.destroy.title',
@@ -89,4 +89,19 @@ module ButtonsHelper
     per_page_items
   end
 
+  def action_buttons(item)
+    [
+      {
+        id: "show-#{item.id}-dropdown-button",
+        dropdown_class: 'dropdown ms-2',
+        menu_class: 'dropdown-menu',
+        toggle_class: 'btn btn-light btn-lg',
+        icon: 'ellipsis-v',
+        dropdown_items: [
+          edit_button(item, 'dropdown-item text-primary'),
+          destroy_button(item, 'dropdown-item text-danger')
+        ]
+      }
+    ]
+  end
 end

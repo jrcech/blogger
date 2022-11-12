@@ -40,8 +40,8 @@ FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "tester.#{n}@example.com" }
     sequence(:username) { |n| "username.#{n}" }
-    first_name { 'MyString' }
-    last_name { 'MyString' }
+    first_name { 'TestFirstName' }
+    last_name { 'TestLastName' }
     password { 'MyString' }
     sequence(:reset_password_token) { |n| "MyString.#{n}" }
     reset_password_sent_at { '2019-03-08 15:33:28' }

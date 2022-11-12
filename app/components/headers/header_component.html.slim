@@ -1,10 +1,12 @@
 / frozen_string_literal: true
 
 = render Headers::HeadingComponent.new header: header,
-  main_header: main_header
-
-= render Buttons::GroupComponent.new title: "#{header[:title]} header",
+  main_header: main_header,
   buttons: options[:header_buttons]
+
+/ div class="text-end"
+/   = render Buttons::GroupComponent.new title: "#{header[:title]} header",
+/     buttons: options[:header_buttons]
 
 div class="row"
   div class="col-md"

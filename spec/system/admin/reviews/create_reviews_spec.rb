@@ -3,9 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews create', type: :system do
+  let(:article) { create :article }
+
   before do
     resource_for :reviews, :admin
     sign_in_user
+
+    article
+
     visit admin_reviews_path
 
     click_link 'New Review'
@@ -16,6 +21,8 @@ RSpec.describe 'Admin Reviews create', type: :system do
       fill_in 'Title', with: 'Test Review'
       fill_in 'Content', with: 'Test content'
 
+      select 'MyString', from: 'Article'
+
       click_button 'Create Review'
 
       expect_created_item
@@ -24,6 +31,8 @@ RSpec.describe 'Admin Reviews create', type: :system do
     it 'user failed to create an review', js: true do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
+
+      select '', from: 'Article'
 
       click_button 'Create Review'
 

@@ -1,17 +1,32 @@
 # frozen_string_literal: true
 
 module HeadersHelper
-  def header(item_presenter = nil)
+  def overview_header
     {
-      title: header_title(item_presenter),
-      icon: model_icon(model_plural_symbol),
-      model: model_plural_symbol
+      title: 'Overview',
+      icon: 'magnifying-glass'
     }
   end
 
-  def header_title(item_presenter)
-    return item_presenter.title if item_presenter.present?
+  def index_header(model)
+    {
+      title: model.to_s.humanize,
+      icon: model_icon(model),
+      model: model
+    }
+  end
 
-    t("models.#{model_plural_symbol}.more")
+  def header(item)
+    {
+      title: header_title(item),
+      icon: model_icon(item.model_name.plural),
+      model: item.model_name.plural
+    }
+  end
+
+  def header_title(item)
+    return item.title if item.present?
+
+    t("models.#{item.model_name.plural}.more")
   end
 end

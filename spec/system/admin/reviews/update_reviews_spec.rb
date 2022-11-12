@@ -2,11 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin Reviews update', type: :system do
-  let!(:review) { create :review }
+RSpec.describe 'Update reviews', type: :system do
+  let(:review) { create :review }
 
   before do
     sign_in_user
+
+    review
 
     visit admin_reviews_path
   end
@@ -22,6 +24,8 @@ RSpec.describe 'Admin Reviews update', type: :system do
       fill_in 'Title', with: 'Test title updated'
       fill_in 'Content', with: 'Test content updated'
 
+      select 'MyString', from: 'Article'
+
       click_button 'Update Review'
 
       expect_updated_item
@@ -30,6 +34,8 @@ RSpec.describe 'Admin Reviews update', type: :system do
     it 'user failed to update an review', js: true do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
+
+      select '', from: 'Article'
 
       click_button 'Update Review'
 
@@ -42,6 +48,7 @@ RSpec.describe 'Admin Reviews update', type: :system do
       find_by_id("#{review.id}-dropdown-button").click
       click_link 'Show'
 
+      find_by_id("show-#{review.id}-dropdown-button").click
       click_link 'Edit'
     end
 

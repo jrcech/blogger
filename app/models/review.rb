@@ -11,4 +11,8 @@ class Review < ApplicationRecord
       "%#{query}%"
     )
   })
+
+  scope :for_article, (->(article) {
+    where(article: article)
+  })
 end

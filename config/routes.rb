@@ -20,11 +20,11 @@ Rails.application.routes.draw do
     devise_for :users, skip: :omniauth_callbacks
 
     namespace :admin do
+      resources :reviews, only: %i[index new create], concerns: %i[searchable]
+
       resources :articles, shallow: true, concerns: %i[searchable] do
         resources :reviews, concerns: %i[searchable]
       end
-
-      resources :reviews, only: %i[index new create], concerns: %i[searchable]
 
       resources :users, concerns: %i[searchable] do
         member do
