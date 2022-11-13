@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'GET /edit authenticated' do |url, model|
-  describe 'GET /edit' do
-    let(:factory) { create model }
+RSpec.shared_examples 'Admin GET /show' do |url, model|
+  describe 'GET /show' do
+    let(:factory) { create(model) }
 
     context 'with a guest' do
       before do

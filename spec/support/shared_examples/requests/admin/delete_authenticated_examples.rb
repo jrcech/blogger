@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'DELETE authenticated' do |url, resource|
+RSpec.shared_examples 'Admin DELETE' do |url, resource|
   describe 'DELETE' do
-    let(:factory) { create resource }
+    let(:factory) { create(resource) }
 
     before do
       factory

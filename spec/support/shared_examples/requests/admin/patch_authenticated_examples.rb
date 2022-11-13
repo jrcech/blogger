@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'PATCH authenticated' do |url, resource|
+RSpec.shared_examples 'Admin PATCH' do |url, resource|
   describe 'PATCH' do
     let(:factory) { create(resource) }
 

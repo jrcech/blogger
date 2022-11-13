@@ -3,9 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe 'SystemTest', type: :request do
-  before do
-    resource_for :system_test, :admin
-  end
-
-  include_examples 'GET /index authenticated', :admin_system_test_url
+  include_examples 'Admin GET /index', :admin_system_test_url
 end

@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'POST authenticated' do |url, resource|
+RSpec.shared_examples 'Admin POST' do |url, resource|
   describe 'POST' do
-    let(:valid_attributes) do
-      associations_attributes = create(resource).attributes.select do |key|
+    let(:factory) { create(resource) }
+
+    let(:factory_associations_attributes) do
+      factory.attributes.select do |key|
         key.to_s.match(/_id/)
       end
+    end
 
-      resource_attributes = attributes_for(resource)
-
-      resource_attributes.merge(associations_attributes)
+    let(:valid_attributes) do
+      attributes_for(resource).merge(factory_associations_attributes)
     end
 
     let(:invalid_attributes) { attributes_for(resource, :invalid) }

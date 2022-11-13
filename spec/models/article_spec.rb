@@ -16,7 +16,7 @@ RSpec.describe Article, type: :model do
   subject(:article) { described_class.new }
 
   it 'has a valid factory' do
-    expect(FactoryBot.build(:article)).to be_valid
+    expect(build(:article)).to be_valid
   end
 
   it 'is valid with valid attributes' do

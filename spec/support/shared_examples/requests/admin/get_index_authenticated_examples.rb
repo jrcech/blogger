@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'GET /new authenticated' do |url|
-  describe 'GET /new' do
+RSpec.shared_examples 'Admin GET /index' do |url|
+  describe 'GET /index' do
     context 'with a guest' do
       before do
         get send(url)

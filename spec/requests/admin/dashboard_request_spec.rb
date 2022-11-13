@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe 'Dashboard', type: :request do
-  include_examples 'GET /index authenticated', :admin_root_url
+  include_examples 'Admin GET /index', :admin_root_url
 end

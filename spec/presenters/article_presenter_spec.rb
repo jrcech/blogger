@@ -8,7 +8,7 @@ RSpec.describe ArticlePresenter, type: :presenter do
   end
 
   let(:article) {
-    FactoryBot.build(
+    build(
       :article,
       title: 'Test Article',
       content: "#{Faker::Lorem.characters(number: 100)}test"

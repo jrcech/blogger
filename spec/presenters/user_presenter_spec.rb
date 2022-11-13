@@ -8,7 +8,7 @@ RSpec.describe UserPresenter, type: :presenter do
   end
 
   let(:user) {
-    FactoryBot.build(
+    build(
       :user,
       first_name: 'John',
       last_name: 'Doe',

@@ -7,7 +7,7 @@ RSpec.describe Review, type: :model do
   let(:article) { FactoryBot.create(:article) }
 
   it 'has a valid factory' do
-    expect(FactoryBot.build(:review)).to be_valid
+    expect(build(:review)).to be_valid
   end
 
   it 'is valid with valid attributes' do

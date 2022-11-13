@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'GET /show authenticated' do |url, model|
-  describe 'GET /show' do
-    let(:factory) { create model }
-
+RSpec.shared_examples 'Admin GET /new' do |url|
+  describe 'GET /new' do
     context 'with a guest' do
       before do
-        get send(url, id: factory.id)
+        get send(url)
       end
 
       it 'responds successfully' do
@@ -22,7 +20,7 @@ RSpec.shared_examples 'GET /show authenticated' do |url, model|
       before do
         sign_in_user
 
-        get send(url, id: factory.id)
+        get send(url)
       end
 
       it 'responds successfully' do

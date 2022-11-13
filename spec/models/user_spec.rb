@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
   subject(:user) { described_class.new }
 
   it 'has a valid factory' do
-    expect(FactoryBot.build(:user)).to be_valid
+    expect(build(:user)).to be_valid
   end
 
   it 'is valid with valid attributes' do
