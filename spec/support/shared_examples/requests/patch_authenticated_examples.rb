@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'PATCH authenticated' do
+RSpec.shared_examples 'PATCH authenticated' do |url, resource|
   describe 'PATCH' do
-    let(:factory) { create resource_singular_symbol }
+    let(:factory) { create resource }
 
-    include_context 'with patch attributes'
+    let(:valid_attributes) { attributes_for resource, :updated }
+    let(:invalid_attributes) { attributes_for resource, :invalid }
 
     context 'with an authenticated user' do
       before do
@@ -12,21 +13,21 @@ RSpec.shared_examples 'PATCH authenticated' do
       end
 
       context 'with valid attributes' do
-        include_examples 'updates the record', :valid_attributes
+        include_examples 'updates the record', url, resource, :valid_attributes
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not update the record', :invalid_attributes
+        include_examples 'does not update the record', url, resource, :invalid_attributes
       end
     end
 
     context 'with a guest' do
       context 'with valid attributes' do
-        include_examples 'does not update the record', :valid_attributes
+        include_examples 'does not update the record', url, resource, :valid_attributes
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not update the record', :invalid_attributes
+        include_examples 'does not update the record', url, resource, :invalid_attributes
       end
     end
   end

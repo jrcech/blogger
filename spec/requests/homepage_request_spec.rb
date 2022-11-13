@@ -7,5 +7,5 @@ RSpec.describe 'Homepage', type: :request do
     resource_for :root
   end
 
-  include_examples 'GET /index'
+  include_examples 'GET /index', :root_url
 end

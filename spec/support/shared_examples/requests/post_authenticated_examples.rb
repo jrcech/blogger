@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'POST authenticated' do
+RSpec.shared_examples 'POST authenticated' do |url, resource|
   describe 'POST' do
-    include_context 'with post attributes'
+    let(:valid_attributes) {
+      associations_attributes = create(resource).attributes.select {
+        |key| key.to_s.match(/_id/)
+      }
+
+      resource_attributes = attributes_for(resource)
+
+      resource_attributes.merge(associations_attributes)
+    }
+
+    let(:invalid_attributes) { attributes_for resource, :invalid }
 
     context 'with an authenticated user' do
       before do
@@ -10,21 +20,21 @@ RSpec.shared_examples 'POST authenticated' do
       end
 
       context 'with valid attributes' do
-        include_examples 'creates a new record', :valid_attributes
+        include_examples 'creates a new record', url, resource, :valid_attributes
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not create a new record', :invalid_attributes
+        include_examples 'does not create a new record', url, resource, :invalid_attributes
       end
     end
 
     context 'with a guest' do
       context 'with valid attributes' do
-        include_examples 'does not create a new record', :valid_attributes
+        include_examples 'does not create a new record', url, resource, :valid_attributes
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not create a new record', :invalid_attributes
+        include_examples 'does not create a new record', url, resource, :invalid_attributes
       end
     end
   end

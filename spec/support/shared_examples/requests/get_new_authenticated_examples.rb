@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'GET /new authenticated' do
+RSpec.shared_examples 'GET /new authenticated' do |url|
   describe 'GET /new' do
     context 'with a guest' do
       before do
-        get url_for action: :new
+        get send(url)
       end
 
       it 'responds successfully' do
@@ -20,7 +20,7 @@ RSpec.shared_examples 'GET /new authenticated' do
       before do
         sign_in_user
 
-        get url_for action: :new
+        get send(url)
       end
 
       it 'responds successfully' do

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'does not create a new record' do |attributes|
+RSpec.shared_examples 'does not create a new record' do |url, resource, attributes|
   it 'does not create a new record' do
     params = {}
-    params[resource_singular_symbol] = send(attributes)
+    params[resource] = send(attributes)
 
     expect do
-      post url_for(action: :create), params: params
-    end.not_to change(model.all, :count)
+      post send(url, params: params)
+    end.not_to change(resource.to_s.classify.safe_constantize.all, :count)
   end
 end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'GET /edit authenticated' do
+RSpec.shared_examples 'GET /edit authenticated' do |url, model|
   describe 'GET /edit' do
-    let(:factory) { create resource_singular_symbol }
+    let(:factory) { create model }
 
     context 'with a guest' do
       before do
-        get url_for action: :edit, id: factory.id
+        get send(url, id: factory.id)
       end
 
       it 'responds successfully' do
@@ -22,7 +22,7 @@ RSpec.shared_examples 'GET /edit authenticated' do
       before do
         sign_in_user
 
-        get url_for action: :edit, id: factory.id
+        get send(url, id: factory.id)
       end
 
       it 'responds successfully' do

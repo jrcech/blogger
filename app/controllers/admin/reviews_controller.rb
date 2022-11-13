@@ -3,8 +3,6 @@
 module Admin
   class ReviewsController < AdminController
     def index
-      # @article = Article.find(params[:article_id])
-      # @article_presenter = ArticlePresenter.new(item: @article)
       if controller_nested?
         @parent = parent_record
         @parent_presenter = parent_presenter.new(item: @parent)

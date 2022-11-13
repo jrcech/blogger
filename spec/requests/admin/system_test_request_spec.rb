@@ -7,5 +7,5 @@ RSpec.describe 'SystemTest', type: :request do
     resource_for :system_test, :admin
   end
 
-  include_examples 'GET /index authenticated'
+  include_examples 'GET /index authenticated', :admin_system_test_url
 end

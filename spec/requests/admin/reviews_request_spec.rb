@@ -3,22 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Reviews', type: :request do
-  before do
-    resource_for :reviews, :admin
-  end
+  include_examples 'GET /index authenticated', :admin_reviews_url
+  include_examples 'GET /show authenticated', :admin_review_url, :review
+  include_examples 'GET /new authenticated', :new_admin_review_url
+  include_examples 'GET /edit authenticated', :edit_admin_review_url, :review
 
-  actions = %i[
-    index
-    show
-    new
-    edit
-  ]
-
-  actions.each do |action|
-    include_examples "GET /#{action} authenticated"
-  end
-
-  include_examples 'POST authenticated'
-  include_examples 'PATCH authenticated'
-  include_examples 'DELETE authenticated'
+  include_examples 'POST authenticated', :admin_reviews_url, :review
+  include_examples 'PATCH authenticated', :admin_review_url, :review
+  include_examples 'DELETE authenticated', :admin_review_url, :review
 end

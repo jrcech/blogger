@@ -3,22 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Articles', type: :request do
-  before do
-    resource_for :articles, :admin
-  end
+  include_examples 'GET /index authenticated', :admin_articles_url
+  include_examples 'GET /show authenticated', :admin_article_url, :article
+  include_examples 'GET /new authenticated', :new_admin_article_url
+  include_examples 'GET /edit authenticated', :edit_admin_article_url, :article
 
-  actions = %i[
-    index
-    show
-    new
-    edit
-  ]
-
-  actions.each do |action|
-    include_examples "GET /#{action} authenticated"
-  end
-
-  include_examples 'POST authenticated'
-  include_examples 'PATCH authenticated'
-  include_examples 'DELETE authenticated'
+  include_examples 'POST authenticated', :admin_articles_url, :article
+  include_examples 'PATCH authenticated', :admin_article_url, :article
+  include_examples 'DELETE authenticated', :admin_article_url, :article
 end
