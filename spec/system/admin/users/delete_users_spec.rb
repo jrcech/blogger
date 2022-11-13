@@ -6,7 +6,6 @@ RSpec.describe 'Admin Users destroy', type: :system do
   let(:user) { create :user }
 
   before do
-    resource_for :users, :admin
     sign_in_user
 
     user
@@ -41,7 +40,7 @@ RSpec.describe 'Admin Users destroy', type: :system do
   def expect_deleted_item
     aggregate_failures do
       expect(page).to have_content "User 'TestFirstName TestLastName' was successfully destroyed."
-      expect(model.count).to eq 1
+      expect(User.count).to eq 1
     end
   end
 end

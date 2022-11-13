@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Users create', type: :system do
   before do
-    resource_for :users, :admin
     sign_in_user
     visit admin_users_path
 
@@ -38,14 +37,14 @@ RSpec.describe 'Admin Users create', type: :system do
   def expect_created_item
     aggregate_failures do
       expect(page).to have_content "User ' ' was successfully created"
-      expect(model.count).to eq 2
+      expect(User.count).to eq 2
     end
   end
 
   def expect_not_created_item
     aggregate_failures do
       expect(page).to have_content "User wasn't created!"
-      expect(model.count).to eq 1
+      expect(User.count).to eq 1
     end
   end
 end

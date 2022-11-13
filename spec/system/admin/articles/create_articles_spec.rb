@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Articles create', type: :system do
   before do
-    resource_for :articles, :admin
     sign_in_user
     visit admin_articles_path
 
@@ -37,14 +36,14 @@ RSpec.describe 'Admin Articles create', type: :system do
     aggregate_failures do
       expect(page).to have_content "Article 'Test Article' was successfully created"
       expect(page).to have_content 'Test Article'
-      expect(model.count).to eq 1
+      expect(Article.count).to eq 1
     end
   end
 
   def expect_not_created_item
     aggregate_failures do
       expect(page).to have_content "Article wasn't created!"
-      expect(model.count).to eq 0
+      expect(Article.count).to eq 0
     end
   end
 end

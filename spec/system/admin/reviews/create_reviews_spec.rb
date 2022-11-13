@@ -6,7 +6,6 @@ RSpec.describe 'Admin Reviews create', type: :system do
   let(:article) { create :article }
 
   before do
-    resource_for :reviews, :admin
     sign_in_user
 
     article
@@ -46,14 +45,14 @@ RSpec.describe 'Admin Reviews create', type: :system do
     aggregate_failures do
       expect(page).to have_content "Review 'Test Review' was successfully created"
       expect(page).to have_content 'Test Review'
-      expect(model.count).to eq 1
+      expect(Review.count).to eq 1
     end
   end
 
   def expect_not_created_item
     aggregate_failures do
       expect(page).to have_content "Review wasn't created!"
-      expect(model.count).to eq 0
+      expect(Review.count).to eq 0
     end
   end
 end

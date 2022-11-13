@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-selenium_app_host = ENV.fetch("SELENIUM_APP_HOST") do
+selenium_app_host = ENV.fetch('SELENIUM_APP_HOST') do
   Socket.ip_address_list.find(&:ipv4_private?).ip_address
 end
 
@@ -16,7 +16,7 @@ Capybara.register_driver :local_selenium do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
-    options: options
+    options:
   )
 end
 
@@ -28,7 +28,7 @@ Capybara.register_driver :local_selenium_headless do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
-    options: options
+    options:
   )
 end
 
@@ -39,11 +39,10 @@ Capybara.register_driver :remote_selenium do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{ENV["SELENIUM_HOST"]}:4444/wd/hub",
+    url: "http://#{ENV.fetch('SELENIUM_HOST', nil)}:4444/wd/hub",
     capabilities: options
   )
 end
-
 
 Capybara.register_driver :remote_selenium_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
@@ -53,7 +52,7 @@ Capybara.register_driver :remote_selenium_headless do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{ENV["SELENIUM_HOST"]}:4444/wd/hub",
+    url: "http://#{ENV.fetch('SELENIUM_HOST', nil)}:4444/wd/hub",
     capabilities: options
   )
 end
@@ -63,7 +62,7 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
-  config.before(:each, type: :system, js: true) do
+  config.before(:each, js: true, type: :system) do
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
 
     locality = ENV['SELENIUM_HOST'].present? ? :remote : :local

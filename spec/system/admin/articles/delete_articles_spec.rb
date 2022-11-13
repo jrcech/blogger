@@ -6,7 +6,6 @@ RSpec.describe 'Admin Articles destroy', type: :system do
   let(:article) { create :article }
 
   before do
-    resource_for :articles, :admin
     sign_in_user
 
     article
@@ -41,7 +40,7 @@ RSpec.describe 'Admin Articles destroy', type: :system do
   def expect_deleted_item
     aggregate_failures do
       expect(page).to have_content "Article 'MyString' was successfully destroyed."
-      expect(model.count).to eq 0
+      expect(Article.count).to eq 0
     end
   end
 end
