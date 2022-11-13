@@ -2,10 +2,10 @@
 
 RSpec.shared_examples 'PATCH authenticated' do |url, resource|
   describe 'PATCH' do
-    let(:factory) { create resource }
+    let(:factory) { create(resource) }
 
-    let(:valid_attributes) { attributes_for resource, :updated }
-    let(:invalid_attributes) { attributes_for resource, :invalid }
+    let(:valid_attributes) { attributes_for(resource, :updated) }
+    let(:invalid_attributes) { attributes_for(resource, :invalid) }
 
     context 'with an authenticated user' do
       before do
@@ -13,21 +13,49 @@ RSpec.shared_examples 'PATCH authenticated' do |url, resource|
       end
 
       context 'with valid attributes' do
-        include_examples 'updates the record', url, resource, :valid_attributes
+        it 'updates the new record' do
+          params = {}
+          params[resource] = valid_attributes
+
+          patch send(url, id: factory.id, params:)
+
+          expect(factory.updated_at < factory.reload.updated_at).to be true
+        end
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not update the record', url, resource, :invalid_attributes
+        it 'does not update the new record' do
+          params = {}
+          params[resource] = invalid_attributes
+
+          patch send(url, id: factory.id, params:)
+
+          expect(factory.updated_at < factory.reload.updated_at).to be false
+        end
       end
     end
 
     context 'with a guest' do
       context 'with valid attributes' do
-        include_examples 'does not update the record', url, resource, :valid_attributes
+        it 'does not update the new record' do
+          params = {}
+          params[resource] = valid_attributes
+
+          patch send(url, id: factory.id, params:)
+
+          expect(factory.updated_at < factory.reload.updated_at).to be false
+        end
       end
 
       context 'with invalid attributes' do
-        include_examples 'does not update the record', url, resource, :invalid_attributes
+        it 'does not update the new record' do
+          params = {}
+          params[resource] = invalid_attributes
+
+          patch send(url, id: factory.id, params:)
+
+          expect(factory.updated_at < factory.reload.updated_at).to be false
+        end
       end
     end
   end
