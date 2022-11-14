@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews destroy', type: :system do
-  let(:review) { create :review }
+  let(:review) { create(:review) }
 
   before do
     sign_in_user
@@ -39,7 +39,7 @@ RSpec.describe 'Admin Reviews destroy', type: :system do
 
   def expect_deleted_item
     aggregate_failures do
-      expect(page).to have_content "Review 'MyString' was successfully destroyed."
+      expect(page).to have_content "Review 'Test review title' was successfully destroyed."
       expect(Review.count).to eq 0
     end
   end

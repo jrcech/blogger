@@ -5,7 +5,7 @@ class ArticlePresenter < ModelPresenter
     highlight(title, search_query)
   end
 
-  def truncate_content
-    content.truncate(100)
+  def highlight_truncate_content
+    highlight(content.truncate(100), search_query)
   end
 end

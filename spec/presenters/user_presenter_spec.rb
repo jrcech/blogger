@@ -4,17 +4,17 @@ require 'rails_helper'
 
 RSpec.describe UserPresenter, type: :presenter do
   subject(:user_presenter) do
-    described_class.new item: user, search_query: search_query
+    described_class.new item: user, search_query:
   end
 
-  let(:user) {
+  let(:user) do
     build(
       :user,
       first_name: 'John',
       last_name: 'Doe',
       email: 'john.doe@example.com'
     )
-  }
+  end
 
   let(:search_query) { nil }
 

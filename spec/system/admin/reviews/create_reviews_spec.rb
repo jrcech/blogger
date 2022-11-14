@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews create', type: :system do
-  let(:article) { create :article }
+  let(:article) { create(:article) }
 
   before do
     sign_in_user
@@ -20,7 +20,7 @@ RSpec.describe 'Admin Reviews create', type: :system do
       fill_in 'Title', with: 'Test Review'
       fill_in 'Content', with: 'Test content'
 
-      select 'MyString', from: 'Article'
+      select 'Test article title', from: 'Article'
 
       click_button 'Create Review'
 

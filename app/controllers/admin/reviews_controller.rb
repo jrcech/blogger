@@ -7,18 +7,16 @@ module Admin
         @parent = parent_record
         @parent_presenter = parent_presenter.new(item: @parent)
 
-        @pagy, @reviews = pagy(
-          Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc),
-          page: params[:page],
-          items: params[:items]
-        )
+        set_reviews = Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
       else
-        @pagy, @reviews = pagy(
-          Review.includes(:article).order(updated_at: :desc),
-          page: params[:page],
-          items: params[:items]
-        )
+        set_reviews = Review.includes(:article).order(updated_at: :desc)
       end
+
+      @pagy, @reviews = pagy(
+        set_reviews,
+        page: params[:page],
+        items: params[:items]
+      )
     end
 
     def show

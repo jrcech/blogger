@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Reviews read', type: :system do
-  let(:review) { create :review }
+  let(:review) { create(:review) }
 
   before do
     sign_in_user
@@ -36,16 +36,16 @@ RSpec.describe 'Admin Reviews read', type: :system do
   def expect_index_item
     aggregate_failures do
       expect(page).to have_content review.id
-      expect(page).to have_content 'MyString'
-      expect(page).to have_content 'MyText'
+      expect(page).to have_content 'Test review title'
+      expect(page).to have_content 'Test review content'
     end
   end
 
   def expect_show_item
     aggregate_failures do
       expect(page).to have_content "ID: #{review.id}"
-      expect(page).to have_content 'Title: MyString'
-      expect(page).to have_content 'Content: MyText'
+      expect(page).to have_content 'Title: Test review title'
+      expect(page).to have_content 'Content: Test review content'
     end
   end
 end

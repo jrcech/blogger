@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Articles destroy', type: :system do
-  let(:article) { create :article }
+  let(:article) { create(:article) }
 
   before do
     sign_in_user
@@ -39,7 +39,7 @@ RSpec.describe 'Admin Articles destroy', type: :system do
 
   def expect_deleted_item
     aggregate_failures do
-      expect(page).to have_content "Article 'MyString' was successfully destroyed."
+      expect(page).to have_content "Article 'Test article title' was successfully destroyed."
       expect(Article.count).to eq 0
     end
   end

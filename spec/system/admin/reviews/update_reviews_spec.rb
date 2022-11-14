@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Update reviews', type: :system do
-  let(:review) { create :review }
+  let(:review) { create(:review) }
 
   before do
     sign_in_user
@@ -24,7 +24,7 @@ RSpec.describe 'Update reviews', type: :system do
       fill_in 'Title', with: 'Test title updated'
       fill_in 'Content', with: 'Test content updated'
 
-      select 'MyString', from: 'Article'
+      select 'Test article title', from: 'Article'
 
       click_button 'Update Review'
 

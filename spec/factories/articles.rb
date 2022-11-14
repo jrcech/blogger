@@ -10,8 +10,8 @@
 #
 FactoryBot.define do
   factory :article do
-    title { 'MyString' }
-    content { 'MyText' }
+    title { 'Test article title' }
+    content { 'Test article content' }
     created_at { '2019-03-08 15:33:28' }
     updated_at { '2019-03-08 15:33:28' }
 
