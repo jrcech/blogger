@@ -92,6 +92,15 @@ module Admin
     end
 
     def search
+      if controller_nested?
+        @parent = parent_record
+        @parent_presenter = parent_presenter.new(item: @parent)
+
+        set_reviews = Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
+      else
+        set_reviews = Review.includes(:article).order(updated_at: :desc)
+      end
+
       @search_query = params[:search_query]
 
       @pagy, @reviews = pagy(

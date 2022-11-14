@@ -47,7 +47,7 @@ ruby:
   search_query: @search_query,
   pagy: @pagy,
   action_buttons: [new_button(:reviews)],
-  path_for_search: path_for(:search))
+  path_for_search: @parent.present? ? search_admin_article_reviews_path(article_id: @parent.id) : search_admin_reviews_path)
 
 = render Tables::TableComponent.new(collection:, thead:)
 
