@@ -30,7 +30,7 @@ ruby:
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons: [new_button])
+  action_buttons: [new_button(:users)])
 
 = render Tables::TableComponent.new(collection:, thead:)
 

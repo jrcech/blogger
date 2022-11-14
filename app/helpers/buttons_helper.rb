@@ -10,14 +10,14 @@ module ButtonsHelper
     }
   end
 
-  def new_button
+  def new_button(resources)
     {
       action: :new,
-      path: send("new_admin_#{model_singular_symbol}_path"),
+      path: send("new_admin_#{resources.to_s.singularize}_path"),
       button_class: 'btn btn-success',
       title: t(
         'actions.new',
-        item: t("models.#{model_plural_symbol}.one")
+        item: t("models.#{resources.to_s.pluralize}.one")
       ),
       icon: action_icon(:new)
     }

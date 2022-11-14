@@ -28,8 +28,8 @@ ruby:
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons: [new_button],
-  path_for_search: path_for(:search))
+  action_buttons: [new_button(:articles)],
+  path_for_search: search_admin_articles_path)
 
 = render Tables::TableComponent.new(collection:, thead:)
 
