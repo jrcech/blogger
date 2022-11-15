@@ -30,7 +30,8 @@ ruby:
   main_header: true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons: [new_button(:users)])
+  action_buttons: [new_button(:users)],
+  path_for_search: search_admin_users_path)
 
 = render Tables::TableComponent.new(collection:, thead:)
 
