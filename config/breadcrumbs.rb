@@ -23,7 +23,7 @@ crumb :item do |item, item_presenter|
 end
 
 crumb :new do |model_symbol_plural|
-  link t('actions.new', item: model_singular), send("new_admin_#{model_symbol_plural.to_s.singularize}_path")
+  link t('actions.new', item: model_symbol_plural.to_s.singularize), send("new_admin_#{model_symbol_plural.to_s.singularize}_path")
 
   parent :items, model_symbol_plural
 end
