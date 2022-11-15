@@ -14,6 +14,10 @@ class ModelPresenter
     item.class.name.underscore
   end
 
+  def model_symbol_plural
+    item.class.name.underscore.pluralize
+  end
+
   private
 
   attr_reader :item, :search_query

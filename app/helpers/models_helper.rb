@@ -7,6 +7,7 @@ module ModelsHelper
 
   alias model_singular model_string
 
+  #TODO
   def model_singular_symbol
     model_singular.underscore.to_sym
   end
@@ -19,6 +20,7 @@ module ModelsHelper
     model_string.pluralize
   end
 
+  #TODO
   def model_plural_symbol
     model_plural.underscore.to_sym
   end

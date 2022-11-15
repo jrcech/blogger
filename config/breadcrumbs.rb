@@ -4,28 +4,28 @@ crumb :root do
   link t('controller.dashboard'), admin_root_path
 end
 
-crumb :items do
+crumb :items do |model_symbol|
   link(
     render(
       Tooltips::TooltipComponent.new(
-        icon: model_icon(model_plural_symbol),
-        title: t("models.#{model_plural_symbol}.more")
+        icon: model_icon(model_symbol),
+        title: t("models.#{model_symbol}.more")
       )
     ),
-    send("admin_#{model_plural_symbol}_path")
+    send("admin_#{model_symbol}_path")
   )
 end
 
 crumb :item do |item, item_presenter|
   link item_presenter.title, send("admin_#{item_presenter.model_symbol}_path", id: item.id)
 
-  parent :items
+  parent :items, item_presenter.model_symbol_plural
 end
 
-crumb :new do
+crumb :new do |model_symbol|
   link t('actions.new', item: model_singular), send("new_admin_#{model_singular_symbol}_path")
 
-  parent :items
+  parent :items, model_symbol
 end
 
 crumb :edit do |item, item_presenter|
