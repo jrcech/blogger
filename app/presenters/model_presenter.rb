@@ -10,11 +10,11 @@ class ModelPresenter
     @search_query = search_query
   end
 
+  def model_symbol
+    item.class.name.underscore
+  end
+
   private
 
   attr_reader :item, :search_query
-
-  # def model_name
-  #   item.class.name.underscore
-  # end
 end

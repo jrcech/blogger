@@ -12,24 +12,24 @@ crumb :items do
         title: t("models.#{model_plural_symbol}.more")
       )
     ),
-    path_for(:index)
+    send("admin_#{model_plural_symbol}_path")
   )
 end
 
 crumb :item do |item, item_presenter|
-  link item_presenter.title, path_for(:show, item)
+  link item_presenter.title, send("admin_#{item_presenter.model_symbol}_path", id: item.id)
 
   parent :items
 end
 
 crumb :new do
-  link t('actions.new', item: model_singular), path_for(:new)
+  link t('actions.new', item: model_singular), send("new_admin_#{model_singular_symbol}_path")
 
   parent :items
 end
 
 crumb :edit do |item, item_presenter|
-  link t('actions.edit'), path_for(:edit, item)
+  link t('actions.edit'), send("edit_admin_#{item_presenter.model_symbol}_path", id: item.id)
 
   parent :item, item, item_presenter
 end
