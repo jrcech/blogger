@@ -60,6 +60,7 @@ class Review {
 User "1" <-- "*" Article
 
 Article "1" <-- "*" Review
+Article "1" <-- "*" Comment
 Review "1" <-- "*" Comment
 
 Article "1" <-- "*" LanguageAssignment

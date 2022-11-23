@@ -144,5 +144,3 @@ gem 'pagy'
 
 gem 'sentry-ruby'
 gem 'sentry-rails'
-
-gem 'dotenv-rails', groups: [:development, :test]
