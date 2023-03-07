@@ -1,4 +1,4 @@
-FROM ruby:3.1.3-slim AS assets
+FROM ruby:3.2.1-slim AS assets
 LABEL maintainer="jiricech94@gmail.com"
 
 WORKDIR /app
@@ -33,7 +33,7 @@ RUN yarn build:css
 
 CMD ["bash"]
 
-FROM ruby:3.1.3-slim AS app
+FROM ruby:3.2.1-slim AS app
 LABEL maintainer="jiricech94@gmail.com"
 
 WORKDIR /app

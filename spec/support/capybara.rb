@@ -39,7 +39,7 @@ Capybara.register_driver :remote_selenium do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{ENV.fetch('SELENIUM_HOST', nil)}:4444/wd/hub",
+    url: "http://#{Rails.application.credentials.selenium[:host]}:4444/wd/hub",
     capabilities: options
   )
 end
@@ -52,7 +52,7 @@ Capybara.register_driver :remote_selenium_headless do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{ENV.fetch('SELENIUM_HOST', nil)}:4444/wd/hub",
+    url: "http://#{Rails.application.credentials.selenium[:host]}:4444/wd/hub",
     capabilities: options
   )
 end
