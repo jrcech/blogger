@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-selenium_app_host = ENV.fetch('SELENIUM_APP_HOST') do
-  Socket.ip_address_list.find(&:ipv4_private?).ip_address
-end
-
-Capybara.configure do |config|
-  config.server_host = selenium_app_host
-  config.server_port = 4000
-end
-
 Capybara.register_driver :local_selenium do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--window-size=1920,1080')
@@ -23,6 +14,9 @@ end
 Capybara.register_driver :local_selenium_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--window-size=1920,1080')
 
   Capybara::Selenium::Driver.new(
@@ -39,7 +33,7 @@ Capybara.register_driver :remote_selenium do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{Rails.application.credentials.selenium[:host]}:4444/wd/hub",
+    url: "http://selenium-chrome:4444/wd/hub",
     capabilities: options
   )
 end
@@ -47,14 +41,23 @@ end
 Capybara.register_driver :remote_selenium_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--window-size=1920,1080')
 
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://#{Rails.application.credentials.selenium[:host]}:4444/wd/hub",
+    url: "http://selenium-chrome:4444/wd/hub",
     capabilities: options
   )
+end
+
+Capybara.configure do |config|
+  config.server_host = Socket.ip_address_list.find(&:ipv4_private?).ip_address
+  config.server_port = 4000
+  config.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
 end
 
 RSpec.configure do |config|
@@ -63,13 +66,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true, type: :system) do
-    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
-
-    locality = ENV['SELENIUM_HOST'].present? ? :remote : :local
+    locality = ENV['DOCKER'].present? ? 'remote' : 'local'
     headless = '_headless' if ENV['DISABLE_HEADLESS'].blank?
 
-    "#{locality}_selenium#{headless}".to_sym
+    driver = "#{locality}_selenium#{headless}".to_sym
 
-    driven_by "#{locality}_selenium#{headless}".to_sym
+    driven_by driver
+  end
+
+  config.after(:each, js: true, type: :system) do
+    Capybara.reset_sessions!
   end
 end

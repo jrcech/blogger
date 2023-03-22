@@ -32,6 +32,7 @@ node_modules
 
 .git
 .gitignore
+.github
 
 .dockerignore
 
@@ -43,3 +44,12 @@ yarn-error.log
 .idea
 
 config/credentials/development.key
+config/credentials/test.key
+
+cache/*
+.yarn-cache
+
+pgdata
+
+spec/reports
+spec/examples.txt

@@ -1,19 +1,26 @@
-version: '3.8'
-
 services:
   web:
     build:
       context: .
       target: "app"
-    env_file:
-      - .env.development
+      args:
+        - "RAILS_ENV=${RAILS_ENV:-development}"
+        - "NODE_ENV=${NODE_ENV:-development}"
+        - "RAILS_STAGING=${RAILS_STAGING:-false}"
+    profiles:
+      - "web"
     depends_on:
       - "postgres"
       - "redis"
-    user: ruby:ruby
+    env_file:
+      - ".env"
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: webpack
+      DOCKER: true
     ports:
       - "3000:3000"
       - "4000:4000"
+    user: ruby:ruby
     volumes:
       - .:/app
       - gem_cache:/gems
@@ -22,8 +29,10 @@ services:
 
   postgres:
     image: postgres:15.2-alpine
+    profiles:
+      - "postgres"
     env_file:
-      - .env.development
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
 
@@ -34,32 +43,38 @@ services:
     build:
       context: .
       target: "assets"
+    profiles:
+      - "assets"
     user: ruby:ruby
-    tty: true
     volumes:
       - .:/app
       - gem_cache:/gems
       - node_cache:/app/node_modules
     command: "yarn build --watch"
+    tty: true
 
   css:
     build:
       context: .
       target: "assets"
+    profiles:
+      - "assets"
     user: ruby:ruby
-    tty: true
     volumes:
       - .:/app
       - gem_cache:/gems
       - node_cache:/app/node_modules
     command: "yarn build:css --watch"
+    tty: true
 
-  selenium_chrome:
+  selenium-chrome:
     image: selenium/standalone-chrome
-    logging:
-      driver: none
+    profiles:
+      - "selenium-chrome"
     ports:
       - "5900:5900"
+    logging:
+      driver: none
 
 volumes:
   db_data:
