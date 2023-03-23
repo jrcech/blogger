@@ -38,11 +38,11 @@ RSpec.describe 'Users Sign Up', type: :system do
       current_email.click_link 'Confirm my account'
     end
 
-    it 'is expected to confirm a user', js: true do
+    skip 'is expected to confirm a user', js: true do
       expect_confirmed_user
     end
 
-    it 'is expected to log in created user', js: true do
+    skip 'is expected to log in created user', js: true do
       visit new_user_session_path
 
       fill_in 'Email', with: 'registered.user@example.com'

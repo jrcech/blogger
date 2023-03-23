@@ -9,6 +9,8 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCdi4UFRRaQqhX+GZ2J3C0MYpxapajvTSHYzfkOrBoP358mS7Ch/0tYj/7OCpFDhosPb+f0twjM3s0AXB1zE+y0XL8AhXvc89p91qFnTt74iTKTWm7BByIqqLyvF8j5ufsVZdSZsPURs11F7QJ41N77NIIQbsX69WJJtTymS7Ut8KJ+vlcL9I4WoBb/oEzGJRjZhkbCwtgRf1ehB8gr5i9km6+GugKEJgzCxixXaBPZjE9NAsG5XIqA4JjY8GrbObcuuVDg5wtFUNkhEEFpvwr4QVgFX7XJCiwL9EMVpYiOwya0gVmBOcJwqR2zzDAt9IXRz1YSI1JpiqCKsDdsJDSGkkjBYZzBp7VhM48+Meda+0djYEJUD7hmBJ94bwvhnTxsA87yHYydkq/7hUwUqc0slyEqj7wDLCJZLkxlCOB+DIfhaQbHELh5+enLMkY64qqyBeiHIxeln7QT7XfNRSBaa5LlT6csYd+K1oc0EO3hTmq9rpCm9+2+/WUC7NBmsH8= jrcech@imac.local
 
 runcmd:
+  - ufw allow 'OpenSSH'
+  - ufw enable
   - sudo apt update
   - sudo apt install -q -y apt-transport-https ca-certificates curl software-properties-common
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
