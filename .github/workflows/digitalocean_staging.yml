@@ -93,4 +93,4 @@ jobs:
         run: docker compose up -d
 
       - name: Setup Postgres Production database
-        run: docker compose exec web bundle exec rails db:create db:migrate db:seed:development
+        run: docker compose exec web bundle exec rails db:setup
