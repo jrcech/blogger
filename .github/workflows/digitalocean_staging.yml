@@ -93,4 +93,4 @@ jobs:
         run: docker compose up -d
 
       - name: Setup Postgres Production database
-        run: docker compose exec web bundle exec rails db:setup
+        run: docker compose exec -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 web bundle exec rails db:setup
