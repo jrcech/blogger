@@ -14,12 +14,14 @@ write_files:
     owner: ${UNIX_USERNAME}:${UNIX_USERNAME}
     encoding: b64
     content: ${DOCKER_INSTALL_CONTENT}
+    defer: true
 
   - path: /home/${UNIX_USERNAME}/run/github_runner_install.sh
     permissions: '0700'
     owner: ${UNIX_USERNAME}:${UNIX_USERNAME}
     encoding: b64
     content: ${GITHUB_RUNNER_INSTALL_CONTENT}
+    defer: true
 
 runcmd:
   - ufw allow 'OpenSSH'
