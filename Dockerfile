@@ -45,7 +45,10 @@ ENV RAILS_ENV="${RAILS_ENV}" \
   USER="ruby"
 
 RUN if [ "${RAILS_ENV}" != "development" ]; then \
-  SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
+  RAILS_ENV=production SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
+  
+RUN if [ "${RAILS_STAGING}" == "true" ]; then \
+  RAILS_ENV=test SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
 
 FROM ruby:3.2.1-slim AS app
 LABEL maintainer="jiricech94@gmail.com"
