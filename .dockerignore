@@ -89,3 +89,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Terraform processed files from templates
+cloud_init.yml
+.cloud/scripts/*

@@ -17,5 +17,5 @@ resource "digitalocean_droplet" "blogger" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = ["ed:b5:ed:cb:c7:54:2b:1c:58:3a:22:5b:28:c8:a0:87"]
-  user_data = file("./blogger_app.yml")
+  user_data = file("./cloud_init.yml")
 }

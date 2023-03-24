@@ -33,7 +33,13 @@ jobs:
       - name: Build Docker Compose
         run: docker compose build
 
-      - name: Upload build public files as an artifact
+      - name: Upload public assets as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: assets
+          path: public/assets
+
+      - name: Upload application assets build files as an artifact
         uses: actions/upload-artifact@v3
         with:
           name: builds
@@ -53,7 +59,7 @@ jobs:
         with:
           name: .env
 
-      - name: Download public artifact
+      - name: Download builds artifact
         uses: actions/download-artifact@v3
         with:
           name: builds
@@ -84,10 +90,10 @@ jobs:
         with:
           name: .env
 
-      - name: Download public artifact
+      - name: Download public assets artifact
         uses: actions/download-artifact@v3
         with:
-          name: builds
+          name: assets
 
       - name: Run Docker Compose
         run: docker compose up -d

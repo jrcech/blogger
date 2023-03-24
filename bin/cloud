@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+source .env
+
+export GITHUB_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GITHUB_USERNAME}/${GITHUB_REPO}/actions/runners/registration-token)
+
+rm -rf .cloud/scripts/docker_install.sh
+envsubst < .cloud/templates/docker_install_template.sh > .cloud/scripts/docker_install.sh
+export DOCKER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/docker_install.sh)
+
+rm -rf .cloud/scripts/github_runner_install.sh
+envsubst < .cloud/templates/github_runner_install_template.sh > .cloud/scripts/github_runner_install.sh
+export GITHUB_RUNNER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/github_runner_install.sh)
+
+rm -rf cloud_init.yml
+envsubst < .cloud/templates/cloud_init_template.yml > cloud_init.yml
