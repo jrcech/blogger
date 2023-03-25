@@ -43,11 +43,11 @@ jobs:
       - name: Copy assets from container
         run: docker compose run --rm web ls
 
-      - name: Run ls
-        run: ls -la public
+      - name: List running containers
+        run: docker compose ps
 
       - name: Run ls
-        run: ls -la ./artifacts
+        run: ls -la public
 
       - name: Upload public as an artifact
         uses: actions/upload-artifact@v3
