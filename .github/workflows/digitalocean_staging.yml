@@ -41,19 +41,22 @@ jobs:
         run: ls -la public
 
       - name: Run assets container
-        run: docker compose up -d assets
+        run: docker compose create web
+
+      - name: Copy assets from container
+        run: docker compose cp web:/app/public ./artifacts
 
       - name: Run ls
         run: ls -la public
+
+      - name: Run ls
+        run: ls -la ./artifacts
 
       - name: Upload public as an artifact
         uses: actions/upload-artifact@v3
         with:
           name: public
           path: public
-
-      - name: Stop assets container
-        run: docker compose down -d assets
 
   test:
     name: Test
