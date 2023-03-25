@@ -40,8 +40,8 @@ jobs:
       - name: Run ls
         run: ls -la public
 
-      - name: Build Docker Compose
-        run: docker compose up -d web
+      - name: Run assets container
+        run: docker compose up -d assets
 
       - name: Run ls
         run: ls -la public
@@ -51,6 +51,9 @@ jobs:
         with:
           name: public
           path: public
+
+      - name: Stop assets container
+        run: docker compose down -d assets
 
   test:
     name: Test

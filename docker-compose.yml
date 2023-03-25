@@ -66,13 +66,17 @@ services:
     profiles:
       - "web"
 
-  js:
+  assets:
     <<: *default-assets
-    command: "yarn build --watch"
+    command: "yarn build && yarn build:css"
 
-  css:
-    <<: *default-assets
-    command: "yarn build:css --watch"
+#  js:
+#    <<: *default-assets
+#    command: "yarn build --watch"
+#
+#  css:
+#    <<: *default-assets
+#    command: "yarn build:css --watch"
 
   postgres:
     image: postgres:15.2-alpine
