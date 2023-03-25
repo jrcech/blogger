@@ -40,11 +40,8 @@ jobs:
       - name: Run ls
         run: ls -la public
 
-      - name: Run assets container
-        run: docker compose create web
-
       - name: Copy assets from container
-        run: docker compose cp web:/app/public ./artifacts
+        run: docker compose run --rm web cp public artifacts
 
       - name: Run ls
         run: ls -la public
