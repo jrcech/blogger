@@ -34,6 +34,12 @@ jobs:
       - name: Build Docker Compose
         run: docker compose build
 
+      - name: Upload public as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: public
+          path: public
+
   test:
     name: Test
     runs-on: self-hosted
@@ -47,6 +53,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .env
+
+      - name: Download public artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: public
 
       - name: Create and Start Selenium Chrome
         run: docker compose up -d selenium-chrome
@@ -73,6 +84,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .env
+
+      - name: Download public artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: public
 
       - name: Run Docker Compose
         run: docker compose up -d
