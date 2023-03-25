@@ -20,7 +20,7 @@ x-app: &default-app
   stop_grace_period: "3s"
   tty: true
   volumes:
-    - "${DOCKER_WEB_VOLUME:-./public:/app/public}"
+    - "${DOCKER_WEB_VOLUME:-.:/app}"
     - gem_cache:/gems
     - node_cache:/app/node_modules
 

@@ -23,6 +23,7 @@ jobs:
           echo 'NODE_ENV=${{ secrets.NODE_ENV }}' >> .env
           echo 'RAILS_STAGING=${{ secrets.RAILS_STAGING }}' >> .env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}' >> .env
+          echo 'RAILS_SERVE_STATIC_FILES=${{ secrets.RAILS_SERVE_STATIC_FILES }}' >> .env
 
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v3
@@ -39,12 +40,6 @@ jobs:
           name: assets
           path: public/assets
 
-      - name: Upload application assets build files as an artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: builds
-          path: app/assets/builds
-
   test:
     name: Test
     runs-on: self-hosted
@@ -59,10 +54,10 @@ jobs:
         with:
           name: .env
 
-      - name: Download builds artifact
+      - name: Download public assets artifact
         uses: actions/download-artifact@v3
         with:
-          name: builds
+          name: assets
 
       - name: Create and Start Selenium Chrome
         run: docker compose up -d selenium-chrome
