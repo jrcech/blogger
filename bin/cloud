@@ -4,13 +4,21 @@ source .env
 
 export GITHUB_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GITHUB_USERNAME}/${GITHUB_REPO}/actions/runners/registration-token)
 
-rm -rf .cloud/scripts/docker_install.sh
-envsubst < .cloud/templates/docker_install_template.sh > .cloud/scripts/docker_install.sh
-export DOCKER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/docker_install.sh)
+rm -rf .cloud/processed/docker_install.sh
+envsubst < .cloud/templates/docker_install_template.sh > .cloud/processed/docker_install.sh
+export DOCKER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/processed/docker_install.sh)
 
-rm -rf .cloud/scripts/github_runner_install.sh
-envsubst < .cloud/templates/github_runner_install_template.sh > .cloud/scripts/github_runner_install.sh
-export GITHUB_RUNNER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/github_runner_install.sh)
+rm -rf .cloud/processed/github_runner_install.sh
+envsubst < .cloud/templates/github_runner_install_template.sh > .cloud/processed/github_runner_install.sh
+export GITHUB_RUNNER_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/processed/github_runner_install.sh)
 
-rm -rf cloud_init.yml
-envsubst < .cloud/templates/cloud_init_template.yml > cloud_init.yml
+rm -rf .cloud/processed/zsh_install.sh
+envsubst < .cloud/templates/zsh_install_template.sh > .cloud/processed/zsh_install.sh
+export ZSH_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/processed/zsh_install.sh)
+
+export PREZTO_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/prezto_install.sh)
+export ALIASES_CONTENT=$(base64 -b 0 -i .cloud/scripts/.aliases.sh)
+export P10K_CONFIGURE_CONTENT=$(base64 -b 0 -i .cloud/scripts/p10k_configure.expect)
+
+rm -rf cloud-init.yml
+envsubst < .cloud/templates/cloud-init_template.yml > cloud-init.yml

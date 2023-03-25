@@ -84,5 +84,5 @@ override.tf.json
 terraform.rc
 
 # Terraform processed files from templates
-cloud_init.yml
-.cloud/scripts/*
+cloud-init.yml
+.cloud/processed/*
