@@ -41,7 +41,7 @@ jobs:
         run: ls -la public
 
       - name: Copy assets from container
-        run: docker compose run --rm web cp -r public artifacts
+        run: docker compose run --rm ls
 
       - name: Run ls
         run: ls -la public
