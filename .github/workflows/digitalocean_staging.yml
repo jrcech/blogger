@@ -34,20 +34,11 @@ jobs:
       - name: Build Docker Compose
         run: docker compose build
 
-      - name: Run ls .
-        run: ls -la .
-
-      - name: Run ls public
-        run: ls -la public
-
-      - name: Run ls public
-        run: ls -la public/assets
-
-      - name: Upload public assets as an artifact
+      - name: Upload public as an artifact
         uses: actions/upload-artifact@v3
         with:
-          name: assets
-          path: public/assets
+          name: public
+          path: public
 
   test:
     name: Test
@@ -63,10 +54,10 @@ jobs:
         with:
           name: .env
 
-      - name: Download public assets artifact
+      - name: Download public artifact
         uses: actions/download-artifact@v3
         with:
-          name: assets
+          name: public
 
       - name: Create and Start Selenium Chrome
         run: docker compose up -d selenium-chrome
@@ -94,10 +85,10 @@ jobs:
         with:
           name: .env
 
-      - name: Download public assets artifact
+      - name: Download public artifact
         uses: actions/download-artifact@v3
         with:
-          name: assets
+          name: public
 
       - name: Run Docker Compose
         run: docker compose up -d
