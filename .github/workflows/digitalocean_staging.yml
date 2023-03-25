@@ -41,7 +41,7 @@ jobs:
         run: ls -la public
 
       - name: Build Docker Compose
-        run: docker compose -d web
+        run: docker compose up -d web
 
       - name: Run ls
         run: ls -la public
