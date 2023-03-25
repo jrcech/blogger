@@ -34,6 +34,15 @@ jobs:
       - name: Build Docker Compose
         run: docker compose build
 
+      - name: Run ls .
+        run: ls -la .
+
+      - name: Run ls public
+        run: ls -la public
+
+      - name: Run ls public
+        run: ls -la public/assets
+
       - name: Upload public assets as an artifact
         uses: actions/upload-artifact@v3
         with:
