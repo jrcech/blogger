@@ -31,8 +31,20 @@ jobs:
           name: .env
           path: .env
 
+      - name: Run ls
+        run: ls -la public
+
       - name: Build Docker Compose
         run: docker compose build
+
+      - name: Run ls
+        run: ls -la public
+
+      - name: Build Docker Compose
+        run: docker compose -d web
+
+      - name: Run ls
+        run: ls -la public
 
       - name: Upload public as an artifact
         uses: actions/upload-artifact@v3
