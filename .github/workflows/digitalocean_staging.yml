@@ -31,23 +31,11 @@ jobs:
           name: .env
           path: .env
 
-      - name: Run ls
-        run: ls -la public
-
       - name: Build Docker Compose
         run: docker compose build
 
-      - name: Run ls
-        run: ls -la public
-
-      - name: Copy assets from container
-        run: docker compose run --rm web ls
-
-      - name: List running containers
-        run: docker compose ps
-
-      - name: Run ls
-        run: ls -la public
+      - name: Run web Container to populate Volume and immediately remove it
+        run: docker compose run --rm web true
 
       - name: Upload public as an artifact
         uses: actions/upload-artifact@v3

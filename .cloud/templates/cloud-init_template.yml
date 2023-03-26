@@ -30,13 +30,6 @@ write_files:
     content: ${ZSH_INSTALL_CONTENT}
     defer: true
 
-  - path: /home/${UNIX_USERNAME}/run/p10k_configure.expect
-    permissions: '0700'
-    owner: ${UNIX_USERNAME}:${UNIX_USERNAME}
-    encoding: b64
-    content: ${P10K_CONFIGURE_CONTENT}
-    defer: true
-
   - path: /home/${UNIX_USERNAME}/run/prezto_install.sh
     permissions: '0700'
     owner: ${UNIX_USERNAME}:${UNIX_USERNAME}
@@ -44,18 +37,11 @@ write_files:
     content: ${PREZTO_INSTALL_CONTENT}
     defer: true
 
-  - path: /home/${UNIX_USERNAME}/.aliases.sh
-    permissions: '0700'
-    owner: ${UNIX_USERNAME}:${UNIX_USERNAME}
-    encoding: b64
-    content: ${ALIASES_CONTENT}
-    defer: true
-
 runcmd:
   - ufw allow 'OpenSSH'
   - ufw enable
+  - chown -R ${UNIX_USERNAME}:${UNIX_USERNAME} /home/${UNIX_USERNAME}/run
   - sudo -u ${UNIX_USERNAME} /home/${UNIX_USERNAME}/run/docker_install.sh
   - sudo -u ${UNIX_USERNAME} /home/${UNIX_USERNAME}/run/github_runner_install.sh
   - sudo -u ${UNIX_USERNAME} /home/${UNIX_USERNAME}/run/zsh_install.sh
   - sudo -u ${UNIX_USERNAME} /home/${UNIX_USERNAME}/run/prezto_install.sh
-  - sudo -u ${UNIX_USERNAME} /home/${UNIX_USERNAME}/run/p10k_configure.expect

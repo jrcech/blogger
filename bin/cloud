@@ -16,9 +16,9 @@ rm -rf .cloud/processed/zsh_install.sh
 envsubst < .cloud/templates/zsh_install_template.sh > .cloud/processed/zsh_install.sh
 export ZSH_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/processed/zsh_install.sh)
 
-export PREZTO_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/scripts/prezto_install.sh)
-export ALIASES_CONTENT=$(base64 -b 0 -i .cloud/scripts/.aliases.sh)
-export P10K_CONFIGURE_CONTENT=$(base64 -b 0 -i .cloud/scripts/p10k_configure.expect)
+rm -rf .cloud/processed/prezto_install.sh
+envsubst < .cloud/templates/prezto_install_template.sh > .cloud/processed/prezto_install.sh
+export PREZTO_INSTALL_CONTENT=$(base64 -b 0 -i .cloud/processed/prezto_install.sh)
 
 rm -rf cloud-init.yml
 envsubst < .cloud/templates/cloud-init_template.yml > cloud-init.yml
