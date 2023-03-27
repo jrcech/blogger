@@ -128,8 +128,9 @@ gem 'rolify'
 group :development do
   gem 'annotate'
   gem 'rails-erd'
-  gem 'seedbank'
 end
+
+gem 'seedbank'
 
 # View
 gem 'slim-rails'
