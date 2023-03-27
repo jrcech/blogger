@@ -16,14 +16,18 @@ jobs:
 
       - name: Create .env
         run: |
-          echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
-          echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
-          echo 'COMPOSE_PROFILES=${{ secrets.COMPOSE_PROFILES }}' >> .env
           echo 'RAILS_ENV=${{ secrets.RAILS_ENV }}' >> .env
           echo 'NODE_ENV=${{ secrets.NODE_ENV }}' >> .env
           echo 'RAILS_STAGING=${{ secrets.RAILS_STAGING }}' >> .env
+          echo 'COMPOSE_PROFILES=${{ secrets.COMPOSE_PROFILES }}' >> .env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}' >> .env
+          echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
+          echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
           echo 'RAILS_SERVE_STATIC_FILES=${{ secrets.RAILS_SERVE_STATIC_FILES }}' >> .env
+          echo 'RAILS_ADMIN_EMAIL=${{ secrets.RAILS_ADMIN_EMAIL }}' >> .env
+          echo 'RAILS_ADMIN_PASSWORD=${{ secrets.RAILS_ADMIN_PASSWORD }}' >> .env
+          echo 'RAILS_ADMIN_FIRST_NAME=${{ secrets.RAILS_ADMIN_FIRST_NAME }}' >> .env
+          echo 'RAILS_ADMIN_LAST_NAME=${{ secrets.RAILS_ADMIN_LAST_NAME }}' >> .env
 
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v3
@@ -62,17 +66,8 @@ jobs:
         with:
           name: public
 
-      - name: Create and Start Selenium Chrome
-        run: docker compose up -d selenium-chrome
-
-      - name: Create and Start Postgres
-        run: docker compose up -d postgres
-
-      - name: Create Postgres Test database
-        run: docker compose run --rm -e RAILS_ENV=test web bundle exec rails db:setup
-
       - name: Run RSpec Tests
-        run: docker compose run --rm -e RAILS_ENV=test -e RAILS_STAGING=true web bundle exec rspec
+        run: docker compose run test
 
   deploy:
     name: Deploy

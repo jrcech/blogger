@@ -41,14 +41,13 @@ ARG NODE_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
   NODE_ENV="${NODE_ENV}" \
   RAILS_STAGING="${RAILS_STAGING}" \
-  RAILS_LOG_TO_STDOUT=true \
   USER="ruby"
 
 RUN if [ "${RAILS_ENV}" != "development" ]; then \
-  RAILS_ENV=production SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
-  
-RUN if [ "${RAILS_STAGING}" == "true" ]; then \
-  RAILS_ENV=test SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
+    RAILS_ENV=production \
+    SECRET_KEY_BASE=dummyvalue \
+    bundle exec rails assets:precompile; \
+  fi
 
 FROM ruby:3.2.1-slim AS app
 LABEL maintainer="jiricech94@gmail.com"
@@ -73,7 +72,6 @@ ARG RAILS_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
   BUNDLE_PATH="/gems" \
   USER="ruby" \
-  RAILS_LOG_TO_STDOUT=true \
   DEBIAN_FRONTEND="noninteractive"
 
 COPY --chown=ruby:ruby --from=assets /gems /gems
