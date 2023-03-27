@@ -2,7 +2,7 @@
 
 source .env
 
-export GITHUB_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GITHUB_USERNAME}/${GITHUB_REPO}/actions/runners/registration-token)
+export GH_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GH_USERNAME}/${GH_REPO}/actions/runners/registration-token)
 
 rm -rf .cloud/processed/docker_install.sh
 envsubst < .cloud/templates/docker_install_template.sh > .cloud/processed/docker_install.sh

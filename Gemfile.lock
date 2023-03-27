@@ -534,7 +534,6 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
-  tzinfo-data
   view_component
   w3c_validators
   web-console

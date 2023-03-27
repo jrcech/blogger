@@ -4,15 +4,15 @@ after :admins do
   puts 'Seeding Users'
 
   30.times do |i|
-    attrs = {
+    seed(
+      User,
+      find_by: { email: "user.#{i + 1}@example.com" },
       password: Faker::Internet.password(min_length: 8, max_length: 32),
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       confirmed_at: DateTime.now,
       confirmation_token: Faker::Internet.password(min_length: 20, max_length: 50)
-    }
-
-    seed User, { email: "user.#{i + 1}@example.com" }, attrs
+    )
   end
 
   non_admins = User.where.not(email: 'jiricech94@gmail.com')

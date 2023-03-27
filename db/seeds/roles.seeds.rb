@@ -5,7 +5,7 @@ puts 'Seeding Roles'
 roles = %w[user admin owner]
 
 roles.each do |role|
-  seed Role, name: role
+  seed Role, find_by: { name: role }
 end
 
 puts

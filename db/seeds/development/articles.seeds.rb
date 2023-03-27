@@ -10,11 +10,11 @@ after :admins do
       content << "#{Faker::Lorem.paragraph(random_sentences_to_add: 15)}\n"
     end
 
-    attrs = {
-      content: content
-    }
-
-    seed Article, { title: "Article #{i + 1}" }, attrs
+    seed(
+      Article,
+      find_by: { title: "Article #{i + 1}" },
+      content:
+    )
   end
 
   puts
