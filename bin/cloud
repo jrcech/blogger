@@ -2,6 +2,12 @@
 
 source .env.staging
 
+runner_token=$(gh api /repos/${GH_USERNAME}/${GH_REPO}/actions/runners -q '.runners[0].id')
+
+if [ -n "$runner_token" ]; then
+  gh api /repos/${GH_USERNAME}/${GH_REPO}/actions/runners/$runner_token --method DELETE --silent
+fi
+
 export GH_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GH_USERNAME}/${GH_REPO}/actions/runners/registration-token)
 
 rm -rf .cloud/processed/docker_install.sh
