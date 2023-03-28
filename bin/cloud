@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source .env
+source .env.staging
 
 export GH_RUNNER_TOKEN=$(gh api -q '.token' -X POST /repos/${GH_USERNAME}/${GH_REPO}/actions/runners/registration-token)
 

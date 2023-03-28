@@ -93,3 +93,4 @@ terraform.rc
 # Terraform processed files from templates
 cloud-init.yml
 .cloud/processed/*
+!.cloud/processed/.keep
