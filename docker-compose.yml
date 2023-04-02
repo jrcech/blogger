@@ -77,7 +77,7 @@ services:
     environment:
       - "RAILS_ENV=test"
       - "DOCKER=true"
-    command: "bundle exec rails db:setup && bundle exec rspec"
+    command: "bundle exec rspec"
 
   js:
     <<: *default-assets
