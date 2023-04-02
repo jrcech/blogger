@@ -70,7 +70,7 @@ jobs:
         run: docker compose start postgres
 
       - name: Create a test database
-        run: docker compose run --rm -e RAILS_ENV=test web rails db:create db:schema:load
+        run: docker compose run --rm -e RAILS_ENV=test web bundle exec rails db:create db:schema:load
 
       - name: Run RSpec Tests
         run: docker compose run test
