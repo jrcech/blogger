@@ -41,9 +41,10 @@ class Article {
   content:text :required
 }
 
-class Language {
+class Technology {
   title:string :required :search
   shortcut:string :search
+  version:string
   homepage:string
 }
 
@@ -57,14 +58,14 @@ class Review {
   content:text :required
 }
 
-User "1" <-- "*" Article
+User "1" -- "*" Article
 
-Article "1" <-- "*" Review
-Article "1" <-- "*" Comment
-Review "1" <-- "*" Comment
+Article "1" -- "*" Review
+Article "1" -- "*" Comment
+Review "1" -- "*" Comment
 
-Article "1" <-- "*" LanguageAssignment
-Language "1" <-- "*" LanguageAssignment
+Article "1" -- "*" TechnologyAssignment
+Technology "1" -- "*" TechnologyAssignment
 
 @enduml
 ```
