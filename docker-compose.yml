@@ -100,7 +100,7 @@ services:
     image: redis:7.0.9-alpine
 
   selenium-chrome:
-    image: selenium/standalone-chrome
+    image: seleniarm/standalone-chromium
     profiles:
       - "selenium-chrome"
     ports:

@@ -1,4 +1,4 @@
-FROM ruby:3.2.1-slim AS assets
+FROM ruby:3.2.2-slim AS assets
 LABEL maintainer="jiricech94@gmail.com"
 
 WORKDIR /app
@@ -49,7 +49,7 @@ RUN if [ "${RAILS_ENV}" != "development" ]; then \
     bundle exec rails assets:precompile; \
   fi
 
-FROM ruby:3.2.1-slim AS app
+FROM ruby:3.2.2-slim AS app
 LABEL maintainer="jiricech94@gmail.com"
 
 WORKDIR /app
