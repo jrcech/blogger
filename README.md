@@ -156,6 +156,12 @@ ruby '3.2.2'
 gem 'rails', '~> 7.0.5'
 ```
 
+Update Gemfile Bundler version:
+
+```shell
+bundle update --bundler
+```
+
 Install ruby dependencies with bundle:
 
 ```shell
@@ -183,12 +189,6 @@ rspec
 > Any failed tests have to be fixed. If fixing is complicated reset changes and
 > start over but upgrade one tool at a time and continue only after all tests
 > pass.
-
-Update Gemfile Bundler version:
-
-```shell
-bundle update --bundler
-```
 
 ### Update Docker development environment
 
