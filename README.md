@@ -1,5 +1,14 @@
 # Blogger
 
+## Setup environment
+
+The most important file is `.env` which configures many aspects of
+application and environment based on desired platform or deploy solution.
+
+In `.env.*.example` are examples based on different environments. In each setup
+variation is one such file copied to `.env`. That means every declaration and
+usage in application or elsewhere is referenced to only this file.
+
 ## Setup development environment and run the application
 
 Install environment tools:

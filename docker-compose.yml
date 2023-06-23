@@ -46,6 +46,12 @@ x-assets: &default-assets
     - gem_cache:/gems
     - node_cache:/app/node_modules
 
+x-selenium: &default-selenium
+  ports:
+    - "5900:5900"
+  logging:
+    driver: none
+
 services:
   web:
     <<: *default-app
@@ -100,13 +106,16 @@ services:
     image: redis:7.0.9-alpine
 
   selenium-chrome:
-    image: seleniarm/standalone-chromium
+    <<: *default-selenium
+    image: selenium/standalone-chrome
     profiles:
       - "selenium-chrome"
-    ports:
-      - "5900:5900"
-    logging:
-      driver: none
+
+  seleniarm-chromium:
+    <<: *default-selenium
+    image: seleniarm/standalone-chromium
+    profiles:
+      - "seleniarm-chromium"
 
 volumes:
   db_data:

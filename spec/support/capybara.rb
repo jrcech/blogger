@@ -33,7 +33,7 @@ Capybara.register_driver :remote_selenium do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://selenium-chrome:4444/wd/hub",
+    url: "http://#{selenium_driver}:4444/wd/hub",
     capabilities: options
   )
 end
@@ -49,7 +49,7 @@ Capybara.register_driver :remote_selenium_headless do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :remote,
-    url: "http://selenium-chrome:4444/wd/hub",
+    url: "http://#{selenium_driver}:4444/wd/hub",
     capabilities: options
   )
 end
@@ -76,5 +76,13 @@ RSpec.configure do |config|
 
   config.after(:each, js: true, type: :system) do
     Capybara.reset_sessions!
+  end
+end
+
+def selenium_driver
+  drivers = %w[selenium-chrome seleniarm-chromium]
+
+  ENV.fetch('COMPOSE_PROFILES', '').split(',').find do |profile|
+    drivers.include?(profile)
   end
 end
