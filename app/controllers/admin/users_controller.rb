@@ -98,20 +98,6 @@ module Admin
       render :index
     end
 
-    %w[member admin].each do |role|
-      define_method("make_#{role}") do
-        @user = set_user
-
-        if @user.send("make_#{role}")
-          flash[:success] = t('success.change_role', role:)
-        else
-          flash[:error] = t('errors.change_role')
-        end
-
-        redirect_to admin_users_url, status: :see_other
-      end
-    end
-
     private
 
     def set_users
