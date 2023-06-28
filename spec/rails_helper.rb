@@ -1,5 +1,11 @@
 require 'simplecov'
-SimpleCov.start
+
+SimpleCov.start do
+  add_filter 'config/initializers/better_errors.rb'
+  add_filter 'config/initializers/devise.rb'
+  add_filter 'spec/support/bullet.rb'
+  add_filter 'spec/support/capybara.rb'
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
