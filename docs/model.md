@@ -1,27 +1,4 @@
-# Generate new scaffold steps
-
-generate spec/system/admin
-
-rails generate model Review title content:text
-- `db/migrate/xxxxxxxxx_create_reviews.rb`
-- `app/models/review.rb (attributes, required, search)`
-- `spec/models/review_spec.rb (attributes, required)`
-- `spec/factories/reviews_spec.rb` (traits)
-
-rails generate request Review
-- `spec/requests/admin/reviews_request_spec.rb`
-- `config/routes.rb` ("resources :articles, concerns: %i[searchable]", after: "namespace :admin do")
-- `app/controllers/admin/reviews_controller.rb`
-- `app/presenters/review_presenter.rb`
-- `app/views/admin/reviews`
-- `app/components/forms/reviews_form_component.html.slim`
-- `app/components/forms/reviews_form_component.html.rb`
-
-rails generate system Review
-- Add `reviews_button` to `app/hepers/navbars_helper.rb`
-- `db/seeds/development/reviews.seeds.rb`
-- Add review translations to `config/locales/en.yml`
-- Add review icon to `config/icon.yml`
+# Blogger model diagram in UML
 
 ```plantuml
 @startuml
@@ -44,7 +21,6 @@ class Article {
 class Technology {
   title:string :required :search
   shortcut:string :search
-  version:string
   homepage:string
 }
 
