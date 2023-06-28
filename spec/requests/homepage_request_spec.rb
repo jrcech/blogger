@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Homepage', type: :request do
+RSpec.describe 'Homepage' do
   include_examples 'GET /index', :root_url
 end

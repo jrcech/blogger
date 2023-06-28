@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Users' do
   include_examples 'Admin GET /index', :admin_users_url
   include_examples 'Admin GET /show', :admin_user_url, :user
   include_examples 'Admin GET /new', :new_admin_user_url

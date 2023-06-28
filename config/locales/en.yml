@@ -44,6 +44,9 @@ en:
     reviews:
       one: "Review"
       more: "Reviews"
+    comments:
+      one: "Comment"
+      more: "Comments"
   controller:
     dashboard: "Dashboard"
   actions:

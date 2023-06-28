@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Dashboard', type: :request do
+RSpec.describe 'Dashboard' do
   include_examples 'Admin GET /index', :admin_root_url
 end

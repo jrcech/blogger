@@ -2,6 +2,7 @@ models:
   users: 'users'
   articles: 'newspaper'
   reviews: 'eye'
+  comments: 'comments'
 actions:
   related: 'share'
   options: 'cogs'

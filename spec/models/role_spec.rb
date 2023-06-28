@@ -19,7 +19,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Role, type: :model do
+RSpec.describe Role do
   subject(:role) { described_class.new }
 
   it 'has a valid factory' do

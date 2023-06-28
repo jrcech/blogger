@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Review < ApplicationRecord
+class Comment < ApplicationRecord
   belongs_to :article
 
   validates :title, presence: true
@@ -8,7 +8,7 @@ class Review < ApplicationRecord
 
   scope :search_by, (lambda { |query|
     where(
-      'reviews.title ILIKE ? OR reviews.content ILIKE ?',
+      'comments.title ILIKE ? OR comments.content ILIKE ?',
       "%#{query}%",
       "%#{query}%"
     )

@@ -27,9 +27,11 @@ Rails.application.routes.draw do
       resources :users, concerns: %i[searchable]
 
       resources :reviews, only: %i[index new create], concerns: %i[searchable]
+      resources :comments, only: %i[index new create], concerns: %i[searchable]
 
       resources :articles, shallow: true, concerns: %i[searchable] do
         resources :reviews, concerns: %i[searchable]
+        resources :comments, concerns: %i[searchable]
       end
 
       if Rails.env.development? || Rails.env.test?

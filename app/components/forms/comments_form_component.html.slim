@@ -1,0 +1,12 @@
+/ frozen_string_literal: true
+
+= simple_form_for [:admin, comment] do |f|
+  = f.error_notification
+
+  = f.input :title
+  = f.input :content
+  = f.association :article
+
+  div class="mt-4"
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', :back, class: 'btn btn-outline-secondary'

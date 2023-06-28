@@ -1,0 +1,17 @@
+/ frozen_string_literal: true
+
+ruby:
+  breadcrumb :item, @comment, @comment_presenter
+
+  def details
+    %i(id title article_title content)
+  end
+
+= render Headers::HeaderComponent.new(header: header(@comment_presenter),
+  main_header: true,
+  item: @comment,
+  header_buttons: action_buttons(@comment))
+
+= render Cards::CardComponent.new(item: @comment,
+  item_presenter: @comment_presenter,
+  details:)

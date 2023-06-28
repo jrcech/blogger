@@ -20,6 +20,10 @@ nav class="nav nav-tabs nav-fill"
     icon: 'eye',
     path: admin_article_reviews_path(@article),
     button_class: 'nav-link')
+  = render Buttons::ButtonComponent.new(title: t('models.comments.more'),
+    icon: 'comment',
+    path: admin_article_comments_path(@article),
+    button_class: 'nav-link')
 
 = render Headers::HeaderComponent.new(header: overview_header,
   main_header: false,

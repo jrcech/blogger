@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Articles', type: :request do
+RSpec.describe 'Articles' do
   include_examples 'Admin GET /index', :admin_articles_url
   include_examples 'Admin GET /show', :admin_article_url, :article
   include_examples 'Admin GET /new', :new_admin_article_url

@@ -12,7 +12,7 @@
 #
 require 'rails_helper'
 
-RSpec.describe Article, type: :model do
+RSpec.describe Article do
   subject(:article) { described_class.new }
 
   it 'has a valid factory' do

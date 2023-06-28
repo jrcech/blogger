@@ -46,7 +46,6 @@ crumb :reviews do |article, article_presenter|
       admin_article_reviews_path(article)
     )
 
-
     parent :item, article, article_presenter
   else
     link(
@@ -59,6 +58,33 @@ crumb :reviews do |article, article_presenter|
       admin_reviews_path
     )
 
+    parent :root
+  end
+end
+
+crumb :comments do |article, article_presenter|
+  if article.present?
+    link(
+      render(
+        Tooltips::TooltipComponent.new(
+          icon: model_icon('comments'),
+          title: t("models.comments.more")
+        )
+      ),
+      admin_article_comments_path(article)
+    )
+
+    parent :item, article, article_presenter
+  else
+    link(
+      render(
+        Tooltips::TooltipComponent.new(
+          icon: model_icon('comments'),
+          title: t("models.comments.more")
+        )
+      ),
+      admin_comments_path
+    )
 
     parent :root
   end

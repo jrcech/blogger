@@ -40,7 +40,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   subject(:user) { described_class.new }
 
   it 'has a valid factory' do

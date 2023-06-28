@@ -6,7 +6,8 @@ module NavbarsHelper
       homepage_button,
       users_button,
       articles_button,
-      reviews_button
+      reviews_button,
+      comments_button
     ]
   end
 
@@ -53,6 +54,16 @@ module NavbarsHelper
       title: t('models.reviews.more'),
       controller: 'reviews',
       button_class: "nav-link#{active_class('reviews')}"
+    }
+  end
+
+  def comments_button
+    {
+      path: admin_comments_path,
+      icon: model_icon(:comments),
+      title: t('models.comments.more'),
+      controller: 'comments',
+      button_class: "nav-link#{active_class('comments')}"
     }
   end
 

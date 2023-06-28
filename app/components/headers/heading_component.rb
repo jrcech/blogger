@@ -11,5 +11,9 @@ module Headers
     private
 
     attr_reader :header, :main_header, :buttons
+
+    def render?
+      main_header
+    end
   end
 end

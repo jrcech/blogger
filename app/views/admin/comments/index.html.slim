@@ -1,7 +1,7 @@
 / frozen_string_literal: true
 
 ruby:
-  breadcrumb :reviews, @parent, @parent_presenter
+  breadcrumb :comments, @parent, @parent_presenter
 
   def thead
     [
@@ -18,7 +18,7 @@ ruby:
 
   def collection
     index_data(
-      @reviews,
+      @comments,
       :id,
       :highlight_title,
       :highlight_truncate_content,
@@ -40,18 +40,18 @@ ruby:
     = render Buttons::ButtonComponent.new(title: t('models.reviews.more'),
       icon: 'eye',
       path: admin_article_reviews_path(@parent),
-      button_class: 'nav-link active')
+      button_class: 'nav-link')
     = render Buttons::ButtonComponent.new(title: t('models.comments.more'),
       icon: 'comment',
       path: admin_article_comments_path(@parent),
-      button_class: 'nav-link')
+      button_class: 'nav-link active')
 
-= render Headers::HeaderComponent.new(header: index_header(:reviews),
+= render Headers::HeaderComponent.new(header: index_header(:comments),
   main_header: @parent.present? ? false : true,
   search_query: @search_query,
   pagy: @pagy,
-  action_buttons: [new_button(:reviews)],
-  path_for_search: @parent.present? ? search_admin_article_reviews_path(article_id: @parent.id) : search_admin_reviews_path)
+  action_buttons: [new_button(:comments)],
+  path_for_search: @parent.present? ? search_admin_article_comments_path(article_id: @parent.id) : search_admin_comments_path)
 
 = render Tables::TableComponent.new(collection:, thead:)
 
