@@ -35,10 +35,11 @@ class Review {
 }
 
 User "1" -- "*" Article
+User "1" -- "*" Review
+User "1" -- "*" Comment
 
 Article "1" -- "*" Review
 Article "1" -- "*" Comment
-Review "1" -- "*" Comment
 
 Article "1" -- "*" TechnologyAssignment
 Technology "1" -- "*" TechnologyAssignment
