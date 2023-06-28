@@ -47,6 +47,9 @@ en:
     comments:
       one: "Comment"
       more: "Comments"
+    technologies:
+      one: "Technology"
+      more: "Technologies"
   controller:
     dashboard: "Dashboard"
   actions:

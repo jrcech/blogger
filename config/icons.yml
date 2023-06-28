@@ -3,6 +3,7 @@ models:
   articles: 'newspaper'
   reviews: 'eye'
   comments: 'comments'
+  technologies: 'cubes'
 actions:
   related: 'share'
   options: 'cogs'

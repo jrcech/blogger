@@ -7,7 +7,8 @@ module NavbarsHelper
       users_button,
       articles_button,
       reviews_button,
-      comments_button
+      comments_button,
+      technologies_button
     ]
   end
 
@@ -64,6 +65,16 @@ module NavbarsHelper
       title: t('models.comments.more'),
       controller: 'comments',
       button_class: "nav-link#{active_class('comments')}"
+    }
+  end
+
+  def technologies_button
+    {
+      path: '',
+      icon: model_icon(:technologies),
+      title: t('models.technologies.more'),
+      controller: 'technologies',
+      button_class: "nav-link#{active_class('technologies')}"
     }
   end
 
