@@ -3,10 +3,7 @@
 ```plantuml
 @startuml
 
-skinparam monochrome true
-skinparam shadowing false
-
-class User {
+class User <<Authentication>> {
   email:string :required :unique :search
   username:string :unique :search
   first_name:string :search

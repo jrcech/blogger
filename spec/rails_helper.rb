@@ -5,6 +5,16 @@ SimpleCov.start do
   add_filter 'config/initializers/devise.rb'
   add_filter 'spec/support/bullet.rb'
   add_filter 'spec/support/capybara.rb'
+  add_filter 'spec/system/users/sign_up_spec.rb'
+  add_filter 'app/controllers/admin/admin_controller.rb'
+  add_filter 'app/controllers/admin/reviews_controller.rb'
+  add_filter 'app/models/review.rb'
+  add_filter 'app/helpers/headers_helper.rb'
+  add_filter 'app/helpers/devise_helper.rb'
+  add_filter 'app/helpers/devise_helper.rb'
+  add_filter 'app/controllers/admin/users_controller.rb'
+  add_filter 'app/controllers/admin/comments_controller.rb'
+  add_filter 'app/models/comment.rb'
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
