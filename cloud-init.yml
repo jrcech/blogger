@@ -1,0 +1,48 @@
+#cloud-config
+users:
+  - name: jrcech
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCdi4UFRRaQqhX+GZ2J3C0MYpxapajvTSHYzfkOrBoP358mS7Ch/0tYj/7OCpFDhosPb+f0twjM3s0AXB1zE+y0XL8AhXvc89p91qFnTt74iTKTWm7BByIqqLyvF8j5ufsVZdSZsPURs11F7QJ41N77NIIQbsX69WJJtTymS7Ut8KJ+vlcL9I4WoBb/oEzGJRjZhkbCwtgRf1ehB8gr5i9km6+GugKEJgzCxixXaBPZjE9NAsG5XIqA4JjY8GrbObcuuVDg5wtFUNkhEEFpvwr4QVgFX7XJCiwL9EMVpYiOwya0gVmBOcJwqR2zzDAt9IXRz1YSI1JpiqCKsDdsJDSGkkjBYZzBp7VhM48+Meda+0djYEJUD7hmBJ94bwvhnTxsA87yHYydkq/7hUwUqc0slyEqj7wDLCJZLkxlCOB+DIfhaQbHELh5+enLMkY64qqyBeiHIxeln7QT7XfNRSBaa5LlT6csYd+K1oc0EO3hTmq9rpCm9+2+/WUC7NBmsH8= jrcech@imac.local
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC83lI+ctDR8hPiQhxSCRZAqtXMHu/HMQPtEr717Y+v2t7gKyssEkrOGz0OHwKOqf7g2OevcDI1Uh0IG30W5FSDKIhg7zglVmTwvO082FWDZg0qNX+Ew0XCdBbXPjLGInGew2L5982dNht/OWkMLYb2Eua416lZg+AKFuvU88avaRnohvKahmoKDeIu8fLsOP9BScFh+YCXEjg6jTtU5gByxlVom2NAmVc7M34VYMNSEVMzH1u+08bBCJp+ywbHTW3N/ci86FbbnVWxiQj4f2uzWN2roxslA4XpicXrZXgvD5hibf9Wtiqu233YxDRz1fLEdUZoRizZSTxbhnw6qPy82TE8Mxqy0Xv9vVz6aW1cCgdR+3cNdSpt9TJjKwuBxmP9QPUvxNoey86oxfKjK9X+v9T9tb5xZ+tykQgoWcjQFbF+dRpmt+UbJq3abL8eR916tCPBlgdstt/LqR4XLNLFKVku05+GOn6D+YuKBT9YBgG/k1oJYxVDP69kstoxIxk= jrcech@mba238.local
+
+write_files:
+  - path: /home/jrcech/run/docker_install.sh
+    permissions: '0700'
+    owner: jrcech:jrcech
+    encoding: b64
+    content: IyEvdXNyL2Jpbi9lbnYgYmFzaAoKc3VkbyBhcHQgdXBkYXRlICYmIGFwdCBpbnN0YWxsIC15IGFwdC10cmFuc3BvcnQtaHR0cHMgY2EtY2VydGlmaWNhdGVzIGN1cmwgc29mdHdhcmUtcHJvcGVydGllcy1jb21tb24KCmN1cmwgLWZzU0wgaHR0cHM6Ly9kb3dubG9hZC5kb2NrZXIuY29tL2xpbnV4L3VidW50dS9ncGcgfCBzdWRvIGdwZyAtLWRlYXJtb3IgLW8gL3Vzci9zaGFyZS9rZXlyaW5ncy9kb2NrZXItYXJjaGl2ZS1rZXlyaW5nLmdwZwplY2hvICJkZWIgW2FyY2g9JChkcGtnIC0tcHJpbnQtYXJjaGl0ZWN0dXJlKSBzaWduZWQtYnk9L3Vzci9zaGFyZS9rZXlyaW5ncy9kb2NrZXItYXJjaGl2ZS1rZXlyaW5nLmdwZ10gaHR0cHM6Ly9kb3dubG9hZC5kb2NrZXIuY29tL2xpbnV4L3VidW50dSAkKGxzYl9yZWxlYXNlIC1jcykgc3RhYmxlIiB8IHN1ZG8gdGVlIC9ldGMvYXB0L3NvdXJjZXMubGlzdC5kL2RvY2tlci5saXN0ID4gL2Rldi9udWxsCgpzdWRvIGFwdCB1cGRhdGUgJiYgc3VkbyBhcHQgaW5zdGFsbCAtcSAteSBkb2NrZXItY2UKc3VkbyB1c2VybW9kIC1hRyBkb2NrZXIganJjZWNoCg==
+    defer: true
+
+  - path: /home/jrcech/run/github_runner_install.sh
+    permissions: '0700'
+    owner: jrcech:jrcech
+    encoding: b64
+    content: IyEvdXNyL2Jpbi9lbnYgYmFzaAoKbWtkaXIgL2hvbWUvanJjZWNoL2FjdGlvbnMtcnVubmVyICYmIGNkIC9ob21lL2pyY2VjaC9hY3Rpb25zLXJ1bm5lcgoKY3VybCAtbyBhY3Rpb25zLXJ1bm5lci1saW51eC14NjQtMi4zMDMuMC50YXIuZ3ogLUwgaHR0cHM6Ly9naXRodWIuY29tL2FjdGlvbnMvcnVubmVyL3JlbGVhc2VzL2Rvd25sb2FkL3YyLjMwMy4wL2FjdGlvbnMtcnVubmVyLWxpbnV4LXg2NC0yLjMwMy4wLnRhci5negplY2hvICJlNGE5ZmI3MjY5YzFhMTU2ZWI1ZDUzNjkyMzJkMGNkNjJlMDZiZWMyZmQyYjMyMTYwMGU4NWFjOTE0YTljYzczICBhY3Rpb25zLXJ1bm5lci1saW51eC14NjQtMi4zMDMuMC50YXIuZ3oiIHwgc2hhc3VtIC1hIDI1NiAtYwp0YXIgeHpmIC4vYWN0aW9ucy1ydW5uZXItbGludXgteDY0LTIuMzAzLjAudGFyLmd6CgouL2NvbmZpZy5zaCAtLXVuYXR0ZW5kZWQgLS1uYW1lICQoZWNobyAiYmxvZ2dlci0kKGRhdGUgJyslWS0lbS0lZF8lSC0lTS0lUycpIikgLS11cmwgaHR0cHM6Ly9naXRodWIuY29tL2pyY2VjaC9ibG9nZ2VyIC0tdG9rZW4gQUZBN1U2TEVKVUNaMzdaS1BLS01IUzNFRkdWNlUKCnN1ZG8gLi9zdmMuc2ggaW5zdGFsbApzdWRvIC4vc3ZjLnNoIHN0YXJ0Cg==
+    defer: true
+
+  - path: /home/jrcech/run/zsh_install.sh
+    permissions: '0700'
+    owner: jrcech:jrcech
+    encoding: b64
+    content: IyEvdXNyL2Jpbi9lbnYgYmFzaAoKc3VkbyBhcHQgdXBkYXRlICYmIHN1ZG8gYXB0IGluc3RhbGwgLXEgLXkgenNoCgpzdWRvIGNoc2ggLXMgL2Jpbi96c2gganJjZWNoCg==
+    defer: true
+
+  - path: /home/jrcech/run/prezto_install.sh
+    permissions: '0700'
+    owner: jrcech:jrcech
+    encoding: b64
+    content: IyEvdXNyL2Jpbi9lbnYgenNoCgpnaXQgY2xvbmUgLS1yZWN1cnNpdmUgaHR0cHM6Ly9naXRodWIuY29tL3NvcmluLWlvbmVzY3UvcHJlenRvLmdpdCB+Ly56cHJlenRvCgpnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2pyY2VjaC92cHNfZG90ZmlsZXMgfi8uZG90ZmlsZXMKCn4vLmRvdGZpbGVzL2luc3RhbGwuc2gK
+    defer: true
+
+runcmd:
+  - ufw allow 'OpenSSH'
+  - ufw enable
+  - chown -R jrcech:jrcech /home/jrcech/run
+  - sudo -u jrcech /home/jrcech/run/docker_install.sh
+  - sudo -u jrcech /home/jrcech/run/github_runner_install.sh
+  - sudo -u jrcech /home/jrcech/run/zsh_install.sh
+  - sudo -u jrcech /home/jrcech/run/prezto_install.sh
