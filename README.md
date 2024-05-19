@@ -2,9 +2,16 @@
 
 Checkout [DEMO](http://49.12.193.13) application.
 
+Login with:
+- email: `test@example.com`
+- password: `123456789`
+
 Part of the rails_template project. Desired Rails application state after a new generation process from the template.
 
 ## How to run this application
+
+In order to run this application locally, you need to be using an Unix-like operating system.
+If you are using Windows, you can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/) to run this application.
 
 There are two ways to run this application:
 
@@ -27,10 +34,9 @@ Or you can install required development tools yourself, see `.tool-versions` fil
 If you don't have ASDF plugins installed, do so with the following commands:
 
 ```shell
-asdf plugin add ruby
-asdf plugin add nodejs
-asdf plugin add yarn
+asdf plugin add bun
 asdf plugin add postgres
+asdf plugin add ruby
 ```
 
 Required versions are defined in `.tool-versions` file:
@@ -57,10 +63,10 @@ Install Ruby gems with Bundler:
 bundle install
 ```
 
-Install Node.js packages with Yarn:
+Install Node.js packages with Bun:
 
 ```shell
-yarn install
+bun install
 ```
 
 #### Setup the database 
@@ -105,15 +111,6 @@ docker compose up
 
 ```shell
 docker-compose run web rails db:setup
-```
-### Update Docker development environment
-
-Update `Dockerfile` to use the latest Ruby version:
-
-```shell
-FROM ruby:3.2.2-slim AS assets
-
-FROM ruby:3.2.2-slim AS app
 ```
 
 ## Deploy application to staging environment
