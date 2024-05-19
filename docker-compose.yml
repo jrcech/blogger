@@ -1,50 +1,36 @@
 x-app: &default-app
   build:
     context: "."
-    target: "app"
     args:
-      - "UID=${UID:-1000}"
-      - "GID=${GID:-1000}"
       - "RAILS_ENV=${RAILS_ENV:-development}"
-      - "NODE_ENV=${NODE_ENV:-development}"
-      - "RAILS_STAGING=${RAILS_STAGING:-false}"
+      - "BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-}"
   depends_on:
     - "postgres"
-    - "redis"
   env_file:
-    - ".env"
-  environment:
-    DOCKER: true
-  user: ruby:ruby
+    - ".env.development"
+  user: rails:rails
   restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
   stop_grace_period: "3s"
   tty: true
   volumes:
-    - ".:/app"
-    - gem_cache:/gems
-    - node_cache:/app/node_modules
+    - ".:/rails"
 
 x-assets: &default-assets
   build:
     context: "."
-    target: "assets"
+    target: "build"
     args:
-      - "UID=${UID:-1000}"
-      - "GID=${GID:-1000}"
       - "RAILS_ENV=${RAILS_ENV:-development}"
-      - "NODE_ENV=${NODE_ENV:-development}"
-  env_file:
-    - ".env"
-  user: ruby:ruby
+      - "BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-}"
   profiles:
     - "assets"
+  env_file:
+    - ".env.development"
   restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
   stop_grace_period: "3s"
   tty: true
   volumes:
-    - ".:/app"
-    - gem_cache:/gems
-    - node_cache:/app/node_modules
+    - ".:/rails"
 
 x-selenium: &default-selenium
   ports:
@@ -76,34 +62,29 @@ services:
     <<: *default-app
     depends_on:
       - "postgres"
-      - "redis"
       - "selenium-chrome"
     profiles:
       - "test"
     environment:
       - "RAILS_ENV=test"
-      - "DOCKER=true"
     command: "bundle exec rspec"
 
   js:
     <<: *default-assets
-    command: "yarn build --watch"
+    command: "bun run build --watch"
 
   css:
     <<: *default-assets
-    command: "yarn build:css --watch"
+    command: "bun run watch:css"
 
   postgres:
-    image: postgres:15.2-alpine
+    image: postgres:15.6-alpine3.19
     profiles:
       - "postgres"
     env_file:
-      - .env
+      - ".env.development"
     volumes:
-      - db_data:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7.0.9-alpine
+      - data:/var/lib/postgresql/data
 
   selenium-chrome:
     <<: *default-selenium
@@ -118,6 +99,4 @@ services:
       - "seleniarm-chromium"
 
 volumes:
-  db_data:
-  gem_cache:
-  node_cache:
+  data:

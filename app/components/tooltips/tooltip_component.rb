@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Tooltips
   class TooltipComponent < ViewComponent::Base
     def initialize(icon:, title:, **options)
+      super
+
       @icon = icon
       @title = title
       @options = options

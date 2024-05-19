@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Headers
   class SearchFormComponent < ViewComponent::Base
     def initialize(search_query:, search_form:, path_for_search:, model:)
+      super
+
       @search_query = search_query
       @search_form = search_form
       @path_for_search = path_for_search

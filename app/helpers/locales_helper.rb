@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module LocalesHelper
   def available_locales
     available_locales = []

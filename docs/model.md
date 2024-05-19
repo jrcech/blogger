@@ -5,7 +5,7 @@
 
 class User <<Authentication>> {
   email:string :required :unique :search
-  username:string :unique :search
+  user_name:string :unique :search
   first_name:string :search
   last_name:string :search
 }

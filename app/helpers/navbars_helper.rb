@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NavbarsHelper
   def left_nav
     [
@@ -70,7 +68,7 @@ module NavbarsHelper
 
   def technologies_button
     {
-      path: '',
+      path: admin_technologies_path,
       icon: model_icon(:technologies),
       title: t('models.technologies.more'),
       controller: 'technologies',
@@ -90,12 +88,6 @@ module NavbarsHelper
     false
   end
 
-  def user_signed_in?
-    return true if current_user.present?
-
-    false
-  end
-
   def locales_dropdown
     {
       title: I18n.locale.upcase,
@@ -108,7 +100,7 @@ module NavbarsHelper
 
   def user_dropdown
     {
-      title: current_user.present? ? UserPresenter.new(item: current_user).full_name : nil,
+      title: current_user.present? ? UserPresenter.new(record: current_user).full_name : nil,
       menu_class: 'dropdown-menu dropdown-menu-end',
       dropdown_class: 'dropdown nav-item',
       toggle_class: 'nav-link dropdown-toggle',
@@ -118,14 +110,14 @@ module NavbarsHelper
           icon: 'power-off',
           title: 'Sign out',
           size: 'sm',
-          path: destroy_user_session_path,
+          path: session_path,
           data: {
             turbo_method: :delete
           }
         },
         {
           title: 'Edit password',
-          path: edit_user_registration_path
+          path: edit_password_path
         }
       ]
     }
@@ -136,7 +128,7 @@ module NavbarsHelper
       icon: 'sign-in-alt',
       title: 'Log in',
       size: 'sm',
-      path: new_user_session_path,
+      path: new_session_path,
       button_class: 'nav-link'
     }
   end

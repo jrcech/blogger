@@ -1,40 +1,52 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Footers::FooterComponent, type: :component do
-  it 'has a working factory' do
-    build :footer
-  end
+  let(:footer) { build(:footer) }
 
-  it 'renders a base footer' do
-    render_inline build(:footer)
-
-    expect(
-      page
-    ).to have_css base_footer_css
-  end
-
-  it 'renders a footer with left dropdown' do
-    render_inline build(:footer, :with_left_dropdown)
-
-    aggregate_failures do
-      expect_to_have_css_attributes dropdown_footer_css
+  describe 'factory' do
+    it 'is valid' do
+      expect(footer).to be_an_instance_of(described_class)
     end
   end
 
-  it 'renders a footer with pagination' do
-    render_inline build(:footer, :with_pagination)
+  it 'renders a base footer' do
+    render_inline footer
 
     aggregate_failures do
-      expect_to_have_css_attributes pagination_footer_css
+      expect_to_have_css_attributes base_footer_css
+    end
+  end
+
+  context 'with left dropdown' do
+    let(:footer) { build(:footer, :with_left_dropdown) }
+
+    it 'renders a footer with left dropdown' do
+      render_inline footer
+
+      aggregate_failures do
+        expect_to_have_css_attributes dropdown_footer_css
+      end
+    end
+  end
+
+  context 'with pagination' do
+    let(:footer) { build(:footer, :with_pagination) }
+
+    it 'renders a footer with pagination' do
+      render_inline footer
+
+      aggregate_failures do
+        expect_to_have_css_attributes pagination_footer_css
+      end
     end
   end
 
   private
 
   def base_footer_css
-    'footer.row > div.col-md'
+    [
+      'footer.row > div.col-md'
+    ]
   end
 
   def dropdown_footer_css
@@ -46,8 +58,8 @@ RSpec.describe Footers::FooterComponent, type: :component do
 
   def pagination_footer_css
     [
-      'footer.row > div.col-md + div.col-md > nav.pagy-bootstrap-nav-js',
-      'div[data-controller="pagy"]',
+      'footer.row > div.col-md + div.col-md > div.float-end > nav.pagy-bootstrap.nav-js',
+      'div[data-controller="pagy-initializer"]'
     ]
   end
 end

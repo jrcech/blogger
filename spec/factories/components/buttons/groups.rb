@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :group, class: 'Buttons::GroupComponent' do
     buttons do

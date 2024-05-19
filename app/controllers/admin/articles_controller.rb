@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class ArticlesController < AdminController
     def index
@@ -12,7 +10,7 @@ module Admin
 
     def show
       @article = set_article
-      @article_presenter = ArticlePresenter.new(item: @article)
+      @article_presenter = ArticlePresenter.new(record: @article)
     end
 
     def new
@@ -21,14 +19,14 @@ module Admin
 
     def edit
       @article = set_article
-      @article_presenter = ArticlePresenter.new(item: @article)
+      @article_presenter = ArticlePresenter.new(record: @article)
     end
 
     def create
-      @article = Article.new(article_params)
+      @article = current_user.articles.new(article_params)
 
       if @article.save
-        @article_presenter = ArticlePresenter.new(item: @article)
+        @article_presenter = ArticlePresenter.new(record: @article)
 
         flash[:success] = t(
           'success.create',
@@ -38,7 +36,7 @@ module Admin
 
         redirect_to admin_article_url(@article)
       else
-        flash[:error] = t('errors.create',  model: t('models.articles.one'))
+        flash[:error] = t('errors.create', model: t('models.articles.one'))
 
         render :new, status: :unprocessable_entity
       end
@@ -46,7 +44,7 @@ module Admin
 
     def update
       @article = set_article
-      @article_presenter = ArticlePresenter.new(item: @article)
+      @article_presenter = ArticlePresenter.new(record: @article)
 
       if @article.update(article_params)
         flash[:success] = t(
@@ -69,7 +67,7 @@ module Admin
 
     def destroy
       @article = set_article
-      @article_presenter = ArticlePresenter.new(item: @article)
+      @article_presenter = ArticlePresenter.new(record: @article)
 
       @article.destroy
 

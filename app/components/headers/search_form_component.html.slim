@@ -1,17 +1,14 @@
-/ frozen_string_literal: true
-
-= simple_form_for '',
-  url: path_for_search,
+= form_with url: path_for_search,
   method: :get,
   html: { id: "search-#{model}" } do |f|
 
   div class="input-group"
 
     - if params[:items]
-      = f.input :page, as: :hidden, input_html: { value: 1 }
-      = f.input :items, as: :hidden, input_html: { value: params[:items] }
+      = f.hidden_field :page, input_html: { value: 1 }
+      = f.hidden_field :items, input_html: { value: params[:items] }
 
-    = f.input_field :search_query,
+    = f.search_field :search_query,
       placeholder: :translate,
       value: search_query,
       type: :search,

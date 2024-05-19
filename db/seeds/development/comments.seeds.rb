@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
 after 'development:articles' do
-  puts 'Seeding Comments'
-
   1000.times do |i|
     content = +''
 
@@ -14,9 +10,8 @@ after 'development:articles' do
       Comment,
       find_by: { title: "Comment #{i + 1}" },
       article: Article.all.sample,
-      content:
+      content:,
+      user: User.all.sample
     )
   end
-
-  puts
 end

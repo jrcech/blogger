@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module HeadersHelper
   def overview_header
     {
@@ -12,21 +10,15 @@ module HeadersHelper
     {
       title: model.to_s.humanize,
       icon: model_icon(model),
-      model: model
+      model:
     }
   end
 
   def header(item)
     {
-      title: header_title(item),
+      title: item.title,
       icon: model_icon(item.model_name.plural),
       model: item.model_name.plural
     }
-  end
-
-  def header_title(item)
-    return item.title if item.present?
-
-    t("models.#{item.model_name.plural}.more")
   end
 end

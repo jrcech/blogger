@@ -1,12 +1,11 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Admin Reviews read', type: :system do
+RSpec.describe 'Admin Reviews read' do
+  let(:admin) { create(:user) }
   let(:review) { create(:review) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     review
 
@@ -14,7 +13,7 @@ RSpec.describe 'Admin Reviews read', type: :system do
   end
 
   context 'when on index' do
-    it 'user reads an review', js: true do
+    it 'user reads an review', :js do
       expect_index_item
     end
   end
@@ -23,10 +22,10 @@ RSpec.describe 'Admin Reviews read', type: :system do
     before do
       find_by_id("#{review.id}-dropdown-button").click
 
-      click_link 'Show'
+      click_on 'Show'
     end
 
-    it 'user reads an review', js: true do
+    it 'user reads an review', :js do
       expect_show_item
     end
   end
@@ -35,17 +34,16 @@ RSpec.describe 'Admin Reviews read', type: :system do
 
   def expect_index_item
     aggregate_failures do
-      expect(page).to have_content review.id
-      expect(page).to have_content 'Test review title'
-      expect(page).to have_content 'Test review content'
+      expect(page).to have_content review.title
+      expect(page).to have_content review.content
     end
   end
 
   def expect_show_item
     aggregate_failures do
       expect(page).to have_content "ID: #{review.id}"
-      expect(page).to have_content 'Title: Test review title'
-      expect(page).to have_content 'Content: Test review content'
+      expect(page).to have_content "Title: #{review.title}"
+      expect(page).to have_content "Content: #{review.content}"
     end
   end
 end

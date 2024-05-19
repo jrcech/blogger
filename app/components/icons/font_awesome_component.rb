@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Icons
   class FontAwesomeComponent < ViewComponent::Base
     def initialize(icon:, title:, **options)
+      super
+
       @icon = icon
       @title = title
       @options = options

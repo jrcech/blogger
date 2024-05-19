@@ -1,39 +1,38 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe 'Admin Comments create' do
+  let(:admin) { create(:user) }
   let(:article) { create(:article) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     article
 
     visit admin_comments_path
 
-    click_link 'New Comment'
+    click_on 'New Comment'
   end
 
   context 'when on index' do
-    it 'user creates an comment', js: true do
+    it 'user creates an comment', :js do
       fill_in 'Title', with: 'Test Comment'
       fill_in 'Content', with: 'Test content'
 
-      select 'Test article title', from: 'Article'
+      select article.title, from: 'Article'
 
-      click_button 'Create Comment'
+      click_on 'Create Comment'
 
       expect_created_item
     end
 
-    it 'user failed to create an comment', js: true do
+    it 'user failed to create an comment', :js do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
 
       select '', from: 'Article'
 
-      click_button 'Create Comment'
+      click_on 'Create Comment'
 
       expect_not_created_item
     end

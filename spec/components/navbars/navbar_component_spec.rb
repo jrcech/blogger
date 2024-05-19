@@ -1,14 +1,16 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Navbars::NavbarComponent, type: :component do
-  it 'has a working factory' do
-    build :navbar
+  let(:navbar) { build(:navbar) }
+
+  describe 'factory' do
+    it 'is valid' do
+      expect(navbar).to be_an_instance_of(described_class)
+    end
   end
 
   it 'renders a base navbar' do
-    render_inline build(:navbar)
+    render_inline navbar
 
     aggregate_failures do
       expect_to_have_css_attributes base_navbar_css
@@ -19,7 +21,7 @@ RSpec.describe Navbars::NavbarComponent, type: :component do
 
   def base_navbar_css
     [
-      'nav.navbar.navbar-expand-lg.navbar-dark.bg-dark',
+      'nav.navbar.navbar-expand-lg.bg-dark[data-bs-theme="dark"]',
       'nav.navbar > div.container > a.navbar-brand',
       'a.navbar-brand + button.navbar-toggler + div.collapse',
       'button.navbar-toggler > span.navbar-toggler-icon',

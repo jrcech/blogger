@@ -1,7 +1,5 @@
-/ frozen_string_literal: true
-
 - breadcrumb :new, :comments
 
-h1 = t('headers.new', item: t('models.comments.one'))
+h1 = t('headers.new', record: t('models.comments.one'))
 
 = render Forms::CommentsFormComponent.new(comment: @comment)

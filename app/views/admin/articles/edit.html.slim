@@ -1,7 +1,5 @@
-/ frozen_string_literal: true
-
 - breadcrumb :edit, @article, @article_presenter
 
-h1 = t('headers.edit', item: @article_presenter.title)
+h1 = t('headers.edit', record: @article_presenter.title)
 
 = render Forms::ArticlesFormComponent.new(article: @article)

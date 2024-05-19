@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
 after 'development:articles' do
-  puts 'Seeding Reviews'
-
   1000.times do |i|
     content = +''
 
@@ -14,9 +10,8 @@ after 'development:articles' do
       Review,
       find_by: { title: "Review #{i + 1}" },
       article: Article.all.sample,
+      user: User.all.sample,
       content:
     )
   end
-
-  puts
 end

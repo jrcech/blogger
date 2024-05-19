@@ -1,12 +1,11 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Admin Articles update', type: :system do
-  let(:article) { create :article }
+RSpec.describe 'Admin Articles update' do
+  let(:admin) { create(:user) }
+  let(:article) { create(:article) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     article
 
@@ -17,23 +16,23 @@ RSpec.describe 'Admin Articles update', type: :system do
     before do
       find_by_id("#{article.id}-dropdown-button").click
 
-      click_link 'Edit'
+      click_on 'Edit'
     end
 
-    it 'user updates an article', js: true do
+    it 'user updates an article', :js do
       fill_in 'Title', with: 'Test title updated'
       fill_in 'Content', with: 'Test content updated'
 
-      click_button 'Update Article'
+      click_on 'Update Article'
 
       expect_updated_item
     end
 
-    it 'user failed to update an article', js: true do
+    it 'user failed to update an article', :js do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
 
-      click_button 'Update Article'
+      click_on 'Update Article'
 
       expect_not_updated_item
     end
@@ -42,26 +41,26 @@ RSpec.describe 'Admin Articles update', type: :system do
   context 'when on show' do
     before do
       find_by_id("#{article.id}-dropdown-button").click
-      click_link 'Show'
+      click_on 'Show'
 
       find_by_id("show-#{article.id}-dropdown-button").click
-      click_link 'Edit'
+      click_on 'Edit'
     end
 
-    it 'user updates an article', js: true do
+    it 'user updates an article', :js do
       fill_in 'Title', with: 'Test title updated'
       fill_in 'Content', with: 'Test content updated'
 
-      click_button 'Update Article'
+      click_on 'Update Article'
 
       expect_updated_item
     end
 
-    it 'user failed to update an article', js: true do
+    it 'user failed to update an article', :js do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
 
-      click_button 'Update Article'
+      click_on 'Update Article'
 
       expect_not_updated_item
     end
@@ -80,7 +79,7 @@ RSpec.describe 'Admin Articles update', type: :system do
   def expect_not_updated_item
     aggregate_failures do
       expect(page).to have_content "Article '' wasn't updated!"
-      expect(resource_updated?).to eq false
+      expect(resource_updated?).to be false
     end
   end
 

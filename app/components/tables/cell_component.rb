@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
 module Tables
   class CellComponent < ViewComponent::Base
     with_collection_parameter :cell
 
     def initialize(cell:, cell_element: nil, cell_attributes: nil)
+      super
+
       @cell = cell
       @cell_element = cell_element
       @cell_attributes = cell_attributes

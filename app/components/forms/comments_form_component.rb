@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Forms
   class CommentsFormComponent < ViewComponent::Base
     def initialize(comment:)
+      super
+
       @comment = comment
     end
 

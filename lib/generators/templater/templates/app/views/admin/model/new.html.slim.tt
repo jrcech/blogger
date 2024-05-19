@@ -1,5 +1,0 @@
-/ frozen_string_literal: true
-
-- breadcrumb :new
-
-= render Views::Admin::<%= file_name.capitalize %>::New::Component.new item: @item

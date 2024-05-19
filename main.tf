@@ -1,35 +1,92 @@
 terraform {
-  required_version = "~> 1.4.2"
-
   required_providers {
-    digitalocean = {
-      source  = "digitalocean/digitalocean"
-      version = "~> 2.0"
+    hcloud = {
+      source = "hetznercloud/hcloud"
+      version = "~> 1.45"
     }
   }
 }
 
-provider "digitalocean" {}
-
-resource "digitalocean_droplet" "blogger" {
-  image = "ubuntu-22-04-x64"
-  name = "blogger"
-  region = "fra1"
-  size = "s-1vcpu-2gb"
-  ssh_keys = [
-    "ed:b5:ed:cb:c7:54:2b:1c:58:3a:22:5b:28:c8:a0:87",
-    "e5:04:e9:c3:e8:a8:bf:3a:8c:82:22:d6:96:f3:03:9b"
-  ]
-  user_data = file("./cloud-init.yml")
+provider "hcloud" {
+  token = var.HCLOUD_TOKEN
 }
 
-resource "null_resource" "run_custom_script" {
-  provisioner "local-exec" {
-    command = "${path.module}/bin/cloud"
-  }
+resource "hcloud_ssh_key" "ssh_personal_public_key" {
+  name = "ssh-personal-public-key"
+  public_key = var.SSH_PERSONAL_PUBLIC_KEY
+}
 
-  triggers = {
-    droplet_id = digitalocean_droplet.blogger.id
-    script_sha1 = filesha1("${path.module}/bin/cloud")
-  }
+resource "hcloud_ssh_key" "ssh_github_public_key" {
+  name = "ssh-github-public-key"
+  public_key = var.SSH_GITHUB_PUBLIC_KEY
+}
+
+resource "hcloud_server" "rails_web" {
+  name = "rails-web"
+  server_type = "cpx21"
+  image = "ubuntu-24.04"
+  location = "nbg1"
+  ssh_keys = [
+    hcloud_ssh_key.ssh_personal_public_key.id,
+    hcloud_ssh_key.ssh_github_public_key.id
+  ]
+  user_data = templatefile(
+    ".cloud/cloud_config_app.yml", {
+      SSH_USER_NAME = var.SSH_USER_NAME
+      SSH_PERSONAL_PUBLIC_KEY = var.SSH_PERSONAL_PUBLIC_KEY
+      SSH_GITHUB_PUBLIC_KEY = var.SSH_GITHUB_PUBLIC_KEY
+    }
+  )
+}
+
+resource "hcloud_server" "postgres" {
+  name = "postgres"
+  server_type = "cpx11"
+  image = "ubuntu-24.04"
+  location = "nbg1"
+  depends_on = [
+    hcloud_server.rails_web
+  ]
+  ssh_keys = [
+    hcloud_ssh_key.ssh_personal_public_key.id,
+    hcloud_ssh_key.ssh_github_public_key.id
+  ]
+  user_data = templatefile(
+    ".cloud/cloud_config_postgres.yml", {
+      SSH_USER_NAME = var.SSH_USER_NAME
+      SSH_PERSONAL_PUBLIC_KEY = var.SSH_PERSONAL_PUBLIC_KEY
+      SSH_GITHUB_PUBLIC_KEY = var.SSH_GITHUB_PUBLIC_KEY
+      IP_ADDRESS_WEB = hcloud_server.rails_web.ipv4_address
+    }
+  )
+}
+
+variable "HCLOUD_TOKEN" {
+  description = "API token for Hetzner Cloud."
+  type = string
+}
+
+variable "SSH_USER_NAME" {
+  description = "SSH user name."
+  type = string
+}
+
+variable "SSH_PERSONAL_PUBLIC_KEY" {
+  description = "Personal SSH public key."
+  type = string
+}
+
+variable "SSH_GITHUB_PUBLIC_KEY" {
+  description = "SSH public key for GitHub Action Runner."
+  type = string
+}
+
+output "ip_address_web" {
+  value = hcloud_server.rails_web.ipv4_address
+  description = "Public IP address of Hetzner server for Rails application."
+}
+
+output "ip_address_postgres" {
+  value = hcloud_server.postgres.ipv4_address
+  description = "Public IP address of Hetzner server for Postgres."
 }

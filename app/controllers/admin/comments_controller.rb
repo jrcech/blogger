@@ -1,17 +1,6 @@
-# frozen_string_literal: true
-
 module Admin
   class CommentsController < AdminController
     def index
-      if controller_nested?
-        @parent = parent_record
-        @parent_presenter = parent_presenter.new(item: @parent)
-
-        set_comments = Comment.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
-      else
-        set_comments = Comment.includes(:article).order(updated_at: :desc)
-      end
-
       @pagy, @comments = pagy(
         set_comments,
         page: params[:page],
@@ -21,7 +10,7 @@ module Admin
 
     def show
       @comment = set_comment
-      @comment_presenter = CommentPresenter.new(item: @comment)
+      @comment_presenter = CommentPresenter.new(record: @comment)
     end
 
     def new
@@ -30,14 +19,14 @@ module Admin
 
     def edit
       @comment = set_comment
-      @comment_presenter = CommentPresenter.new(item: @comment)
+      @comment_presenter = CommentPresenter.new(record: @comment)
     end
 
     def create
-      @comment = Comment.new(comment_params)
+      @comment = current_user.comments.new(comment_params)
 
       if @comment.save
-        @comment_presenter = CommentPresenter.new(item: @comment)
+        @comment_presenter = CommentPresenter.new(record: @comment)
 
         flash[:success] = t(
           'success.create',
@@ -55,7 +44,7 @@ module Admin
 
     def update
       @comment = set_comment
-      @comment_presenter = CommentPresenter.new(item: @comment)
+      @comment_presenter = CommentPresenter.new(record: @comment)
 
       if @comment.update(comment_params)
         flash[:success] = t(
@@ -78,7 +67,7 @@ module Admin
 
     def destroy
       @comment = set_comment
-      @comment_presenter = CommentPresenter.new(item: @comment)
+      @comment_presenter = CommentPresenter.new(record: @comment)
 
       @comment.destroy
 
@@ -92,15 +81,6 @@ module Admin
     end
 
     def search
-      if controller_nested?
-        @parent = parent_record
-        @parent_presenter = parent_presenter.new(item: @parent)
-
-        set_comments = Comment.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
-      else
-        set_comments = Comment.includes(:article).order(updated_at: :desc)
-      end
-
       @search_query = params[:search_query]
 
       @pagy, @comments = pagy(
@@ -115,7 +95,14 @@ module Admin
     private
 
     def set_comments
-      Comment.order(updated_at: :desc)
+      if controller_nested?
+        @parent = parent_record
+        @parent_presenter = parent_presenter.new(record: @parent)
+
+        Comment.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
+      else
+        Comment.includes(:article).order(updated_at: :desc)
+      end
     end
 
     def set_comment

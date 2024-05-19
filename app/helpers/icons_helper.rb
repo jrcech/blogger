@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module IconsHelper
   def model_icon(model)
     icons = YAML.load_file('config/icons.yml')

@@ -1,0 +1,32 @@
+service: blogger
+
+image: jiricech/blogger
+
+servers:
+  web:
+    - <%= ENV['IP_ADDRESS_WEB'] %>
+
+registry:
+  username: jiricech
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+ssh:
+  user: <%= ENV['TF_VAR_SSH_USER_NAME'] %>
+
+env:
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+    - IP_ADDRESS_POSTGRES
+
+accessories:
+  postgres:
+    image: postgres:16.3-alpine3.19
+    host: <%= ENV['IP_ADDRESS_POSTGRES'] %>
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data

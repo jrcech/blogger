@@ -1,0 +1,5 @@
+- breadcrumb :new, :technologies
+
+h1 = t('headers.new', record: t('models.technologies.one'))
+
+= render Forms::TechnologiesFormComponent.new(technology: @technology)

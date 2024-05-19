@@ -1,14 +1,16 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Buttons::DropdownComponent, type: :component do
-  it 'has a working factory' do
-    build :dropdown
+  let(:dropdown) { build(:dropdown) }
+
+  describe 'factory' do
+    it 'is valid' do
+      expect(dropdown).to be_an_instance_of(described_class)
+    end
   end
 
   it 'renders a default dropdown with buttons' do
-    render_inline build(:dropdown)
+    render_inline dropdown
 
     aggregate_failures do
       expect_to_have_css_attributes base_dropdown_css

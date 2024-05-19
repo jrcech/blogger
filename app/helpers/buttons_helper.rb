@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ButtonsHelper
   def show_button(item)
     {
@@ -17,7 +15,7 @@ module ButtonsHelper
       button_class: 'btn btn-success',
       title: t(
         'actions.new',
-        item: t("models.#{resources.to_s.pluralize}.one")
+        record: t("models.#{resources.to_s.pluralize}.one")
       ),
       icon: action_icon(:new)
     }
@@ -51,7 +49,7 @@ module ButtonsHelper
       turbo_method: :delete,
       turbo_confirm: t(
         'confirmations.destroy.confirm',
-        item: item.title
+        record: item.title
       ),
       title: t(
         'confirmations.destroy.title',

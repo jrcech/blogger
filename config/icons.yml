@@ -2,7 +2,7 @@ models:
   users: 'users'
   articles: 'newspaper'
   reviews: 'eye'
-  comments: 'comments'
+  comments: 'comment'
   technologies: 'cubes'
 actions:
   related: 'share'

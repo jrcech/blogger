@@ -2,59 +2,81 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
-#  confirmation_token     :string
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  unconfirmed_email      :string
-#  failed_attempts        :integer          default("0"), not null
-#  unlock_token           :string
-#  locked_at              :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  first_name             :string
-#  last_name              :string
-#  username               :string
-#  provider               :string
-#  uid                    :string
+#  id              :uuid             not null, primary key
+#  auth_token      :string
+#  email           :string           not null
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string           not null
+#  user_name       :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_unlock_token          (unlock_token) UNIQUE
+#  index_users_on_email  (email) UNIQUE
 #
-
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe User do
-  subject(:user) { described_class.new }
+  describe 'factory' do
+    context 'with required attributes' do
+      subject(:user) { build(:user) }
 
-  it 'has a valid factory' do
-    expect(build(:user)).to be_valid
+      it 'is valid' do
+        expect(user).to be_valid
+      end
+    end
+
+    context 'with all attributes' do
+      subject(:technology) { build(:technology, :all) }
+
+      it 'is valid' do
+        expect(technology).to be_valid
+      end
+    end
   end
 
-  it 'is valid with valid attributes' do
-    user.first_name = 'John'
-    user.last_name = 'Doe'
-    user.email = 'tester@example.com'
-    user.password = SecureRandom.hash
-    expect(user).to be_valid
+  describe 'association' do
+    it { is_expected.to have_many(:articles) }
+    it { is_expected.to have_many(:reviews) }
+    it { is_expected.to have_many(:comments) }
   end
 
-  it { is_expected.to validate_presence_of :email }
-  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  describe 'validation' do
+    subject { build(:user) }
+
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
+    it { is_expected.to have_secure_password }
+  end
+
+  describe 'normalization' do
+    it do
+      is_expected.to normalize(:email).from("  TEST@EXAMPLE.COM\n ").to('test@example.com')
+    end
+  end
+
+  describe 'token generation' do
+    let(:user) { create(:user) }
+    let(:token) { user.generate_token_for(:password_reset) }
+
+    it 'creates a token for password reset' do
+      expect(token).not_to be_nil
+    end
+
+    it 'finds the user by token immediately after generation' do
+      expect(described_class.find_by_token_for(:password_reset, token)).to eq(user)
+    end
+
+    it 'does not find the user by token after it has expired' do
+      Timecop.freeze do
+        token
+
+        Timecop.travel(16.minutes.from_now)
+
+        expect(described_class.find_by_token_for(:password_reset, token)).to be_nil
+      end
+    end
+  end
 end

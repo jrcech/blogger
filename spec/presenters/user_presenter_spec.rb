@@ -1,46 +1,36 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe UserPresenter, type: :presenter do
-  subject(:user_presenter) do
-    described_class.new item: user, search_query:
-  end
+  subject(:user_presenter) { described_class.new(record: user, search_query: nil) }
 
   let(:user) do
     build(
       :user,
       first_name: 'John',
       last_name: 'Doe',
-      email: 'john.doe@example.com'
+      email: 'johndoe@example.com'
     )
   end
 
-  let(:search_query) { nil }
-
-  it "returns a user's full name as a string" do
-    expect(user_presenter.full_name).to eq 'John Doe'
-  end
-
-  it "return a user's role with highest privileges" do
-    user.add_role :admin
-
-    expect(user_presenter.user_role).to eq 'Admin'
+  describe '#full_name' do
+    it 'returns the full name of the user' do
+      expect(user_presenter.full_name).to eq('John Doe')
+    end
   end
 
   context 'with a search query' do
-    let(:search_query) { 'Doe' }
+    subject(:user_presenter) { described_class.new(record: user, search_query: 'john') }
 
-    it "highlights a user's full name" do
-      expect(
-        user_presenter.highlight_full_name
-      ).to eq 'John <mark>Doe</mark>'
+    describe '#highlight_full_name' do
+      it 'highlights the search query in the full name' do
+        expect(user_presenter.highlight_full_name).to eq('<mark>John</mark> Doe')
+      end
     end
 
-    it "highlights a user's email" do
-      expect(
-        user_presenter.highlight_email
-      ).to eq 'john.<mark>doe</mark>@example.com'
+    describe '#highlight_email' do
+      it 'highlights the search query in the email' do
+        expect(user_presenter.highlight_email).to eq('<mark>john</mark>doe@example.com')
+      end
     end
   end
 end

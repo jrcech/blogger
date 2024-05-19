@@ -1,33 +1,50 @@
-# frozen_string_literal: true
-
 module Toasts
   class ToastComponent < ViewComponent::Base
-    private
+    TEXT_COLOR_CLASSES = {
+      success: 'text-success',
+      danger: 'text-danger',
+      warning: 'text-warning',
+      info: 'text-info'
+    }.freeze
 
-    def icon_for(type)
-      case type
-      when 'success'
-        'check'
-      when 'error'
-        'exclamation-triangle'
-      else
-        'info-circle'
-      end
+    BG_COLOR_CLASSES = {
+      success: 'bg-success',
+      danger: 'bg-danger',
+      warning: 'bg-warning',
+      info: 'bg-info'
+    }.freeze
+
+    ICONS = {
+      success: 'check',
+      danger: 'exclamation-triangle',
+      warning: 'exclamation',
+      info: 'info'
+    }.freeze
+
+    def initialize(flash:)
+      super
+
+      @flash = flash
     end
 
-    def bg_class_for(type)
-      case type
-      when 'success'
-        'success'
-      when 'error'
-        'danger'
-      else
-        'info'
-      end
+    private
+
+    attr_reader :flash
+
+    def text_color_class_for(type)
+      TEXT_COLOR_CLASSES[type.to_sym] || 'text-info'
+    end
+
+    def bg_color_class_for(type)
+      BG_COLOR_CLASSES[type.to_sym] || 'bg-info'
+    end
+
+    def icon_for(type)
+      ICONS[type.to_sym] || 'info'
     end
 
     def title_for(type)
-      type.humanize
+      type.to_s.humanize
     end
   end
 end

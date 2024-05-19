@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Tables
   class TableComponent < ViewComponent::Base
     def initialize(collection:, thead: nil)
+      super
+
       @collection = collection
       @thead = thead
     end

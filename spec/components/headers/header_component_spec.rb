@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Headers::HeaderComponent, type: :component do
@@ -28,7 +26,7 @@ RSpec.describe Headers::HeaderComponent, type: :component do
   it 'renders component' do
     aggregate_failures do
       expect(page).to have_text 'john.doe@example.com'
-      expect(page).to have_css 'h1>i.fa-check'
+      expect(page).to have_css 'h1 > i.fa-check'
     end
   end
 end

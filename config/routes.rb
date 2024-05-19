@@ -1,44 +1,36 @@
 Rails.application.routes.draw do
   concern :searchable do
-    get(
-      'search',
-      action: :search,
-      on: :collection,
-      as: :search
-    )
+    get 'search', action: :search, on: :collection, as: :search
   end
 
-  root to: 'homepage#index'
+  get 'up', to: 'rails/health#show', as: :rails_health_check
 
-  devise_for(
-    :users,
-    only: :omniauth_callbacks,
-    controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks'
-    }
-  )
+  root 'homepage#index'
 
   scope '(:locale)', locale: /en|cs/ do
-    devise_for :users, skip: :omniauth_callbacks
+    scope module: :authentication do
+      resource :session, only: %i[new create destroy]
+      resource :registration, only: %i[new create]
+      resource :password_reset, only: %i[new edit create update]
+      resource :password, only: %i[edit update]
+    end
 
     namespace :admin do
-      root to: 'dashboard#index'
+      root 'dashboard#index'
 
       resources :users, concerns: %i[searchable]
 
       resources :reviews, only: %i[index new create], concerns: %i[searchable]
       resources :comments, only: %i[index new create], concerns: %i[searchable]
+      resources :technologies, only: %i[index new create], concerns: %i[searchable]
 
       resources :articles, shallow: true, concerns: %i[searchable] do
         resources :reviews, concerns: %i[searchable]
         resources :comments, concerns: %i[searchable]
+        resources :technologies, concerns: %i[searchable]
       end
 
-      if Rails.env.development? || Rails.env.test?
-        get :system_test, to: 'system_test#index'
-      end
+      resource :integration, only: %i[show] if Rails.env.local?
     end
   end
-
-  get '/:locale', to: 'homepage#index'
 end

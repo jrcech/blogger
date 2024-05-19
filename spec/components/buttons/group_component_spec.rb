@@ -1,26 +1,30 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Buttons::GroupComponent, type: :component do
-  it 'has a working factory' do
-    build :group
+  let(:group) { build(:group) }
+
+  describe 'factory' do
+    it 'is valid' do
+      expect(group).to be_an_instance_of(described_class)
+    end
   end
 
   it 'renders a base group of buttons' do
-    render_inline build :group
+    render_inline group
 
     aggregate_failures do
       expect_to_have_css_attributes base_button_group_css
     end
   end
 
-  it 'renders a group with a title' do
-    render_inline build :group, :with_title
+  context 'with title' do
+    let(:group) { build(:group, :with_title) }
 
-    expect(
-      page
-    ).to have_css 'div.btn-group[aria-label="Test title buttons"]'
+    it 'renders a group with a title' do
+      render_inline group
+
+      expect(page).to have_css 'div.btn-group[aria-label="Test title buttons"]'
+    end
   end
 
   private

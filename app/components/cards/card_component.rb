@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Cards
   class CardComponent < ViewComponent::Base
     def initialize(item:, item_presenter:, details:)
+      super
+
       @item = item
       @item_presenter = item_presenter
       @details = details

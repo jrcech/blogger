@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Cards::CardComponent, type: :component do
@@ -11,7 +9,7 @@ RSpec.describe Cards::CardComponent, type: :component do
     )
   end
 
-  let(:user_presenter) { UserPresenter.new item: user }
+  let(:user_presenter) { UserPresenter.new record: user }
 
   let(:component) do
     described_class.new(
@@ -34,6 +32,6 @@ RSpec.describe Cards::CardComponent, type: :component do
   end
 
   it 'stops looping through card body' do
-    expect(page).not_to have_css 'p:nth-child(3)'
+    expect(page).to have_no_css 'p:nth-child(3)'
   end
 end

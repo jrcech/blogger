@@ -1,0 +1,15 @@
+ruby:
+  breadcrumb :record, @technology, @technology_presenter
+
+  def details
+    %i(id title shortcut homepage)
+  end
+
+= render Headers::HeaderComponent.new(header: header(@technology_presenter),
+  main_header: true,
+  item: @technology,
+  header_buttons: action_buttons(@technology))
+
+= render Cards::CardComponent.new(item: @technology,
+  item_presenter: @technology_presenter,
+  details:)

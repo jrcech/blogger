@@ -1,12 +1,11 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Admin Comments destroy', type: :system do
+RSpec.describe 'Admin Comments destroy' do
+  let(:admin) { create(:user) }
   let(:comment) { create(:comment) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     comment
 
@@ -14,22 +13,22 @@ RSpec.describe 'Admin Comments destroy', type: :system do
   end
 
   context 'when on index' do
-    it 'user destroyed an comment', js: true do
+    it 'user destroyed an comment', :js do
       find_by_id("#{comment.id}-dropdown-button").click
 
-      accept_confirm { click_link 'Destroy' }
+      accept_confirm { click_on 'Destroy' }
 
       expect_deleted_item
     end
   end
 
   context 'when on show' do
-    it 'user destroyed an comment', js: true do
+    it 'user destroyed an comment', :js do
       find_by_id("#{comment.id}-dropdown-button").click
-      click_link 'Show'
+      click_on 'Show'
 
       find_by_id("show-#{comment.id}-dropdown-button").click
-      accept_confirm { click_link 'Destroy' }
+      accept_confirm { click_on 'Destroy' }
 
       expect_deleted_item
     end
@@ -39,7 +38,7 @@ RSpec.describe 'Admin Comments destroy', type: :system do
 
   def expect_deleted_item
     aggregate_failures do
-      expect(page).to have_content "Comment 'Test comment title' was successfully destroyed."
+      expect(page).to have_content "Comment '#{comment.title}' was successfully destroyed."
       expect(Comment.count).to eq 0
     end
   end

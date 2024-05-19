@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
 module Buttons
   class ButtonComponent < ViewComponent::Base
     with_collection_parameter :button
 
     def initialize(**button)
+      super
+
       @button = button
 
       sanitize_button

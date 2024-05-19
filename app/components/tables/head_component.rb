@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Tables
   class HeadComponent < ViewComponent::Base
     def initialize(thead:)
+      super
+
       @thead = thead
     end
 

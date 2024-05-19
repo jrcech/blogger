@@ -2,25 +2,26 @@
 #
 # Table name: articles
 #
-#  id         :bigint           not null, primary key
-#  content    :text
-#  title      :string
+#  id         :uuid             not null, primary key
+#  content    :text             not null
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :uuid             not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :article do
-    title { 'Test article title' }
-    content { 'Test article content' }
-    created_at { '2019-03-08 15:33:28' }
-    updated_at { '2019-03-08 15:33:28' }
+    content { Faker::Lorem.paragraph }
+    title { Faker::Lorem.sentence }
 
-    trait :invalid do
-      content { nil }
-    end
-
-    trait :updated do
-      title { 'test' }
-    end
+    user
   end
 end

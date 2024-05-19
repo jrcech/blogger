@@ -1,5 +1,3 @@
-/ frozen_string_literal: true
-
 ruby:
   breadcrumb :comments, @parent, @parent_presenter
 
@@ -7,7 +5,6 @@ ruby:
     [
       {
         cells: [
-          t('tables.headings.id'),
           search_icon(t('tables.headings.title')),
           search_icon(t('tables.headings.content')),
           t('models.articles.one')
@@ -19,7 +16,6 @@ ruby:
   def collection
     index_data(
       @comments,
-      :id,
       :highlight_title,
       :highlight_truncate_content,
       :article_title
@@ -45,6 +41,10 @@ ruby:
       icon: 'comment',
       path: admin_article_comments_path(@parent),
       button_class: 'nav-link active')
+    = render Buttons::ButtonComponent.new(title: t('models.technologies.more'),
+      icon: 'cubes',
+      path: admin_article_technologies_path(@parent),
+      button_class: 'nav-link')
 
 = render Headers::HeaderComponent.new(header: index_header(:comments),
   main_header: @parent.present? ? false : true,

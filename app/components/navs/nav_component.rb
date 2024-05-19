@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Navs
   class NavComponent < ViewComponent::Base
     def initialize(nav_items:, **options)
+      super
+
       @nav_items = alter_nav_items(nav_items)
       @options = options
     end
@@ -31,6 +31,12 @@ module Navs
     end
 
     def construct_class
+      return navbar_class if navbar?
+
+      'nav'
+    end
+
+    def navbar_class
       "navbar-nav#{left_nav_class}"
     end
 
@@ -42,6 +48,10 @@ module Navs
 
     def left_nav?
       options&.dig(:type) == :left_nav
+    end
+
+    def navbar?
+      options&.dig(:navbar)
     end
 
     def construct_id

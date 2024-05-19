@@ -1,0 +1,1 @@
+/Users/jrcech/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/pagy-8.4.0/javascripts/pagy-module.js

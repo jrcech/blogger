@@ -1,88 +1,69 @@
-# frozen_string_literal: true
+# Capybara Configuration
+#
+# Purpose:
+# Configures Capybara with Selenium drivers for different device breakpoints and headless mode.
+#
+# Default Behavior:
+# - The default driver remains unchanged. Executing `bundle exec rspec` runs tests as before.
+#
+# Drivers:
+# - Standard: :selenium_chrome_mobile, :selenium_chrome_tablet, :selenium_chrome_desktop
+# - Headless: :selenium_chrome_mobile_headless, :selenium_chrome_tablet_headless, :selenium_chrome_desktop_headless
+#
+# Commands:
+# - Default: `bundle exec rspec`
+# - Device-specific: `DEVICE=<device_type> bundle exec rspec` (where `<device_type>` is mobile, tablet, or desktop)
+# - Headless: `HEADLESS=true bundle exec rspec` for headless mode
+#
+# Test Usage (for dedicated device-specific tests):
+# ```ruby
+# describe 'feature', type: :system, driver: <selected_driver> do
+#   # test content
+# end
+# ```
+# Replace `<selected_driver>` with the desired driver, e.g., :selenium_chrome_mobile.
+#
 
-Capybara.register_driver :local_selenium do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--window-size=1920,1080')
+Capybara.default_driver = :selenium_chrome
 
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options:
-  )
-end
+DEVICE_BREAKPOINTS = {
+  'mobile' => [640, 800],
+  'tablet' => [768, 1024],
+  'desktop' => [1024, 1366]
+}.freeze
 
-Capybara.register_driver :local_selenium_headless do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless')
-  options.add_argument('--disable-gpu')
-  options.add_argument('--no-sandbox')
-  options.add_argument('--disable-dev-shm-usage')
-  options.add_argument('--window-size=1920,1080')
+DEVICE_BREAKPOINTS.each do |device, size|
+  Capybara.register_driver :"selenium_chrome_#{device}" do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument("window-size=#{size[0]},#{size[1]}")
 
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options:
-  )
-end
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+  end
 
-Capybara.register_driver :remote_selenium do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--window-size=1920,1080')
+  Capybara.register_driver :"selenium_chrome_#{device}_headless" do |app|
+    options = Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+      opts.add_argument('--headless')
+      opts.add_argument('--no-sandbox')
+      opts.add_argument('--disable-gpu')
+      opts.add_argument('--disable-dev-shm-usage')
+      opts.add_argument("--window-size=#{size[0]},#{size[1]}")
+    end
 
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :remote,
-    url: "http://#{selenium_driver}:4444/wd/hub",
-    capabilities: options
-  )
-end
-
-Capybara.register_driver :remote_selenium_headless do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless')
-  options.add_argument('--disable-gpu')
-  options.add_argument('--no-sandbox')
-  options.add_argument('--disable-dev-shm-usage')
-  options.add_argument('--window-size=1920,1080')
-
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :remote,
-    url: "http://#{selenium_driver}:4444/wd/hub",
-    capabilities: options
-  )
-end
-
-Capybara.configure do |config|
-  config.server_host = Socket.ip_address_list.find(&:ipv4_private?).ip_address
-  config.server_port = 4000
-  config.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+  end
 end
 
 RSpec.configure do |config|
-  config.before(:each, type: :system) do
+  config.before(:each, js: false, type: :system) do
     driven_by :rack_test
   end
 
-  config.before(:each, js: true, type: :system) do
-    locality = ENV['DOCKER'].present? ? 'remote' : 'local'
-    headless = '_headless' if ENV['DISABLE_HEADLESS'].blank?
+  config.before(:each, type: :system) do
+    device = "_#{ENV['DEVICE']}" if ENV['DEVICE']
+    headless = '_headless' if ENV['HEADLESS']
 
-    driver = "#{locality}_selenium#{headless}".to_sym
+    driver = :"selenium_chrome#{device}#{headless}"
 
     driven_by driver
-  end
-
-  config.after(:each, js: true, type: :system) do
-    Capybara.reset_sessions!
-  end
-end
-
-def selenium_driver
-  drivers = %w[selenium-chrome seleniarm-chromium]
-
-  ENV.fetch('COMPOSE_PROFILES', '').split(',').find do |profile|
-    drivers.include?(profile)
   end
 end

@@ -2,95 +2,45 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
-#  confirmation_token     :string
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  unconfirmed_email      :string
-#  failed_attempts        :integer          default("0"), not null
-#  unlock_token           :string
-#  locked_at              :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  first_name             :string
-#  last_name              :string
-#  username               :string
-#  provider               :string
-#  uid                    :string
+#  id              :uuid             not null, primary key
+#  auth_token      :string
+#  email           :string           not null
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string           not null
+#  user_name       :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_unlock_token          (unlock_token) UNIQUE
+#  index_users_on_email  (email) UNIQUE
 #
-
 class User < ApplicationRecord
-  validates :email, presence: true, uniqueness: true, email: true
+  has_many :articles, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
-  after_create :assign_default_role
+  has_secure_password
+  has_secure_token :auth_token
 
-  rolify
-  devise(
-    :database_authenticatable,
-    :registerable,
-    :recoverable,
-    :rememberable,
-    :validatable,
-    :trackable,
-    :confirmable,
-    :lockable,
-    :omniauthable,
-    omniauth_providers: %i[facebook google]
-  )
+  validates :email, presence: true, uniqueness: true
+  normalizes :email, with: ->(email) { email.strip.downcase }
 
-  scope :search_by, (lambda { |query|
+  generates_token_for :password_reset, expires_in: 15.minutes do
+    password_salt&.last(10)
+  end
+
+  scope :search_by, lambda { |query|
     where(
       'users.email ILIKE ? OR users.first_name ILIKE ? OR users.last_name ILIKE ?',
       "%#{query}%",
       "%#{query}%",
       "%#{query}%"
     )
-  })
+  }
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      process_user(user, auth)
-      user.skip_confirmation!
-    end
-  end
+  self.implicit_order_column = 'created_at'
 
-  def self.process_user(user, auth)
-    info = auth.info
-
-    user.email = info.email
-    user.password = Devise.friendly_token[0, 20]
-    user.first_name = info.first_name
-    user.last_name = info.last_name
-  end
-
-  def assign_default_role
-    add_role(:user) if roles.blank?
-  end
-
-  def role
-    return :owner if has_cached_role? :owner
-    return :admin if has_cached_role? :admin
-
-    :member
-  end
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  alias_attribute :title, :email
 end

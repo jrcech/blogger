@@ -23,6 +23,16 @@ Start your database server:
 pg_ctl start
 ```
 
+Add postgres role:
+
+```shell
+createuser -U postgres --interactive
+```
+
+> You will be prompted to enter role name and answer if it's a superuser.
+> Choose your machine username for role name.
+> Choose `y` for superuser role.
+
 Install ruby dependencies with bundle:
 
 ```shell
@@ -49,6 +59,10 @@ Setup your database:
 ```shell
 rails db:setup
 ```
+
+> If you see error
+> like `pg_dump: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: FATAL:  role "jrcech" does not exist`
+> you need to create postgres role with your machine username.
 
 Start your application in development environment:
 
@@ -200,6 +214,9 @@ FROM ruby:3.2.2-slim AS assets
 FROM ruby:3.2.2-slim AS app
 ```
 
----
+## Deploy application to staging environment
 
-https://thurlow.io/ruby/2020/11/06/remote-selenium-webdriver-servers-with-rails-capybara-and-rspec.html
+Generate SSH key pair for GitHub:
+```shell
+ssh-keygen -t ed25519 -a 100 -f path/to/keyfile
+```

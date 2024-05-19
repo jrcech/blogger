@@ -1,7 +1,0 @@
-/ frozen_string_literal: true
-
-/ - breadcrumb :items
-
-= render Views::Admin::<%= file_name.capitalize %>::Index::Component.new items: @items,
-  search_query: @search_query,
-  pagy: @pagy

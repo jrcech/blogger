@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
 module Tables
   class RowComponent < ViewComponent::Base
     with_collection_parameter :row
 
     def initialize(row:, cell_element: nil, cell_attributes: nil)
+      super
+
       @row = row
       @cell_element = cell_element
       @cell_attributes = cell_attributes
@@ -22,6 +22,7 @@ module Tables
 
     def click_row_attributes
       {
+        role: 'button',
         data: {
           controller: 'index-table',
           action: 'click->index-table#visit',
