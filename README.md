@@ -1,5 +1,7 @@
 # Blogger
 
+Checkout [DEMO](http://49.12.193.13) application.
+
 ## Setup development environment and run the application
 
 Install environment tools:
