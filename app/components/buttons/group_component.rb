@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Buttons
   class GroupComponent < ViewComponent::Base
     def initialize(buttons:, title: nil)
+      super
+
       @buttons = buttons
       @title = title
     end

@@ -44,21 +44,27 @@ en:
     reviews:
       one: "Review"
       more: "Reviews"
+    comments:
+      one: "Comment"
+      more: "Comments"
+    technologies:
+      one: "Technology"
+      more: "Technologies"
   controller:
     dashboard: "Dashboard"
   actions:
-    new: "New %{item}"
+    new: "New %{record}"
     edit: "Edit"
     show: "Show"
     destroy: "Destroy"
   headers:
-    new: "New %{item}"
-    edit: "Edit %{item}"
-    edit_nested: "Edit %{item} %{nested_items}"
+    new: "New %{record}"
+    edit: "Edit %{record}"
+    edit_nested: "Edit %{record} %{nested_items}"
   confirmations:
     destroy:
       title: "Confirm %{model} destruction"
-      confirm: "Do you really want to delete %{item}? There is no undo!"
+      confirm: "Do you really want to delete %{record}? There is no undo!"
       commit: "Yes, delete %{model}"
       cancel: "No"
   tables:

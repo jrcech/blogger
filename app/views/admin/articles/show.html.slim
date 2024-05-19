@@ -1,7 +1,5 @@
-/ frozen_string_literal: true
-
 ruby:
-  breadcrumb :item, @article, @article_presenter
+  breadcrumb :record, @article, @article_presenter
 
   def details
     %i(id title content)
@@ -19,6 +17,14 @@ nav class="nav nav-tabs nav-fill"
   = render Buttons::ButtonComponent.new(title: t('models.reviews.more'),
     icon: 'eye',
     path: admin_article_reviews_path(@article),
+    button_class: 'nav-link')
+  = render Buttons::ButtonComponent.new(title: t('models.comments.more'),
+    icon: 'comment',
+    path: admin_article_comments_path(@article),
+    button_class: 'nav-link')
+  = render Buttons::ButtonComponent.new(title: t('models.technologies.more'),
+    icon: 'cubes',
+    path: admin_article_technologies_path(@article),
     button_class: 'nav-link')
 
 = render Headers::HeaderComponent.new(header: overview_header,

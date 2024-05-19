@@ -1,16 +1,12 @@
-/ frozen_string_literal: true
-
 ruby:
-  breadcrumb :items, :users
+  breadcrumb :records, :users
 
   def thead
     [
       {
         cells: [
-          t('tables.headings.id'),
           search_icon(t('tables.headings.name')),
-          search_icon(t('tables.headings.email')),
-          t('models.roles.one')
+          search_icon(t('tables.headings.email'))
         ]
       }
     ]
@@ -19,10 +15,8 @@ ruby:
   def collection
     index_data(
       @users,
-      :id,
       :highlight_full_name,
-      :highlight_email,
-      :user_role
+      :highlight_email
     )
   end
 

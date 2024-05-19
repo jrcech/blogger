@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class UsersController < AdminController
     def index
@@ -12,7 +10,7 @@ module Admin
 
     def show
       @user = set_user
-      @user_presenter = UserPresenter.new(item: @user)
+      @user_presenter = UserPresenter.new(record: @user)
     end
 
     def new
@@ -21,14 +19,14 @@ module Admin
 
     def edit
       @user = set_user
-      @user_presenter = UserPresenter.new(item: @user)
+      @user_presenter = UserPresenter.new(record: @user)
     end
 
     def create
       @user = User.new(user_params)
 
-      if @user.skip_confirmation_notification! && @user.save
-        @user_presenter = UserPresenter.new(item: @user)
+      if @user.save
+        @user_presenter = UserPresenter.new(record: @user)
 
         flash[:success] = t(
           'success.create',
@@ -38,7 +36,7 @@ module Admin
 
         redirect_to admin_user_url(@user)
       else
-        flash[:error] = t('errors.create', model: t('models.users.one'))
+        flash[:danger] = t('errors.create', model: t('models.users.one'))
 
         render :new, status: :unprocessable_entity
       end
@@ -46,7 +44,7 @@ module Admin
 
     def update
       @user = set_user
-      @user_presenter = UserPresenter.new(item: @user)
+      @user_presenter = UserPresenter.new(record: @user)
 
       if @user.update(user_params)
         flash[:success] = t(
@@ -57,7 +55,7 @@ module Admin
 
         redirect_to admin_user_url(@user)
       else
-        flash[:error] = t(
+        flash[:danger] = t(
           'errors.update',
           model: t('models.users.one'),
           record: @user_presenter.title
@@ -69,7 +67,7 @@ module Admin
 
     def destroy
       @user = set_user
-      @user_presenter = UserPresenter.new(item: @user)
+      @user_presenter = UserPresenter.new(record: @user)
 
       if @user == current_user
         flash[:error] = t('errors.destroy_yourself')
@@ -98,24 +96,10 @@ module Admin
       render :index
     end
 
-    %w[member admin].each do |role|
-      define_method("make_#{role}") do
-        @user = set_user
-
-        if @user.send("make_#{role}")
-          flash[:success] = t('success.change_role', role:)
-        else
-          flash[:error] = t('errors.change_role')
-        end
-
-        redirect_to admin_users_url, status: :see_other
-      end
-    end
-
     private
 
     def set_users
-      User.preload(:roles).order(updated_at: :desc)
+      User.order(updated_at: :desc)
     end
 
     def set_user
@@ -127,7 +111,7 @@ module Admin
         :email,
         :first_name,
         :last_name,
-        :username,
+        :user_name,
         :password,
         :password_confirmation
       )

@@ -4,17 +4,17 @@
 
 import { application } from "./application"
 
-import BsController from "./bs_controller.js"
+import BsController from "./bs_controller"
 application.register("bs", BsController)
 
-import FontAwesomeController from "./font_awesome_controller.js"
+import FontAwesomeController from "./font_awesome_controller"
 application.register("font-awesome", FontAwesomeController)
 
-import IndexTableController from "./index_table_controller.js"
+import IndexTableController from "./index_table_controller"
 application.register("index-table", IndexTableController)
 
-import PagyController from "./pagy_controller.js"
-application.register("pagy", PagyController)
+import IntegrationsController from "./integrations_controller"
+application.register("integrations", IntegrationsController)
 
-import SystemTestController from "./system_test_controller.js"
-application.register("system-test", SystemTestController)
+import PagyInitializerController from "./pagy_initializer_controller"
+application.register("pagy-initializer", PagyInitializerController)

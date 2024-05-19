@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Forms
   class ReviewsFormComponent < ViewComponent::Base
     def initialize(review:)
+      super
+
       @review = review
     end
 

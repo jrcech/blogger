@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-ssh_keys="37821516,37808182,36788065"
-droplet="last"
-
-dir="${0%/*}"
-
-doctl compute droplet create $droplet --image ubuntu-22-04-x64 --size s-1vcpu-512mb-10gb --region fra1 --enable-monitoring --ssh-keys $ssh_keys --user-data-file "$dir"/../scripts/ubuntu_initial.sh

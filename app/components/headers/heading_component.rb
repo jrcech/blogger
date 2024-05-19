@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Headers
   class HeadingComponent < ViewComponent::Base
     def initialize(header:, main_header:, buttons:)
+      super
+
       @header = header
       @main_header = main_header
       @buttons = buttons

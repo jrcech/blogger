@@ -1,12 +1,11 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Admin Users read', type: :system do
-  let(:user) { create :user }
+RSpec.describe 'Admin Users read' do
+  let(:admin) { create(:user) }
+  let(:user) { create(:user, :all) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     user
 
@@ -14,7 +13,7 @@ RSpec.describe 'Admin Users read', type: :system do
   end
 
   context 'when on index' do
-    it 'user reads an user', js: true do
+    it 'user reads an user', :js do
       expect_index_item
     end
   end
@@ -23,52 +22,31 @@ RSpec.describe 'Admin Users read', type: :system do
     before do
       find_by_id("#{user.id}-dropdown-button").click
 
-      click_link 'Show'
+      click_on 'Show'
     end
 
-    it 'user reads an user', js: true do
+    it 'user reads an user', :js do
       expect_show_item
     end
   end
 
   private
 
-  def index_expectations
-    [
-      user.id,
-      'TestFirstName TestLastName',
-      user.email,
-      'Member'
-    ]
-  end
-
-  def show_expectations
-    [
-      "ID: #{user.id}",
-      "E-Mail: #{user.email}",
-      'First Name: TestFirstName',
-      'Last Name: TestLastName',
-      "Username: #{user.username}"
-    ]
-  end
-
   def expect_index_item
     aggregate_failures do
-      index_expectations.each do |expectation|
-        expect(page).to have_content expectation
-      end
-
-      expect(page).to have_content index_expectations.join ' '
+      expect(page).to have_content user.email
+      expect(page).to have_content user.first_name
+      expect(page).to have_content user.last_name
     end
   end
 
   def expect_show_item
     aggregate_failures do
-      show_expectations.each do |expectation|
-        expect(page).to have_content expectation
-      end
-
-      expect(page).to have_content show_expectations.join "\n"
+      expect(page).to have_content "ID: #{user.id}"
+      expect(page).to have_content "E-Mail: #{user.email}"
+      expect(page).to have_content "First Name: #{user.first_name}"
+      expect(page).to have_content "Last Name: #{user.last_name}"
+      expect(page).to have_content "User Name: #{user.user_name}"
     end
   end
 end

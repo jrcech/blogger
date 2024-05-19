@@ -1,0 +1,5 @@
+- breadcrumb :edit, @technology, @technology_presenter
+
+h1 = t('headers.edit', record: @technology_presenter.title)
+
+= render Forms::TechnologiesFormComponent.new(technology: @technology)

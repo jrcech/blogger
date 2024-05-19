@@ -1,12 +1,12 @@
-# frozen_string_literal: true
-
 module NavbarsHelper
   def left_nav
     [
       homepage_button,
       users_button,
       articles_button,
-      reviews_button
+      reviews_button,
+      comments_button,
+      technologies_button
     ]
   end
 
@@ -56,6 +56,26 @@ module NavbarsHelper
     }
   end
 
+  def comments_button
+    {
+      path: admin_comments_path,
+      icon: model_icon(:comments),
+      title: t('models.comments.more'),
+      controller: 'comments',
+      button_class: "nav-link#{active_class('comments')}"
+    }
+  end
+
+  def technologies_button
+    {
+      path: admin_technologies_path,
+      icon: model_icon(:technologies),
+      title: t('models.technologies.more'),
+      controller: 'technologies',
+      button_class: "nav-link#{active_class('technologies')}"
+    }
+  end
+
   def active_class(controller)
     return ' active' if active?(controller)
 
@@ -64,12 +84,6 @@ module NavbarsHelper
 
   def active?(controller)
     return true if controller_name == controller
-
-    false
-  end
-
-  def user_signed_in?
-    return true if current_user.present?
 
     false
   end
@@ -86,7 +100,7 @@ module NavbarsHelper
 
   def user_dropdown
     {
-      title: current_user.present? ? UserPresenter.new(item: current_user).full_name : nil,
+      title: current_user.present? ? UserPresenter.new(record: current_user).full_name : nil,
       menu_class: 'dropdown-menu dropdown-menu-end',
       dropdown_class: 'dropdown nav-item',
       toggle_class: 'nav-link dropdown-toggle',
@@ -96,14 +110,14 @@ module NavbarsHelper
           icon: 'power-off',
           title: 'Sign out',
           size: 'sm',
-          path: destroy_user_session_path,
+          path: session_path,
           data: {
             turbo_method: :delete
           }
         },
         {
           title: 'Edit password',
-          path: edit_user_registration_path
+          path: edit_password_path
         }
       ]
     }
@@ -114,7 +128,7 @@ module NavbarsHelper
       icon: 'sign-in-alt',
       title: 'Log in',
       size: 'sm',
-      path: new_user_session_path,
+      path: new_session_path,
       button_class: 'nav-link'
     }
   end

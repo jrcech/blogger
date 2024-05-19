@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 module TablesHelper
-  def index_data(items, *columns)
+  def index_data(records, *columns)
     collection = []
 
-    items.each do |item|
-      item_presenter = "#{item.class}Presenter".constantize.new(
-        item:,
+    records.each do |record|
+      item_presenter = "#{record.class}Presenter".constantize.new(
+        record:,
         search_query: @search_query
       )
 
@@ -14,7 +12,7 @@ module TablesHelper
 
       cells << index_buttons(item_presenter)
 
-      collection << { cells:, show_path: send("admin_#{item_presenter.model_name.singular}_path", item) }
+      collection << { cells:, show_path: send("admin_#{item_presenter.model_name.singular}_path", record) }
     end
 
     collection

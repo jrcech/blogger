@@ -1,36 +1,42 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Icons::FontAwesomeComponent, type: :component do
-  it 'has a working factory' do
-    build :font_awesome
+  let(:font_awesome) { build(:font_awesome) }
+
+  describe 'factory' do
+    it 'is valid' do
+      expect(font_awesome).to be_an_instance_of(described_class)
+    end
   end
 
   it 'renders a base font awesome' do
-    render_inline build :font_awesome
-
-    expect(
-      page
-    ).to have_css base_fontawesome_css
-  end
-
-  it 'renders a full font awesome' do
-    render_inline build :font_awesome, :full
+    render_inline font_awesome
 
     aggregate_failures do
-      expect(page).to have_text 'Test text'
+      expect_to_have_css_attributes base_fontawesome_css
+    end
+  end
 
-      expect_to_have_css_attributes full_fontawesome_css
+  context 'with all attributes' do
+    let(:font_awesome) { build(:font_awesome, :full) }
+
+    it 'renders a full font awesome' do
+      render_inline font_awesome
+
+      aggregate_failures do
+        expect(page).to have_text 'Test text'
+
+        expect_to_have_css_attributes full_fontawesome_css
+      end
     end
   end
 
   private
 
   def base_fontawesome_css
-    'i.fa-solid.fa-test-icon' \
-      '[title="Test title"]' \
-      '[data-controller="font-awesome"]'
+    [
+      'i.fa-solid.fa-test-icon[title="Test title"][data-controller="font-awesome"]'
+    ]
   end
 
   def full_fontawesome_css

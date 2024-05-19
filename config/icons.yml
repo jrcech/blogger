@@ -2,6 +2,8 @@ models:
   users: 'users'
   articles: 'newspaper'
   reviews: 'eye'
+  comments: 'comment'
+  technologies: 'cubes'
 actions:
   related: 'share'
   options: 'cogs'

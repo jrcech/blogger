@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Forms
   class ArticlesFormComponent < ViewComponent::Base
     def initialize(article:)
+      super
+
       @article = article
     end
 

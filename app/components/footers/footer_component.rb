@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
 module Footers
   class FooterComponent < ViewComponent::Base
     include Pagy::Frontend
 
     def initialize(left_dropdown: nil, pagination: nil)
+      super
+
       @left_dropdown = left_dropdown
       @pagination = pagination
     end

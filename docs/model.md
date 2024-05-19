@@ -1,37 +1,11 @@
-# Generate new scaffold steps
-
-generate spec/system/admin
-
-rails generate model Review title content:text
-- `db/migrate/xxxxxxxxx_create_reviews.rb`
-- `app/models/review.rb (attributes, required, search)`
-- `spec/models/review_spec.rb (attributes, required)`
-- `spec/factories/reviews_spec.rb` (traits)
-
-rails generate request Review
-- `spec/requests/admin/reviews_request_spec.rb`
-- `config/routes.rb` ("resources :articles, concerns: %i[searchable]", after: "namespace :admin do")
-- `app/controllers/admin/reviews_controller.rb`
-- `app/presenters/review_presenter.rb`
-- `app/views/admin/reviews`
-- `app/components/forms/reviews_form_component.html.slim`
-- `app/components/forms/reviews_form_component.html.rb`
-
-rails generate system Review
-- Add `reviews_button` to `app/hepers/navbars_helper.rb`
-- `db/seeds/development/reviews.seeds.rb`
-- Add review translations to `config/locales/en.yml`
-- Add review icon to `config/icon.yml`
+# Blogger model diagram in UML
 
 ```plantuml
 @startuml
 
-skinparam monochrome true
-skinparam shadowing false
-
-class User {
+class User <<Authentication>> {
   email:string :required :unique :search
-  username:string :unique :search
+  user_name:string :unique :search
   first_name:string :search
   last_name:string :search
 }
@@ -41,7 +15,7 @@ class Article {
   content:text :required
 }
 
-class Language {
+class Technology {
   title:string :required :search
   shortcut:string :search
   homepage:string
@@ -57,14 +31,15 @@ class Review {
   content:text :required
 }
 
-User "1" <-- "*" Article
+User "1" -- "*" Article
+User "1" -- "*" Review
+User "1" -- "*" Comment
 
-Article "1" <-- "*" Review
-Article "1" <-- "*" Comment
-Review "1" <-- "*" Comment
+Article "1" -- "*" Review
+Article "1" -- "*" Comment
 
-Article "1" <-- "*" LanguageAssignment
-Language "1" <-- "*" LanguageAssignment
+Article "1" -- "*" TechnologyAssignment
+Technology "1" -- "*" TechnologyAssignment
 
 @enduml
 ```

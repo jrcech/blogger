@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Buttons
   class DropdownComponent < ViewComponent::Base
     def initialize(**button)
+      super
+
       @button = alter_button(**button)
       @dropdown_items = alter_dropdown_items(button[:dropdown_items])
     end

@@ -1,55 +1,47 @@
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
+
+# Ignore git directory.
+/.git/
+
 # Ignore bundler config.
-.bundle
+/.bundle
+
+# Ignore all environment files (except templates).
+/.env*
+!/.env*.erb
+
+# Ignore all default key files.
+/config/master.key
+/config/credentials/*.key
 
 # Ignore all logfiles and tempfiles.
-log/*
-tmp/*
-!log/.keep
-!tmp/.keep
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-tmp/pids/*
-!tmp/pids/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
 
-# Ignore uploaded files in development.
-storage/*
-!storage/.keep
-tmp/storage/*
-!tmp/storage/.keep
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
 
-public/assets
+# Ignore assets.
+/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets
 
-# Ignore master key for decrypting credentials and more.
-config/master.key
-
-app/assets/builds/*
-!app/assets/builds/.keep
-
-node_modules
-
-.env
-.env.*
-
-.git
-.gitignore
-.github
-
-.dockerignore
-
-coverage
-.byebug_history
-yarn-error.log
-
+# Added
+/.idea
 .DS_Store
-.idea
+/coverage
 
-config/credentials/development.key
-config/credentials/test.key
-
-cache/*
-.yarn-cache
-
-pgdata
-
-spec/reports
-spec/examples.txt
+# Terraform
+/.terraform
+*.tfstate
+*.tfstate.backup

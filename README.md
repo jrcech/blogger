@@ -1,4 +1,6 @@
-# Blogger – Simple but full of features Blogging Application
+# Blogger – Simple Blogging Application
+
+Checkout [DEMO](http://49.12.193.13) application.
 
 Part of the rails_template project. Desired Rails application state after a new generation process from the template.
 
@@ -34,10 +36,9 @@ asdf plugin add postgres
 Required versions are defined in `.tool-versions` file:
 
 ```
-ruby 3.2.1
-nodejs 19.7.0
-yarn 1.22.19
-postgres 14.1
+bun 1.1.8
+postgres 16.3
+ruby 3.3.1
 ```
 
 To install required versions run in the project root directory:
@@ -104,4 +105,20 @@ docker compose up
 
 ```shell
 docker-compose run web rails db:setup
+```
+### Update Docker development environment
+
+Update `Dockerfile` to use the latest Ruby version:
+
+```shell
+FROM ruby:3.2.2-slim AS assets
+
+FROM ruby:3.2.2-slim AS app
+```
+
+## Deploy application to staging environment
+
+Generate SSH key pair for GitHub:
+```shell
+ssh-keygen -t ed25519 -a 100 -f path/to/keyfile
 ```

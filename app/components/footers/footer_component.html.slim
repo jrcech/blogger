@@ -1,10 +1,12 @@
-/ frozen_string_literal: true
-
 footer class="row"
   div class="col-md"
     - if left_dropdown?
       = render Buttons::DropdownComponent.new(**left_dropdown)
 
   - if pagination?
-    div class="col-md" data-controller="pagy"
-      == pagy_bootstrap_nav_js pagination
+    div class="col-md" data-controller="pagy-initializer"
+      div class="float-end"
+        noscript
+          == pagy_nav pagination
+
+        == pagy_bootstrap_nav_js pagination

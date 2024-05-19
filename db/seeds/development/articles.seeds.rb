@@ -1,9 +1,6 @@
-# frozen_string_literal: true
-
-after :admins do
-  puts 'Seeding Articles'
-
+after 'development:users' do
   100.times do |i|
+    user = User.all.sample
     content = +''
 
     Random.rand(1..6).times do
@@ -11,11 +8,10 @@ after :admins do
     end
 
     attrs = {
-      content: content
+      content:,
+      user:
     }
 
-    seed Article, { title: "Article #{i + 1}" }, attrs
+    seed Article, find_by: { title: "Article #{i + 1}" }, **attrs
   end
-
-  puts
 end

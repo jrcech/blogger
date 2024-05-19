@@ -1,13 +1,10 @@
-/ frozen_string_literal: true
-
 ruby:
-  breadcrumb :items, :articles
+  breadcrumb :records, :articles
 
   def thead
     [
       {
         cells: [
-          t('tables.headings.id'),
           search_icon(t('tables.headings.title')),
           search_icon(t('tables.headings.content'))
         ]
@@ -18,7 +15,6 @@ ruby:
   def collection
     index_data(
       @articles,
-      :id,
       :highlight_title,
       :highlight_truncate_content
     )

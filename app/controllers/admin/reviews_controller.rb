@@ -1,17 +1,6 @@
-# frozen_string_literal: true
-
 module Admin
   class ReviewsController < AdminController
     def index
-      if controller_nested?
-        @parent = parent_record
-        @parent_presenter = parent_presenter.new(item: @parent)
-
-        set_reviews = Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
-      else
-        set_reviews = Review.includes(:article).order(updated_at: :desc)
-      end
-
       @pagy, @reviews = pagy(
         set_reviews,
         page: params[:page],
@@ -21,7 +10,7 @@ module Admin
 
     def show
       @review = set_review
-      @review_presenter = ReviewPresenter.new(item: @review)
+      @review_presenter = ReviewPresenter.new(record: @review)
     end
 
     def new
@@ -30,14 +19,14 @@ module Admin
 
     def edit
       @review = set_review
-      @review_presenter = ReviewPresenter.new(item: @review)
+      @review_presenter = ReviewPresenter.new(record: @review)
     end
 
     def create
-      @review = Review.new(review_params)
+      @review = current_user.reviews.new(review_params)
 
       if @review.save
-        @review_presenter = ReviewPresenter.new(item: @review)
+        @review_presenter = ReviewPresenter.new(record: @review)
 
         flash[:success] = t(
           'success.create',
@@ -55,7 +44,7 @@ module Admin
 
     def update
       @review = set_review
-      @review_presenter = ReviewPresenter.new(item: @review)
+      @review_presenter = ReviewPresenter.new(record: @review)
 
       if @review.update(review_params)
         flash[:success] = t(
@@ -78,7 +67,7 @@ module Admin
 
     def destroy
       @review = set_review
-      @review_presenter = ReviewPresenter.new(item: @review)
+      @review_presenter = ReviewPresenter.new(record: @review)
 
       @review.destroy
 
@@ -92,15 +81,6 @@ module Admin
     end
 
     def search
-      if controller_nested?
-        @parent = parent_record
-        @parent_presenter = parent_presenter.new(item: @parent)
-
-        set_reviews = Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
-      else
-        set_reviews = Review.includes(:article).order(updated_at: :desc)
-      end
-
       @search_query = params[:search_query]
 
       @pagy, @reviews = pagy(
@@ -115,7 +95,14 @@ module Admin
     private
 
     def set_reviews
-      Review.order(updated_at: :desc)
+      if controller_nested?
+        @parent = parent_record
+        @parent_presenter = parent_presenter.new(record: @parent)
+
+        Review.includes(:article).send(scope_method, parent_record).order(updated_at: :desc)
+      else
+        Review.includes(:article).order(updated_at: :desc)
+      end
     end
 
     def set_review

@@ -1,0 +1,5 @@
+- breadcrumb :edit, @comment, @comment_presenter
+
+h1 = t('headers.edit', record: @comment_presenter.title)
+
+= render Forms::CommentsFormComponent.new(comment: @comment)

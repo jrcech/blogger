@@ -1,69 +1,74 @@
-FROM ruby:3.2.1-slim AS assets
-LABEL maintainer="jiricech94@gmail.com"
+# syntax = docker/dockerfile:1
 
-WORKDIR /app
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.3.1
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-ENV BUNDLE_PATH="/gems" \
-  DEBIAN_FRONTEND="noninteractive"
+# Rails app lives here
+WORKDIR /rails
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ARG RAILS_ENV=production
+ARG BUNDLE_WITHOUT=development
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential curl git libpq-dev && \
-    curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
-    curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo 'deb https://dl.yarnpkg.com/debian/ stable main' | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y --no-install-recommends nodejs yarn && \
-    rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man && \
-    apt-get clean && \
-    useradd --create-home ruby && \
-    mkdir /gems && chown ruby:ruby -R /gems && \
-    chown ruby:ruby -R /app
+# Set production environment
+ENV RAILS_ENV=${RAILS_ENV} \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT=${BUNDLE_WITHOUT}
 
-USER ruby
 
-COPY --chown=ruby:ruby Gemfile Gemfile.lock ./
-RUN bundle install
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
-COPY --chown=ruby:ruby package.json yarn.lock ./
-RUN yarn install --no-cache
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips pkg-config unzip
 
-COPY --chown=ruby:ruby . .
+ENV BUN_INSTALL=/usr/local/bun
+ENV PATH=/usr/local/bun/bin:$PATH
+ARG BUN_VERSION=1.1.8
+RUN curl -fsSL https://bun.sh/install | bash -s -- "bun-v${BUN_VERSION}"
 
-ARG RAILS_ENV="development"
-ARG NODE_ENV="development"
-ARG RAILS_STAGING="false"
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
 
-ENV RAILS_ENV="${RAILS_ENV}" \
-  NODE_ENV="${NODE_ENV}" \
-  RAILS_STAGING="${RAILS_STAGING}" \
-  USER="ruby"
+# Install node modules
+COPY package.json bun.lockb ./
+RUN bun install --frozen-lockfile
 
-RUN yarn build
-RUN yarn build:css
+# Copy application code
+COPY . .
 
-FROM ruby:3.2.1-slim AS app
-LABEL maintainer="jiricech94@gmail.com"
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
 
-WORKDIR /app
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails pagy:link_module assets:precompile
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends build-essential curl git libpq-dev nano && \
-  rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man && \
-  apt-get clean && \
-  useradd --create-home ruby && \
-  chown ruby:ruby -R /app
 
-USER ruby
+# Final stage for app image
+FROM base
 
-ENV BUNDLE_PATH="/gems" \
-  USER="ruby" \
-  DEBIAN_FRONTEND="noninteractive"
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-COPY --chown=ruby:ruby --from=assets /gems /gems
-COPY --chown=ruby:ruby --from=assets /app/app/assets/builds /app/assets/builds
-COPY --chown=ruby:ruby . .
+# Copy built artifacts: gems, application
+COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build /rails /rails
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
+# Run and own only the runtime files as a non-root user for security
+RUN useradd rails --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER rails:rails
 
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD ["./bin/rails", "server"]

@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Buttons
   class LinkComponent < ViewComponent::Base
     def initialize(**button)
+      super
+
       @button = button
     end
 

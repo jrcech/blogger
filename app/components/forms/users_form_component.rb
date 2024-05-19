@@ -1,8 +1,8 @@
-# frozen_string_literal: true
-
 module Forms
   class UsersFormComponent < ViewComponent::Base
     def initialize(user:)
+      super
+
       @user = user
     end
 

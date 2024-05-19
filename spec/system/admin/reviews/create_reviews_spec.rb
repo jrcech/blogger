@@ -1,39 +1,38 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Admin Reviews create', type: :system do
+RSpec.describe 'Admin Reviews create' do
+  let(:admin) { create(:user) }
   let(:article) { create(:article) }
 
   before do
-    sign_in_user
+    sign_in admin
 
     article
 
     visit admin_reviews_path
 
-    click_link 'New Review'
+    click_on 'New Review'
   end
 
   context 'when on index' do
-    it 'user creates an review', js: true do
+    it 'user creates an review', :js do
       fill_in 'Title', with: 'Test Review'
       fill_in 'Content', with: 'Test content'
 
-      select 'Test article title', from: 'Article'
+      select article.title, from: 'Article'
 
-      click_button 'Create Review'
+      click_on 'Create Review'
 
       expect_created_item
     end
 
-    it 'user failed to create an review', js: true do
+    it 'user failed to create an review', :js do
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
 
       select '', from: 'Article'
 
-      click_button 'Create Review'
+      click_on 'Create Review'
 
       expect_not_created_item
     end

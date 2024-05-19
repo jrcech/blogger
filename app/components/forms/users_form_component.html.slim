@@ -1,22 +1,35 @@
-/ frozen_string_literal: true
+= form_with model: [:admin, user], class: 'mb-3' do |form|
+  - if form.object.errors.any?
+    div class="alert alert-danger"
+      ul
+        - form.object.errors.full_messages.each do |message|
+          li = message
 
-= simple_form_for [:admin, user] do |f|
-  = f.error_notification
+  div class="form-group mb-3"
+    = form.label :email, class: 'form-label'
+    = form.email_field :email, class: 'form-control'
 
-  = f.input :email
-  = f.input :first_name
-  = f.input :last_name
-  = f.input :username
+  div class="form-group mb-3"
+    = form.label :first_name, class: 'form-label'
+    = form.text_field :first_name, class: 'form-control'
+
+  div class="form-group mb-3"
+    = form.label :last_name, class: 'form-label'
+    = form.text_field :last_name, class: 'form-control'
+
+  div class="form-group mb-3"
+    = form.label :user_name, class: 'form-label'
+    = form.text_field :user_name, class: 'form-control'
 
   - if user.new_record?
-    = f.input :password, required: true, hint: false
-    = f.input :password_confirmation, required: true
+    div class="form-group mb-3"
+      = form.label :password, class: 'form-label'
+      = form.password_field :password, class: 'form-control'
 
-  - if params[:return_to].present?
-    = f.input :return_to,
-      as: :hidden,
-      input_html: { value: params[:return_to] }
+    div class="form-group mb-3"
+      = form.label :password_confirmation, class: 'form-label'
+      = form.password_field :password_confirmation, class: 'form-control'
 
-  div class="mt-4"
-    = f.button :submit, class: 'btn btn-primary'
+  div
+    = form.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', :back, class: 'btn btn-outline-secondary'
