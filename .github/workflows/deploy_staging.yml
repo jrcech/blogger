@@ -43,7 +43,7 @@ jobs:
           platforms: linux/amd64
 
       - name: Deploy with Kamal to Staging
-        run: bundle exec kamal setup -d staging --skip_hooks
+        run: bundle exec kamal deploy -d staging --skip_hooks
 
       - name: Seed the database
         run: bundle exec kamal app exec 'bundle exec rails db:seed' -d staging --skip_hooks
